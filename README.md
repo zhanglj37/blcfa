@@ -51,7 +51,17 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 blcfa(filename,varnames,usevar,myModel)
 ```
 
-After running this function, you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for example:
+After running this function(two chain):
+```
+num of chain:1
+num of iteration:100
+num of iteration:200
+....
+num of chain:2
+...
+```
+
+you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
