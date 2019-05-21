@@ -16,13 +16,13 @@ If you want to know more about Bayesian covariance lasso prior confirmatory fact
 (Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.)
 
 ## Installation
-```{r}
+```r
 install.packages("blcfa")
 ```
 
 If you want to try out the latest development 'blcfa' code, you can install it  from github using Hadley Wickham's 'devtools' package. 
 
-```{r}
+```r
 install.packages("devtools")
 library(devtools)
 
@@ -34,7 +34,7 @@ install_github("zhanglj37/blcfa")
 
 ### ex1
 
-```{r}
+```r
 library(blcfa)
 
 filename <- "ss.txt"  # use null value to represent missing value in the dataset
@@ -53,7 +53,7 @@ blcfa(filename,varnames,usevar,myModel)
 ```
 
 After running this function(two chain):
-```
+```r
 num of chain:1
 num of iteration:100
 num of iteration:200
@@ -63,7 +63,7 @@ num of chain:2
 ```
 
 you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for example:
-```
+```r
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
  VARIABLE:
@@ -93,20 +93,20 @@ MODEL:
 
 ### ex2
 The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default num of burn-in MCMC samples=5000), you will get an epsr graph and the warnings:
-```
+```r
 Error: The Convergence Criterion is not satisfied
 Please refer to the epsr graph and increase the MCMAX
 ```
 
 
 Then you should increase the value of N.burn and MCMAX(Total number of MCMC samples for inference).
-```
+```r
 blcfa(filename,varnames,usevar,myModel,MCMAX=30000,N.burn=15000)
 ```
 
 ### ex3
 If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
-```
+```r
 blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
 ```
 
@@ -115,7 +115,7 @@ Then you will get the results folder includes: ppp, epsr graph,
 
 ### ex4
 Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
-```
+```r
 blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
 ```
 
