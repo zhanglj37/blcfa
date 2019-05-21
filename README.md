@@ -1,11 +1,11 @@
 
 # blcfa
 author: Junhao Pan, Lijin Zhang
+
 date: May 21, 2019
 
 
 [![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
-
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
