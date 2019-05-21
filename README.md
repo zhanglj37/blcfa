@@ -37,7 +37,7 @@ install_github("zhanglj37/blcfa")
 ```
 library(blcfa)
 
-filename <- "ss.txt" 
+filename <- "ss.txt"  # use null value to represent missing value in the dataset
 varnames <- c("gender",paste("y", 1:17, sep = ""))
 usevar <- c(paste("y", 1:17, sep = ""))
 
@@ -47,6 +47,7 @@ f1 =~ y1 + y2 + y3 + y4 + y5
 f2 =~ y6 + y7 + y8 + y9 + y10 + y11
 f3 =~ y12 + y13 + y14 + y15 + y16 + y17  
 '
+# make sure there is a space between each variable or symbol
 
 blcfa(filename,varnames,usevar,myModel)
 ```
