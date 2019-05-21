@@ -23,8 +23,7 @@ blcfa<-function(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 	
 	### source("read_model.r")
 	mmvarorigin<-read_model(myModel)
-	mmvar<-mmvarorigin[2:length(mmvarorigin)]
-	    ### List: includes factors and variables under each factor
+	mmvar<-mmvarorigin[2:length(mmvarorigin)] # List: includes factors and variables under each factor
 	factorname<-mmvarorigin[[1]]   # names of factors
 	numw<-length(mmvar)   # num of factors
 	mmvar_loc<-cfa_loc(mmvar,dataset)  # location of indicators
