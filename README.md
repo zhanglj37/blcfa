@@ -103,7 +103,7 @@ Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of ly, mu, phi and psx.
 
 ### ex4
-Detect significant residual correlations by p-value rather than hpd interval.
+Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```
 blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
 ```
