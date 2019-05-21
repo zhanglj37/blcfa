@@ -16,13 +16,13 @@ If you want to know more about Bayesian covariance lasso prior confirmatory fact
 (Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.)
 
 ## Installation
-```
+```{r}
 install.packages("blcfa")
 ```
 
 If you want to try out the latest development 'blcfa' code, you can install it  from github using Hadley Wickham's 'devtools' package. 
 
-```
+```{r}
 install.packages("devtools")
 library(devtools)
 
@@ -34,7 +34,7 @@ install_github("zhanglj37/blcfa")
 
 ### ex1
 
-```
+```{r}
 library(blcfa)
 
 filename <- "ss.txt"  # use null value to represent missing value in the dataset
