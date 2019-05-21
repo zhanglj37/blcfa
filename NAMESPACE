@@ -1,0 +1,17 @@
+
+
+exportPattern("^[[:alpha:]]+")
+import(stats)
+import(MASS)
+import(MCMCpack)
+import(msm)
+import(statmod)
+import(psychometric)
+import(MplusAutomation)
+import(sna)
+
+importFrom("grDevices", "dev.cur", "rainbow", "savePlot")
+importFrom("graphics", "lines", "plot")
+importFrom("stats", "pnorm", "rgamma", "rnorm", "sd")
+importFrom("utils", "read.table")
+importFrom("utils", "write.table")
