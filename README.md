@@ -81,7 +81,7 @@ MODEL:
 ```
 
 ### ex2
-The Convergence Criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default num of burn-in MCMC samples=5000), you will get an epsr graph and the warnings:
+The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default num of burn-in MCMC samples=5000), you will get an epsr graph and the warnings:
 ```
 Error: The Convergence Criterion is not satisfied
 Please refer to the epsr graph and increase the MCMAX
@@ -94,7 +94,7 @@ blcfa(filename,varnames,usevar,myModel,MCMAX=30000,N.burn=15000)
 ```
 
 ### ex3
-If you want to get the detauled results of the Bayesian covariance lasso prior confirmatory factor analysis:
+If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
 ```
 blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
 ```
