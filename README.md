@@ -94,8 +94,8 @@ MODEL:
 ### ex2
 The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default num of burn-in MCMC samples=5000), you will get an epsr graph and the warnings:
 ```r
-Error: The Convergence Criterion is not satisfied
-Please refer to the epsr graph and increase the MCMAX
+Error: The convergence criterion is not satisfied.
+Please refer to the epsr graph and increase the MCMAX.
 ```
 
 
