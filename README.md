@@ -51,7 +51,7 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 blcfa(filename,varnames,usevar,myModel)
 ```
 
-After running this function, you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for examle:
+After running this function, you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
@@ -102,6 +102,11 @@ blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = T
 Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of ly, mu, phi and psx.
 
+### ex4
+Detect significant residual correlations by p-value rather than hpd interval.
+```
+blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
+```
 
 ## BugsReports
 
