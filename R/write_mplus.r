@@ -1,8 +1,10 @@
 
 write_mplus<-function(varnames,usevar,myModel,filename,sigpsx_list)
 {
-if(file.exists("bayeslasso_cfa.inp")) file.remove("bayeslasso_cfa.inp")
-
+if(file.exists("bayeslasso_cfa.inp"))
+{
+ file.remove("bayeslasso_cfa.inp")
+}
 
 SIGPSX=sigpsx_list$SIGPSX
 sigpsxname<-rownames(SIGPSX)
@@ -125,7 +127,9 @@ cat(
 ## run
 runModels()
 
-file.remove("Mplus Run Models.txt")
-
+if(file.exists("Mplus Run Models.log"))
+{
+ file.remove("Mplus Run Models.log")
+}
 
 }

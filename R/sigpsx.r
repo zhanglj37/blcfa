@@ -62,8 +62,10 @@ count_sig_interval<-function(NY,matrix)
 		ii<-i+1
 		for (j in ii:NY)
 		{
-			if(matrix[i,j,1] >0 || matrix[i,j,2] <0)
-			count=count+1
+			if(matrix[i,j,1]*matrix[i,j,2]>0)
+			{
+				count=count+1
+			}
 		}
 	}
 return(count)
@@ -104,7 +106,7 @@ out_sig<-function(NY,NZ,PPSX1,CORPSX,HPD_PSX2,dataset)
 		{
 			if (interval_psx)
 			{
-				if ( HPD_PSX2[i,j,1] >0 || HPD_PSX2[i,j,2] <0)
+				if (matrix[i,j,1]*matrix[i,j,2]>0)
 				{
 					signame[k]<-paste(colnames(dataset)[i]," with ",colnames(dataset)[j])
 					sigpsxcor[k]<-CORPSX[i,j]

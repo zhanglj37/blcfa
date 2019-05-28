@@ -28,6 +28,7 @@ inter<-HPDinterval(mcmc(chainpsx))   # 95% HPD interval for PSX
 #position.sig<-which(temp.sig==1,arr.ind=T)
 HPD_PSX1<-inter
 
+
 temp.interval<-array(0,dim=c(NY,NY,2))
 k<-1
 for(i in 1:NY){

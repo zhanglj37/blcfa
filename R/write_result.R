@@ -134,18 +134,11 @@ write.table(LY_matrix,file = paste('ly.dat', sep = ''), sep = '\t', row.names = 
 write.table(MU_matrix,file = paste('mu.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 
 
-#write.xlsx(EmPHI1,xlsxname,"phi-est", append = TRUE, row.names = FALSE, col.names = FALSE) 
-#write.xlsx(SEPHI1,xlsxname,"phi-se", append = TRUE, row.names = FALSE, col.names = FALSE) 
-#write.xlsx(PPHI1,xlsxname,"phi-p", append = TRUE, row.names = FALSE, col.names = FALSE) 
+
 write.table(OUTPHI,file = paste('phi.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 rownames(CORPHI)<-factorname
 colnames(CORPHI)<-factorname
 write.table(CORPHI,file = paste('phi_cormatrix.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
-
-
-#write.xlsx(EmPSX1,xlsxname,"psx-est", append = TRUE, row.names = TRUE, col.names = TRUE) 
-#write.xlsx(SEPSX1,xlsxname,"psx-se", append = TRUE, row.names = TRUE, col.names = TRUE) 
-#write.xlsx(PPSX1,xlsxname,"psx-p", append = TRUE, row.names = TRUE, col.names = TRUE) 
 
 write.table(OUTPSX,file = paste('psx.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 write.table(SIGPSX,file = paste('psx_sig.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
