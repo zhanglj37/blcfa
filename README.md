@@ -2,7 +2,7 @@
 # blcfa
 author: Junhao Pan, Lijin Zhang
 
-date: May 21, 2019
+published: May 21, 2019
 
 
 [![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
@@ -17,7 +17,7 @@ If you want to know more about Bayesian covariance lasso prior confirmatory fact
 
 ## Installation
 ```r
-install.packages("blcfa")
+install.packages("blcfa")  #It hasn't been released yet. 2019-05-28
 ```
 
 If you want to try out the latest development 'blcfa' code, you can install it  from github using Hadley Wickham's 'devtools' package. 
@@ -62,7 +62,7 @@ num of chain:2
 ...
 ```
 
-you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso Prior confirmatory factor analysis. for example:
+you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. for example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
@@ -123,4 +123,11 @@ blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = T
 
 https://github.com/zhanglj37/blcfa/issues
 
-or contact with me: zhanglj37@mail2.sysu.edu.cn. I really hope that we can jointly promote the improvement of this package.
+or contact with me: zhanglj37@mail2.sysu.edu.cn.
+
+## Functions under development
+
+1. Bayesian lasso confirmatory factor analysis models with ordered categorical data.
+2. Parallel computing of two MCMC chains.
+
+If you have any suggestions or are willing to join in the improvement of this package, please contact me.  I really hope that we can jointly promote the improvement of this package.
