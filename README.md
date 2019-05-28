@@ -2,14 +2,14 @@
 # blcfa
 author: Junhao Pan, Lijin Zhang
 
-published: May 21, 2019
+published: May 28, 2019
 
 
 [![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
-The 'blcfa' package Uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual correlations and generate the corresponding mplus file.
+The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual correlations and generate the corresponding mplus file.
 
 If you want to know more about Bayesian covariance lasso prior confirmatory factor analysis, please refer to Pan, Ip and Dubé(2017).
 
@@ -52,7 +52,7 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 blcfa(filename,varnames,usevar,myModel)
 ```
 
-After running this function(two chain):
+After running this function(two chains):
 ```r
 num of chain:1
 num of iteration:100
@@ -69,7 +69,7 @@ TITLE: Bayesian Lasso CFA
  VARIABLE:
  NAMES = gender y1 y2 y3 y4 y5 y6 y7 y8 y9 
 	y10 y11 y12 y13 y14 y15 y16 y17 ;
- USEV = gender y1 y2 y3 y4 y5 y6 y7 y8 y9 
+ USEV = y1 y2 y3 y4 y5 y6 y7 y8 y9 
 	y10 y11 y12 y13 y14 y15 y16 y17 ;
 ANALYSIS:
 	 ESTIMATOR = BAYES;
@@ -92,14 +92,14 @@ MODEL:
 ```
 
 ### ex2
-The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default num of burn-in MCMC samples=5000), you will get an epsr graph and the warnings:
+The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default value = 5000), you will get an epsr graph (for reference) and the warnings:
 ```r
 Error: The convergence criterion is not satisfied.
 Please refer to the epsr graph and increase the MCMAX.
 ```
 
 
-Then you should increase the value of N.burn and MCMAX(Total number of MCMC samples for inference).
+Then you should increase the value of N.burn and MCMAX (Total number of MCMC samples for inference, the default value = 15000).
 ```r
 blcfa(filename,varnames,usevar,myModel,MCMAX=30000,N.burn=15000)
 ```
@@ -111,7 +111,7 @@ blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = T
 ```
 
 Then you will get the results folder includes: ppp, epsr graph,
-			estimated value, standard error and hpd interval of ly, mu, phi and psx.
+			estimated value, standard error and hpd interval of parameters (ly, mu, phi and psx).
 
 ### ex4
 Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
@@ -130,4 +130,4 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 1. Bayesian lasso confirmatory factor analysis models with ordered categorical data.
 2. Parallel computing of two MCMC chains.
 
-If you have any suggestions or are willing to join in the improvement of this package, please contact me.  I really hope that we can jointly promote the improvement of this package.
+If you have any suggestions or are willing to join in the improvement of this package, please contact with me.  I really hope that we can jointly promote the improvement of this package.
