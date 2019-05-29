@@ -116,8 +116,14 @@ rownames(OUTPHI)<-philoc
 
 
 ### write results----------------------------------------------------
-dir.create(paste('results', sep = ''))
-setwd(paste('results', sep = ''))
+wd_origin<-getwd()
+if (file.exists('results')){
+    setwd('results')
+} else {
+    dir.create('results')
+    setwd('results')
+}
+
 write.table(Empostp[1],file = paste('ppp.dat', sep = ''), sep = '\t', row.names = FALSE, col.names = FALSE)
  
 

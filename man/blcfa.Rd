@@ -7,14 +7,13 @@
 			 the significant residual correlations detected by Bayesian Covariance Lasso Prior Confirmatory Factor Analysis.}
 \usage{
 blcfa(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,   
-			bloutput = FALSE,  interval_psx = FALSE)
+			ms = -999, bloutput = FALSE,  interval_psx = FALSE)
 
 }			 
 \arguments{
 \item{filename}{Name of the data file (eg. "Y.txt"). 
 			Make sure the data file is in the format of dat or txt, 
-			and the variable name is not included in the file.
-			Besides, use null value to represent missing value in the dataset.}
+			and the variable name is not included in the file.}
 \item{varnames}{Colnames of your dataset (eg. c("gender",paste("y", 1:19, sep = ""))).}
 \item{usevar}{select a subset of variables for analysis (eg. c(paste("y", 1:19, sep = ""))))}
 \item{model}{define your model by a string (eg. 
@@ -32,6 +31,7 @@ blcfa(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 			Besides, if the model does not converge in the N.burn iteration, 
 			the result and the mplus file will not be presented, 
 			and you need to increase the value of N.burn and MCMAX.}
+\item{ms}{define missing value (the default value is NA, which means null value in your dataset).}
 \item{bloutput}{Results of bayesian covariance lasso prior cfa, incluse: ppp, 
 			estimated value, standard error and hpd interval of ly, mu, phi and psx.
 			The default setting is not output these results, if you just want

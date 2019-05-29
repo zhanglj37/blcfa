@@ -1,7 +1,7 @@
 			
 	
-blcfa<-function(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,   
-			bloutput =FALSE,  interval_psx = TRUE)
+blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.burn = 5000,   
+			 bloutput = FALSE,  interval_psx = TRUE)
 			## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 			## bloutput: Output detailed results (xlsx file);  
 			## interval_psx: Detect significant residual correlation based on HPD interval or p-value
@@ -10,11 +10,7 @@ blcfa<-function(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 
 	nthin<-1  ## MCMC algorithm sampling interval
 	CNUM<-2
-#	if (point>3)
-#	{
-#		point<-point
-#		category<-category
-#	}
+	ms<-ms
 
 
 	### prepare model and data  #######################################################
@@ -53,13 +49,8 @@ blcfa<-function(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 	    
 		cat(paste("num of chain: ",CIR,"\n"))
 		
-		#if (category)
-		#{
-		#source("Gibbs_cate.R")
-		#}else{
-		### source("Gibbs.R")
-		#}
-		chainlist<-gibbs_fun(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,nthin,mmvar,mmvar_loc,N.burn)
+		chainlist<-gibbs_fun(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,
+							  nthin, mmvar, mmvar_loc, N.burn, ms) 
 	    assign(paste0("chain",CIR),chainlist)
 				
 	}#end of GIBs

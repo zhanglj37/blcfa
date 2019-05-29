@@ -37,10 +37,9 @@ install_github("zhanglj37/blcfa")
 ```r
 library(blcfa)
 
-filename <- "ss.txt"  # use null value to represent missing value in the dataset
+filename <- "ss.txt"  
 varnames <- c("gender",paste("y", 1:17, sep = ""))
 usevar <- c(paste("y", 1:17, sep = ""))
-
 myModel<-'   
 # 1. CFA
 f1 =~ y1 + y2 + y3 + y4 + y5 
@@ -49,7 +48,8 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 '
 # make sure there is a space between each variable or symbol
 
-blcfa(filename,varnames,usevar,myModel)
+blcfa(filename,varnames,usevar,myModel,ms=-9)
+# ms represents missing value (you don't need to define it if -999 or NA represents missing value in the dataset).
 ```
 
 After running this function(two chains):
@@ -101,13 +101,13 @@ Please refer to the epsr graph and increase the MCMAX.
 
 Then you should increase the value of N.burn and MCMAX (Total number of MCMC samples for inference, the default value = 15000).
 ```r
-blcfa(filename,varnames,usevar,myModel,MCMAX=30000,N.burn=15000)
+blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX=30000,N.burn=15000)
 ```
 
 ### ex3
 If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
 ```r
-blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
+blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
 ```
 
 Then you will get the results folder includes: ppp, epsr graph,
@@ -116,7 +116,7 @@ Then you will get the results folder includes: ppp, epsr graph,
 ### ex4
 Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```r
-blcfa(filename,varnames,usevar,myModel,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
+blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
 ```
 
 ## BugsReports
@@ -131,3 +131,4 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 2. Parallel computing of two MCMC chains.
 
 If you have any suggestions or are willing to join in the improvement of this package, please contact with me.  I really hope that we can jointly promote the improvement of this package.
+

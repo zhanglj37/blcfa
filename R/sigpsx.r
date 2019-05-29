@@ -106,7 +106,7 @@ out_sig<-function(NY,NZ,PPSX1,CORPSX,HPD_PSX2,dataset)
 		{
 			if (interval_psx)
 			{
-				if (matrix[i,j,1]*matrix[i,j,2]>0)
+				if (HPD_PSX2[i,j,1]*HPD_PSX2[i,j,2]>0)
 				{
 					signame[k]<-paste(colnames(dataset)[i]," with ",colnames(dataset)[j])
 					sigpsxcor[k]<-CORPSX[i,j]

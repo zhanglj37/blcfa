@@ -1,5 +1,6 @@
 
-gibbs_fun<-function(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,nthin,mmvar,mmvar_loc,N.burn)
+gibbs_fun<-function(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,nthin,mmvar,
+					mmvar_loc,N.burn,ms)
 {
 #### def_rec ###################################################################
 
@@ -101,11 +102,14 @@ b_lambda<-0.01
 #}
 
 ###  set init ####################################################################
-# Creat the matrix of missing indicators where 1 represents missing
+# Creat the matrix of missing indicators where 1 represents missing  
 missing_ind<-array(0, dim=c(NY, N))
+
 for(i in 1:NY)
    for(j in 1:N)
-      if(is.na(Y[i,j])) missing_ind[i,j]<-1
+      if(is.na(Y[i,j]) || Y[i,j]==ms) missing_ind[i,j]<-1
+
+
 	 
 LY<-LY_int
 MU<<-rep(1.0,NY)
@@ -135,10 +139,12 @@ inv.sqrt.PSX<-chol(inv.PSX)
 if(IDMUA==F) MU<-rep(0,NY)
 
 # initial values for missing data in Y
+
 for(i in 1:NY)
    for(j in 1:N)
-      if(is.na(Y[i,j])) Y[i,j]<-rnorm(1)
+      if(is.na(Y[i,j]) || Y[i,j]==ms) Y[i,j]<-rnorm(1)
 
+	
 
 ### gibbs sampling  ##########################################################
 for(g in 1:MCMAX){
