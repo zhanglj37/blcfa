@@ -4,9 +4,9 @@ author: Junhao Pan, Lijin Zhang
 
 published: May 28, 2019
 
-
 [![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
 The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual correlations and generate the corresponding mplus file.

@@ -1,4 +1,5 @@
-write_results<-function(NZ,NY,NLY,resultlist,hpdlist,mmvar,factorname,IDMU,IDY)
+write_results<-function(MCMAX,NZ,NY,NLY,resultlist,hpdlist,sigpsx_list,
+						epsr,mmvar,factorname,IDMU,IDY)
 {	
 
 EmLY=resultlist$EmLY
@@ -14,6 +15,8 @@ HPD_LY1=hpdlist$HPD_LY1
 HPD_MU1=hpdlist$HPD_MU1
 HPD_PHI1=hpdlist$HPD_PHI1
 HPD_PSX1=hpdlist$HPD_PHI1
+OUTPSX=sigpsx_list$OUTPSX
+SIGPSX=sigpsx_list$SIGPSX
 
 NMU<-sum(IDMU)			      #number of Mu in measurement equation.
 NLY<-sum(IDY)				#number of free lambda need to be estimated in Lambda.
@@ -174,3 +177,4 @@ savePlot(filename = "EPSR",
 setwd('..')
 
 }
+

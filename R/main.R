@@ -70,7 +70,8 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 		write_mplus(varnames,usevar,myModel,filename,sigpsx_list)
 		if (bloutput)
 		{
-			write_results(NZ,NY,NLY,resultlist,hpdlist,mmvar,factorname,IDMU,IDY)  
+			write_results(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)  
 		}
     }else{
 		cat('Error: The convergence criterion is not satisfied.  \n')
