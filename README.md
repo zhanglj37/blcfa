@@ -9,9 +9,9 @@ published: May 28, 2019
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
-The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual correlations and generate the corresponding mplus file.
+The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual covariances and generate the corresponding mplus file.
 
-If you want to know more about Bayesian covariance lasso prior confirmatory factor analysis, please refer to Pan, Ip and Dubé(2017).
+If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to Pan, Ip and Dubé(2017).
 
 (Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.)
 
@@ -62,7 +62,7 @@ num of chain:2
 ...
 ```
 
-you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. for example:
+you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. For example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
@@ -81,7 +81,6 @@ MODEL:
 	f2  BY  y6  y7  y8  y9  y10  y11;
 	f3  BY  y12  y13  y14  y15  y16  y17  ;
 	 
-
 	y11  with  y13 ;
 	y11  with  y14 ;
 	y13  with  y14 ;

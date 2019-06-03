@@ -74,10 +74,11 @@ rownames(OUTPSX)<-c(psxloc)
 count_sig_interval<-function(NY,matrix)
 {
 	count=0
-	for(i in 2:NY)
+	for(i in 1:NY)
 	{
-		ii<-i-1
-		for(j in 1:ii)
+	for(j in 1:NY)
+	{
+		if(i>j)
 		{
 			if((matrix[i,j,1]*matrix[i,j,2])>0)
 			{
@@ -85,20 +86,23 @@ count_sig_interval<-function(NY,matrix)
 			}
 		}
 	}
+	}
 return(count)
 }
 
 count_sig_p<-function(NY,matrix)
 {
 	count=0
-	for(i in 2:NY)
+	for(i in 1:NY)
 	{
-		ii<-i-1
-		for(j in 1:ii)
+	for(j in 1:NY)
+	{
+		if(i>j)
 		{
 			if(matrix[i,j] < 0.05)
 			count=count+1
 		}
+	}
 	}
 return(count)
 }
@@ -116,10 +120,11 @@ out_sig<-function(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset)
 	sigloc=sighpdpsx=matrix(0,count,2)
 	signame=sigpsxcor=sigpsxp=rep(0,count)
 	k=m=1
-	for(i in 2:NY)
+	for(i in 1:NY)
 	{
-		ii<-i-1
-		for(j in 1:ii)
+	for(j in 1:NY)
+	{
+		if(i>j)
 		{
 			if (interval_psx)
 			{
@@ -148,6 +153,7 @@ out_sig<-function(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset)
 				}			
 			}
 		}
+	}
 	}
 
 	

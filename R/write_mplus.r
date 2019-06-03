@@ -105,7 +105,8 @@ for (i in 1:(usevar_row_num-1))
   
 cat(
 	"ANALYSIS:\n\t",
-	"ESTIMATOR = BAYES;\n\t",
+#	"ESTIMATOR = BAYES;\n\t",
+	"ALGORITHM=GIBBS(RW); \n\t",
 	"PROC = 2;\n\t",
 	"BITERATIONS = (10000);\n",
 	"MODEL:\n\t",
