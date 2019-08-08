@@ -1,4 +1,4 @@
-# main.R with the feature of parallel computing.
+
 
 blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.burn = 5000,
 			 bloutput = FALSE,  interval_psx = TRUE)
