@@ -52,15 +52,14 @@ blcfa(filename,varnames,usevar,myModel,ms=-9)
 
 After running this function(two chains):
 ```r
-num of chain:1
-num of iteration:100
-num of iteration:200
-....
-num of chain:2
-...
-```
+The program is running. See 'log.txt' for details.
 
-you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. for example:
+Gibbs sampling ended up, specific results are being calculated.
+```
+('log.txt' records the process of parallel computing of two MCMC chains)
+
+
+You will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. for example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 

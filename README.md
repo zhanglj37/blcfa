@@ -2,7 +2,7 @@
 # blcfa
 author: Junhao Pan, Lijin Zhang
 
-published: May 28, 2019
+published: August 7, 2019
 
 [![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
@@ -17,7 +17,7 @@ If you would like to know the details about Bayesian covariance lasso prior conf
 
 ## Installation
 ```r
-install.packages("blcfa")  #It hasn't been released yet. 2019-05-28
+install.packages("blcfa")  #It hasn't been released yet. 2019-08-07
 ```
 
 If you want to try out the latest development 'blcfa' code, you can install it  from github using Hadley Wickham's 'devtools' package. 
@@ -52,17 +52,15 @@ blcfa(filename,varnames,usevar,myModel,ms=-9)
 # ms represents missing value (you don't need to define it if -999 or NA represents missing value in the dataset).
 ```
 
-After running this function(two chains):
+After running this function:
 ```r
-num of chain:1
-num of iteration:100
-num of iteration:200
-....
-num of chain:2
-...
-```
+The program is running. See 'log.txt' for details.
 
-you will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. For example:
+Gibbs sampling ended up, specific results are being calculated.
+```
+('log.txt' records the process of parallel computing of two MCMC chains)
+
+You will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. For example:
 ```
 TITLE: Bayesian Lasso CFA
  DATA: FILE =  ss.txt ; 
@@ -126,8 +124,10 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 
 ## Functions under development
 
-1. Bayesian lasso confirmatory factor analysis models with ordered categorical data.
-2. Parallel computing of two MCMC chains.
+Bayesian lasso confirmatory factor analysis models with ordered categorical data.
 
 If you have any suggestions or are willing to join in the improvement of this package, please contact with me.  I really hope that we can jointly promote the improvement of this package.
 
+## Acknowledgement
+
+Thanks to YaTing Deng for adding parallel computing to this package.

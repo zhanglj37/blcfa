@@ -7,7 +7,7 @@
 			 the significant residual correlations detected by Bayesian Covariance Lasso Prior Confirmatory Factor Analysis.}
 \usage{
 blcfa(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,   
-			ms = -999, bloutput = FALSE,  interval_psx = FALSE)
+			ms = -999, bloutput = FALSE,  interval_psx = TRUE)
 
 }			 
 \arguments{
@@ -40,9 +40,5 @@ blcfa(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 			the default setting is using hpd interval.}
 }			 
 \references{
-Yves Rosseel (2012). lavaan: An R Package for Structural Equation
-Modeling. Journal of Statistical Software, 48(2), 1-36. URL
-http://www.jstatsoft.org/v48/i02/.}
-\seealso{
-\code{\link{lavaan}}
+Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.
 }
