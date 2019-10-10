@@ -7,7 +7,7 @@ if(file.exists("bayeslasso_cfa.inp"))
 }
 
 SIGPSX=sigpsx_list$SIGPSX
-sigpsxname<-rownames(SIGPSX)
+
 ## The variable name part is split into multiple lines in order to be smaller than the 90 characters constrained by Mplus.
 var_row_num<- length(varnames)%/%10+1
 for (i in 1:var_row_num)
@@ -114,11 +114,16 @@ cat(
 	"\n\n\t",
 	file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
  
-for (i in 1:length(sigpsxname))
+if (SIGPSX != 0)
 {
-	cat(sigpsxname[i],";\n\t",
-		file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
+	sigpsxname<-rownames(SIGPSX)
+	for (i in 1:length(sigpsxname))
+	{
+		cat(sigpsxname[i],";\n\t",
+			file = paste("blcfa", simui, ".inp", sep = ''), append = T)
+	}
 }
+
 cat(
 	"\n",
 	"OUTPUT: TECH1  TECH8  STDY;\n",
