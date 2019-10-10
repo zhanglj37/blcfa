@@ -14,7 +14,7 @@ Empostp=resultlist$Empostp
 HPD_LY1=hpdlist$HPD_LY1
 HPD_MU1=hpdlist$HPD_MU1
 HPD_PHI1=hpdlist$HPD_PHI1
-HPD_PSX1=hpdlist$HPD_PHI1
+HPD_PSX1=hpdlist$HPD_PSX1
 OUTPSX=sigpsx_list$OUTPSX
 SIGPSX=sigpsx_list$SIGPSX
 
