@@ -52,10 +52,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 	  registerDoParallel(cores = ncores)
 	}
 
-	if(file.exists("log.txt"))
-	{
-		file.remove("log.txt")
-	}
+
 	writeLines(c(""), "log.txt") #create or clear the log file recording the ouput of foreach loop
 
 	parList <- foreach (CIR = 1:CNUM,
@@ -81,10 +78,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
   	list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
 	}
 	cat("Gibbs sampling ended up, specific results are being calculated.  \n",file=FALSE)
-	if(file.exists("log.txt"))
-	{
-		file.remove("log.txt")
-	}
+
 	
 	if(ncores > 1) stopCluster(cl)
 
