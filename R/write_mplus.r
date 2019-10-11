@@ -141,7 +141,7 @@ cat(
  
 if (SIGPSX[1] != 0)
 {
-	sigpsxname<-rownames(SIGPSX)
+	sigpsxname<-sigpsx_list$sigpsxname
 	for (i in 1:length(sigpsxname))
 	{
 		cat(sigpsxname[i],";\n\t",

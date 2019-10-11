@@ -183,7 +183,7 @@ if(count > 0)
 	}
 	
 	
-	sigpsx_list<-list(SIGPSX=SIGPSX,sigloc=sigloc,OUTPSX=OUTPSX)
+	sigpsx_list<-list(SIGPSX=SIGPSX,sigloc=sigloc,OUTPSX=OUTPSX,sigpsxname=sigpsxname)
 }else{
 	sigpsx_list<-list(SIGPSX=count,OUTPSX=OUTPSX)
 }
