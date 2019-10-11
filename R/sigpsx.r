@@ -167,11 +167,20 @@ out_sig<-function(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)
 
 if(count > 0)
 {
-	SIGPSX<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,4:7],2,as.numeric)
-	sigloc<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,1:2],2,as.numeric)
-	sigpsxname<-out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,3]
-	colnames(SIGPSX)<-c("cor","p-value","HPD_lower","HPD_upper")
-	rownames(SIGPSX)<-sigpsxname
+	if (count == 1)
+	{
+		SIGPSX<-as.numeric(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,4:7])
+		sigloc<-as.numeric(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,1:2])
+		sigpsxname<-out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,3]
+		names(SIGPSX)<-sigpsxname
+
+	}else{
+		SIGPSX<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,4:7],2,as.numeric)
+		sigloc<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,1:2],2,as.numeric)
+		sigpsxname<-out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,3]
+		colnames(SIGPSX)<-c("cor","p-value","HPD_lower","HPD_upper")
+		rownames(SIGPSX)<-sigpsxname
+	}
 	
 	
 	sigpsx_list<-list(SIGPSX=SIGPSX,sigloc=sigloc,OUTPSX=OUTPSX)

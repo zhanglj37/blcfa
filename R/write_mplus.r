@@ -139,7 +139,7 @@ cat(
 	"\n\n\t",
 	file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
  
-if (SIGPSX != 0)
+if (SIGPSX[1] != 0)
 {
 	sigpsxname<-rownames(SIGPSX)
 	for (i in 1:length(sigpsxname))
