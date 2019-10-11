@@ -169,7 +169,7 @@ if(count > 0)
 {
 	SIGPSX<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,4:7],2,as.numeric)
 	sigloc<-apply(out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,1:2],2,as.numeric)
-	sigpsxname<-out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset)[,3]
+	sigpsxname<-out_sig(NY,NZ,PPSX1,CORPSX,HPD_PSX3,dataset,count)[,3]
 	colnames(SIGPSX)<-c("cor","p-value","HPD_lower","HPD_upper")
 	rownames(SIGPSX)<-sigpsxname
 	

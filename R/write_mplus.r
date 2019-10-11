@@ -9,7 +9,13 @@ if(file.exists("bayeslasso_cfa.inp"))
 SIGPSX=sigpsx_list$SIGPSX
 
 ## The variable name part is split into multiple lines in order to be smaller than the 90 characters constrained by Mplus.
-var_row_num<- length(varnames)%/%10+1
+if (length(varnames)%%10 == 0)
+{
+	var_row_num<- length(varnames)%/%10
+}else{
+	var_row_num<- length(varnames)%/%10+1
+}
+
 for (i in 1:var_row_num)
 {
 	if (i == var_row_num)
@@ -38,7 +44,13 @@ for (i in 1:var_row_num)
 	
 }
 
-usevar_row_num<- length(usevar)%/%10+1
+if (length(varnames)%%10 == 0)
+{
+	usevar_row_num<- length(usevar)%/%10
+}else{
+	usevar_row_num<- length(usevar)%/%10+1
+}
+
 for (i in 1:usevar_row_num)
 {
 	if (i == usevar_row_num)
@@ -82,27 +94,40 @@ cat(
 	"VARIABLE:\n",
 	"NAMES = ",
 	file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
-  
-for (i in 1:(var_row_num-1))
-{
-	cat(get(paste0("combine_names",i)),"\n\t",
-		file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
-}
+
+if (var_row_num == 1)
+{  
 	cat(get(paste0("combine_names",var_row_num)),";\n",
 		file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
-		
+	
+}else{
+	for (i in 1:(var_row_num-1))
+	{
+		cat(get(paste0("combine_names",i)),"\n\t",
+			file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
+	}
+		cat(get(paste0("combine_names",var_row_num)),";\n",
+			file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
+}	
+	
 cat(
 	"USEV = ",
 	file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
 
-for (i in 1:(usevar_row_num-1))
+if (usevar_row_num == 1)
 {
-	cat(get(paste0("combine_usenames",i)),"\n\t",
-		file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
-}
 	cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 		file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
-  
+}else{
+	for (i in 1:(usevar_row_num-1))
+	{
+		cat(get(paste0("combine_usenames",i)),"\n\t",
+			file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
+	}
+		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
+			file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
+} 
+ 
 cat(
 	"ANALYSIS:\n\t",
 	"ESTIMATOR = BAYES;\n\t",
