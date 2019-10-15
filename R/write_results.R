@@ -82,14 +82,14 @@ colnames(MU_matrix)<-c("EstMU","SeMU","p-value","HPD_lower","HPD_upper")
 EmPHI1<-matrix(EmPHI[1,],NZ,NZ)
 SEPHI1<-matrix(SEPHI[1,],NZ,NZ)
 ZPHI=PPHI=EmPHI[1,]/SEPHI[1,]
-for (i in 1:NZ*NZ)
+numphi = NZ*NZ
+for (i in 1:numphi)
 {
 	if (ZPHI[i]>0)
 	{
 		PPHI[i]<-2*(1-pnorm(ZPHI[i]))
 	}
-	else 
-	{
+	else{
 		PPHI[i]<-2*pnorm(ZPHI[i])
 	}
 }
@@ -98,7 +98,9 @@ for (i in 1:NZ)
 	for (j in 1:NZ)
 		CORPHI[i,j] = EmPHI1[i,j]/( sqrt(EmPHI1[i,i])* sqrt(EmPHI1[j,j]) )
 
-philoc=phiest=phise=phicor=phip=rep(0,(NZ*(NZ+1))/2)
+
+
+philoc=phiest=phise=phicor=phip=hpd_low=hpd_up=rep(0,(NZ*(NZ+1))/2)
 k<-1
 for(i in 1:NZ)
 {
@@ -109,10 +111,12 @@ for(i in 1:NZ)
 			phise[k]<-SEPHI1[i,j]
 			phicor[k]<-CORPHI[i,j]
 			phip[k]<-PPHI1[i,j]
+			hpd_low[k]<-HPD_PHI1[(j-1)*NZ + i,1]  ###取决于上下三角
+			hpd_up[k]<-HPD_PHI1[(j-1)*NZ + i,2]
 			k<-k+1
 	}
 }
-OUTPHI<-cbind(phiest,phise,phicor,phip,HPD_PHI1[1:((NZ*(NZ+1))/2),])
+OUTPHI<-cbind(phiest,phise,phicor,phip,hpd_low,hpd_up)   #### error
 colnames(OUTPHI)<-c("est","se","cor","p-value","HPD_lower","HPD_upper")
 rownames(OUTPHI)<-philoc
 
