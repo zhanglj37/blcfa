@@ -77,7 +77,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 
   	list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
 	}
-	#cat("Gibbs sampling ended up, specific results are being calculated.  \n",file=FALSE)
+	cat("Gibbs sampling ended up, specific results are being calculated.  \n")
 
 	
 	if(ncores > 1) stopCluster(cl)
@@ -114,7 +114,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 		}
     }else{
 		cat('Error: The convergence criterion is not satisfied.  \n',file=FALSE)
-		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.',file=FALSE)
+		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
 
 		mycolsi <- rainbow(ncol(epsr), s = 1, v = 1, start = 0,
 				end = max(1, ncol(epsr) - 1)/ncol(epsr), alpha = 1)
