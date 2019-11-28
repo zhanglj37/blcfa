@@ -77,7 +77,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 
   	list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
 	}
-	cat("Gibbs sampling ended up, specific results are being calculated.  \n",file=FALSE)
+	#cat("Gibbs sampling ended up, specific results are being calculated.  \n",file=FALSE)
 
 	
 	if(ncores > 1) stopCluster(cl)
