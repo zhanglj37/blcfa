@@ -113,7 +113,7 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
 		}
     }else{
-		cat('Error: The convergence criterion is not satisfied.  \n',file=FALSE)
+		cat('Error: The convergence criterion is not satisfied.  \n')
 		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
 
 		mycolsi <- rainbow(ncol(epsr), s = 1, v = 1, start = 0,
