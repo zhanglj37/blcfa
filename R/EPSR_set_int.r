@@ -8,7 +8,7 @@ if (CIR == 1)
 	for (i in 1:length(mmvar))
 	{
 		LY_int[mmvar_loc[[i]][1],i]<-1.0
-		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.5
+		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.3
 	}
 	LY_int[mmvar_loc[[1]][2:length(mmvar_loc[[1]])],1]<-1.1
 }
@@ -20,7 +20,7 @@ if (CIR == 2)
 	for (i in 1:length(mmvar))
 	{
 		LY_int[mmvar_loc[[i]][1],i]<-1.0
-		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.5
+		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.3
 	}
 }
 
@@ -30,9 +30,9 @@ if (CIR == 3)
 	for (i in 1:length(mmvar))
 	{
 		LY_int[mmvar_loc[[i]][1],i]<-1.0
-		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.5
+		LY_int[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.3
 	}
-	LY_int[mmvar_loc[[1]][2:length(mmvar_loc[[1]])],1]<-1.3
+	LY_int[mmvar_loc[[1]][2:length(mmvar_loc[[1]])],1]<-1.5
 }
 return(LY_int)
 }

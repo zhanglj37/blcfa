@@ -145,7 +145,7 @@ if (SIGPSX[1] != 0)
 	for (i in 1:length(sigpsxname))
 	{
 		cat(sigpsxname[i],";\n\t",
-			file = paste("blcfa", simui, ".inp", sep = ''), append = T)
+			file = paste("bayeslasso_cfa.inp", sep = ''), append = T)
 	}
 }
 

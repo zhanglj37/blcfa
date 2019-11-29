@@ -4,8 +4,8 @@ read_dataset<-function(dataset)
 {
 Y<-t(dataset)
 #Standardized the data
-#Y.temp<-t(Y)   
-#Y<-t(scale(Y.temp)) 
+Y.temp<-t(Y)   
+Y<-t(scale(Y.temp)) 
 
 return(Y)
 }

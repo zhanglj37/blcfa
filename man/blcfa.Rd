@@ -23,7 +23,7 @@ blcfa(filename, varnames, usevar, model, MCMAX = 15000, N.burn = 5000,
 			f2 =~ y8 + y9 + y10 + y11 + y12 + y13 + y14
 			f3 =~ y15 + y16 + y17 + y18 + y19').
 			Wrap when you define a new factor, 
-			define he relationship between factors and indicators by the =~ symbol,
+			define the relationship between factors and indicators by the =~ symbol,
 			make sure there is a space between each variable or symbol
 			(eg. y1 + y2 (right), y1+y2(wrong)).}
 \item{MCMAX}{Total number of MCMC samples for inference (the default value is 15000).}
