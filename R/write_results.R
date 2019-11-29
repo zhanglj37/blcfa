@@ -154,7 +154,7 @@ colnames(CORPHI)<-factorname
 write.table(CORPHI,file = paste('phi_cormatrix.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 
 write.table(OUTPSX,file = paste('psx.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
-if (SIGPSX != 0 )
+if (SIGPSX[1] != 0 )
 {
 	write.table(SIGPSX,file = paste('psx_sig.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 }else{
