@@ -49,7 +49,7 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 # make sure there is a space between each variable or symbol
 
 blcfa(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = -9)
-# estimation ( = 'ML' / 'Bayes', the default value is ML) means the estimation method in Mplus file
+# estimation ( = 'ML' / 'Bayes', the default value is ML) denotes the estimation method in Mplus file
 # ms represents missing value (you don't need to define it if -999 or NA represents missing value in the dataset).
 ```
 
