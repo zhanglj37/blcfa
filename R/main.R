@@ -1,6 +1,6 @@
 
 
-blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.burn = 5000,
+blcfa<-function(filename, varnames, usevar, model, estimation = ML, ms = -999, MCMAX = 15000, N.burn = 5000,
 			 bloutput = FALSE,  interval_psx = TRUE)
 			## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 			## bloutput: Output detailed results (xlsx file);
@@ -109,8 +109,15 @@ blcfa<-function(filename, varnames, usevar, model, ms = -999, MCMAX = 15000, N.b
 		write_mplus(varnames,usevar,myModel,filename,sigpsx_list)
 		if (bloutput)
 		{
-			write_results(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+			if (estimation == 'Bayes')
+			{
+				write_results_bayes(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
+			}else{
+				write_results_ml(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
+			
+			}
 		}
     }else{
 		cat('Error: The convergence criterion is not satisfied.  \n')
