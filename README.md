@@ -64,11 +64,11 @@ Gibbs sampling ended up, specific results are being calculated.
 You will get Mplus input file and output file  that include significant residual correlations detected by Bayesian covariance lasso prior confirmatory factor analysis. For example:
 ```
 TITLE: Bayesian Lasso CFA
- DATA: FILE =  ss.txt ; 
- VARIABLE:
- NAMES = gender y1 y2 y3 y4 y5 y6 y7 y8 y9 
+DATA: FILE =  ss.txt ; 
+VARIABLE:
+NAMES = gender y1 y2 y3 y4 y5 y6 y7 y8 y9 
 	y10 y11 y12 y13 y14 y15 y16 y17 ;
- USEV = y1 y2 y3 y4 y5 y6 y7 y8 y9 
+USEV = y1 y2 y3 y4 y5 y6 y7 y8 y9 
 	y10 y11 y12 y13 y14 y15 y16 y17 ;
 ANALYSIS:
 	 ESTIMATOR = BAYES;
