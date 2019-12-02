@@ -1,6 +1,6 @@
 
 
-blcfa<-function(filename, varnames, usevar, model, estimation = ML, ms = -999, MCMAX = 15000, N.burn = 5000,
+blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000,
 			 bloutput = FALSE,  interval_psx = TRUE)
 			## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 			## bloutput: Output detailed results (xlsx file);
@@ -109,12 +109,12 @@ blcfa<-function(filename, varnames, usevar, model, estimation = ML, ms = -999, M
 		write_mplus(varnames,usevar,myModel,filename,sigpsx_list)
 		if (bloutput)
 		{
-			if (estimation == 'Bayes' || estimation == 'BAYES')
+			if (estimation == 'ML' || estimation == 'ml')
 			{
-				write_results_bayes(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+				write_results_ml(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
 			}else{
-				write_results_ml(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+				write_results_bayes(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
 			
 			}
