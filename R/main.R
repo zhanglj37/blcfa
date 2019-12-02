@@ -109,7 +109,8 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 		write_mplus(varnames,usevar,myModel,filename,sigpsx_list)
 		if (bloutput)
 		{
-			if (estimation == 'ML' || estimation == 'ml')
+			estimation = tolower(estimation)
+			if (estimation == 'ml' || estimation == 'maximum likelihood')
 			{
 				write_results_ml(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
