@@ -127,6 +127,14 @@ if (usevar_row_num == 1)
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 			file = paste("blcfa_ml.inp", sep = ''), append = T)
 } 
+if (is.numeric(ms))
+{
+	cat(
+		"Missing: ALL(",
+		ms,
+		")\n\n\t",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}
  
 cat(
 	"ANALYSIS:\n\t",

@@ -106,19 +106,18 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
 	if (convergence)
 	{
-		write_mplus(varnames,usevar,myModel,filename,sigpsx_list)
+		estimation = tolower(estimation)
+		if (estimation == 'ml' || estimation == 'maximum likelihood')
+		{
+			write_results(varnames,usevar,myModel,filename,sigpsx_list,ms)
+		}else{
+			write_results(varnames,usevar,myModel,filename,sigpsx_list,ms)
+		
+		}
 		if (bloutput)
 		{
-			estimation = tolower(estimation)
-			if (estimation == 'ml' || estimation == 'maximum likelihood')
-			{
-				write_results_ml(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
+			write_results(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
 							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
-			}else{
-				write_results_bayes(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
-							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
-			
-			}
 		}
     }else{
 		cat('Error: The convergence criterion is not satisfied.  \n')
