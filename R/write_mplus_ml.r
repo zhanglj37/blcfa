@@ -1,5 +1,5 @@
 
-write_mplus_ml<-function(varnames,usevar,myModel,filename,sigpsx_list)
+write_mplus_ml<-function(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
 {
 if(file.exists("blcfa_ml.inp"))
 {
@@ -89,7 +89,19 @@ model4<-gsub("\n",";\n\t",model3)
 ## generate input file
 cat(
 	"TITLE: Bayesian Lasso CFA\n", #_fix211_
-	"DATA: FILE = ", filename, ";",
+	file = paste("blcfa_ml.inp", sep = ''), append = T)
+
+if(ismissing == 1)
+{
+	cat(
+		"DATA: FILE = data_imputed.txt ;",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}else{
+	cat(
+		"DATA: FILE = ", filename, ";",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}
+cat(
 	"\n",
 	"VARIABLE:\n",
 	"NAMES = ",
@@ -127,18 +139,31 @@ if (usevar_row_num == 1)
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 			file = paste("blcfa_ml.inp", sep = ''), append = T)
 } 
-if (is.numeric(ms))
-{
-	cat(
-		"Missing: ALL(",
-		ms,
-		")\n\n\t",
-		file = paste("blcfa_ml.inp", sep = ''), append = T)
-}
+#if (is.numeric(ms))
+#{
+#	cat(
+#		"missing: ALL(",
+#		ms,
+#		")\n\n\t",
+#		file = paste("blcfa_ml.inp", sep = ''), append = T)
+#}
  
 cat(
 	"ANALYSIS:\n\t",
-	"ESTIMATOR = ML;\n\t",
+	file = paste("blcfa_ml.inp", sep = ''), append = T)
+
+nonnormal = normal_detect(varnames,usevar,myModel,filename)
+if (nonnormal == 1)
+{
+	cat(
+		"ESTIMATOR = MLM;\n\t",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}else{
+	cat(
+		"ESTIMATOR = ML;\n\t",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}
+cat(
 	"MODEL:\n\t",
 	model4,
 	"\n\n\t",

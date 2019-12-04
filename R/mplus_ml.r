@@ -1,9 +1,9 @@
 
-write_mplus_bayes<-function(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
+mplus_ml<-function(varnames,usevar,myModel,filename, ms = 'na')
 {
-if(file.exists("blcfa_bayes.inp"))
+if(file.exists("ml.inp"))
 {
- file.remove("blcfa_bayes.inp")
+ file.remove("ml.inp")
 }
 
 SIGPSX=sigpsx_list$SIGPSX
@@ -89,74 +89,85 @@ model4<-gsub("\n",";\n\t",model3)
 ## generate input file
 cat(
 	"TITLE: Bayesian Lasso CFA\n", #_fix211_
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+	file = paste("ml.inp", sep = ''), append = T)
 
 if(ismissing == 1)
 {
 	cat(
 		"DATA: FILE = data_imputed.txt ;",
-		file = paste("blcfa_bayes.inp", sep = ''), append = T)
+		file = paste("ml.inp", sep = ''), append = T)
 }else{
 	cat(
 		"DATA: FILE = ", filename, ";",
-		file = paste("blcfa_bayes.inp", sep = ''), append = T)
+		file = paste("ml.inp", sep = ''), append = T)
 }
 cat(
 	"\n",
 	"VARIABLE:\n",
 	"NAMES = ",
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+	file = paste("ml.inp", sep = ''), append = T)
 
 if (var_row_num == 1)
 {  
 	cat(get(paste0("combine_names",var_row_num)),";\n",
-		file = paste("blcfa_bayes.inp", sep = ''), append = T)
+		file = paste("ml.inp", sep = ''), append = T)
 	
 }else{
 	for (i in 1:(var_row_num-1))
 	{
 		cat(get(paste0("combine_names",i)),"\n\t",
-			file = paste("blcfa_bayes.inp", sep = ''), append = T)
+			file = paste("ml.inp", sep = ''), append = T)
 	}
 		cat(get(paste0("combine_names",var_row_num)),";\n",
-			file = paste("blcfa_bayes.inp", sep = ''), append = T)
+			file = paste("ml.inp", sep = ''), append = T)
 }	
 	
 cat(
 	"USEV = ",
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+	file = paste("ml.inp", sep = ''), append = T)
 
 if (usevar_row_num == 1)
 {
 	cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
-		file = paste("blcfa_bayes.inp", sep = ''), append = T)
+		file = paste("ml.inp", sep = ''), append = T)
 }else{
 	for (i in 1:(usevar_row_num-1))
 	{
 		cat(get(paste0("combine_usenames",i)),"\n\t",
-			file = paste("blcfa_bayes.inp", sep = ''), append = T)
+			file = paste("ml.inp", sep = ''), append = T)
 	}
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
-			file = paste("blcfa_bayes.inp", sep = ''), append = T)
+			file = paste("ml.inp", sep = ''), append = T)
 } 
-#if (is.numeric(ms))
-#{
-#	cat(
-#		"missing: ALL(",
-#		ms,
-#		")\n\n\t",
-#		file = paste("blcfa_ml.inp", sep = ''), append = T)
-#}
+if (is.numeric(ms))
+{
+	cat(
+		"missing: ALL(",
+		ms,
+		")\n\n\t",
+		file = paste("ml.inp", sep = ''), append = T)
+}
+ 
 cat(
 	"ANALYSIS:\n\t",
-	"ESTIMATOR = BAYES;\n\t",
-	"ALGORITHM=GIBBS(RW); \n\t",
-	"PROC = 2;\n\t",
-	"BITERATIONS = (10000);\n",
+	file = paste("ml.inp", sep = ''), append = T)
+
+nonnormal = normal_detect(varnames,usevar,myModel,filename)
+if (nonnormal == 1)
+{
+	cat(
+		"ESTIMATOR = MLM;\n\t",
+		file = paste("ml.inp", sep = ''), append = T)
+}else{
+	cat(
+		"ESTIMATOR = ML;\n\t",
+		file = paste("ml.inp", sep = ''), append = T)
+}
+cat(
 	"MODEL:\n\t",
 	model4,
 	"\n\n\t",
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+	file = paste("ml.inp", sep = ''), append = T)
  
 if (SIGPSX[1] != 0)
 {
@@ -164,15 +175,14 @@ if (SIGPSX[1] != 0)
 	for (i in 1:length(sigpsxname))
 	{
 		cat(sigpsxname[i],";\n\t",
-			file = paste("blcfa_bayes.inp", sep = ''), append = T)
+			file = paste("ml.inp", sep = ''), append = T)
 	}
 }
 
 cat(
 	"\n",
-	"OUTPUT: TECH1  TECH8  STDY;\n",
-	"PLOT: TYPE= PLOT2;\n",
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+	"OUTPUT: TECH1  STDY;\n",
+	file = paste("ml.inp", sep = ''), append = T)
  
 ## run
 runModels()

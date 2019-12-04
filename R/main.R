@@ -67,7 +67,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 		IDMU<-rep(1,NY)  # now MU is estimated
 		IDMUA<-any(as.logical(IDMU))
 		LY_int<-set_int_fun(CIR,dataset,mmvar,mmvar_loc)
-		Y<-read_dataset(dataset)
+		Y<-read_dataset(dataset) # standarized
 
 		sink("log.txt", append=TRUE) # divert the output to the log file
 
@@ -106,12 +106,31 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
 	if (convergence)
 	{
+		if(sum(chain2$missing_ind) > 0)
+		{
+			ismissing = 1
+			missing_mean = c((N.burn+1):MCMAX)
+			for(i in 1:NY)
+			{
+				for (j in 1:N)
+				{
+					if(missing_ind[i,j]==1)
+					{
+						
+						dataset[i,j] = mean(chain2$Y_missing[i,j,missing_mean])
+					}
+				}
+			}		
+		}else{
+			ismissing = 0
+		}
+		write.table(dataset,'data_imputed.txt',col.names=FALSE,row.names=FALSE)
 		estimation = tolower(estimation)
 		if (estimation == 'ml' || estimation == 'maximum likelihood')
 		{
-			write_results(varnames,usevar,myModel,filename,sigpsx_list,ms)
+			write_results(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
 		}else{
-			write_results(varnames,usevar,myModel,filename,sigpsx_list,ms)
+			write_results(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
 		
 		}
 		if (bloutput)

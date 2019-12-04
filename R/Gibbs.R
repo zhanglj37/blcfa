@@ -102,7 +102,8 @@ b_lambda<-0.01
 
 ###  set init ####################################################################
 # Creat the matrix of missing indicators where 1 represents missing
-missing_ind<-array(0, dim=c(NY, N))
+missing_ind = array(0, dim=c(NY, N))
+Y_missing = array(0, dim=c(NY,N,MCMAX))
 
 for(i in 1:NY)
    for(j in 1:N)
@@ -290,6 +291,7 @@ for(g in 1:MCMAX){
        EPSX[gm,,]<-PSX
        EinvPSX[gm,,]<-inv.PSX
        EMU[gm,]<-MU
+	  
        k<-1
        for(i in 1:NY){
           for(j in 1:NY){
@@ -314,6 +316,7 @@ for(g in 1:MCMAX){
 		theta.temp<-MU+LY%*%xi.temp  # NY*N
 		for(i in 1:N) Y.temp[,i]<-mvrnorm(1, theta.temp[,i], Sigma=PSX)
 		Y.cen<-Y.temp-MU-LY%*%xi.temp  # NY*N
+		Y_missing[,,gm] = Y.temp[,] 
 		for(i in 1:N){
 			postp2<-postp2+t(Y.cen[,i])%*%inv.PSX%*%Y.cen[,i]
 		}
@@ -328,7 +331,8 @@ for(g in 1:MCMAX){
 
 }#end of g MCMAX
 
-chainlist<-list(EMU=EMU,ELY=ELY,EPHI=EPHI,EPSX=EPSX,Epostp=Epostp,EinvPSX=EinvPSX,chainpsx=chainpsx)
+chainlist<-list(EMU=EMU,ELY=ELY,EPHI=EPHI,EPSX=EPSX,Epostp=Epostp,EinvPSX=EinvPSX,chainpsx=chainpsx,
+	missing_ind=missing_ind,Y_missing=Y_missing)
 return(chainlist)
 
 }
