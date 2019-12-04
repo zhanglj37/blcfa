@@ -1,6 +1,6 @@
 
 gibbs_fun<-function(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,nthin,mmvar,
-					mmvar_loc,N.burn,ms,CIR)
+					mmvar_loc,N.burn,CIR)
 {
 #### def_rec ###################################################################
 
@@ -107,7 +107,7 @@ Y_missing = array(0, dim=c(NY,N,MCMAX))
 
 for(i in 1:NY)
    for(j in 1:N)
-      if(is.na(Y[i,j]) || Y[i,j]==ms) missing_ind[i,j]<-1
+      if(is.na(Y[i,j])) missing_ind[i,j]<-1
 
 
 
@@ -142,7 +142,7 @@ if(IDMUA==F) MU<-rep(0,NY)
 
 for(i in 1:NY)
    for(j in 1:N)
-      if(is.na(Y[i,j]) || Y[i,j]==ms) Y[i,j]<-rnorm(1)
+      if(is.na(Y[i,j])) Y[i,j]<-rnorm(1)
 
 
 

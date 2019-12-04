@@ -159,10 +159,10 @@ cat(
 ## run
 runModels()
 
-normality = readModels('normal.out')
+normality = readModels('normal.out')$tech12
 for (i in 1:length(varnames))
 {
-	if (normality$tech12$obsSkewness > 2 || normality$tech12$obsKurtosis > 7)
+	if (normality$obsSkewness[i] > 2 || normality$obsKurtosis[i] > 7)
 	{
 		nonnormal = 1
 	}else{
