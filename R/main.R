@@ -128,10 +128,10 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 			{
 				for (j in 1:N)
 				{
-					if(missing_ind[i,j]==1)
+					if(chain2$missing_ind[i,j]==1)
 					{
 						
-						dataset[i,j] = mean(chain2$Y_missing[i,j,missing_mean])
+						dataset[j,i] = mean(chain2$Y_missing[i,j,missing_mean])
 					}
 				}
 			}		
