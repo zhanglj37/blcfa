@@ -91,7 +91,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
   	list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
 	}
-	cat("Gibbs sampling ended up, specific results are being calculated.  \n")
+	#cat("Gibbs sampling ended up, specific results are being calculated.  \n")
 
 	
 	if(ncores > 1) stopCluster(cl)
@@ -109,18 +109,19 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	IDY <- parList[[1]][[2]]
 	IDMU <- parList[[1]][[3]]
 	#*******************************************
+	Y_missing = chain2$Y_missing
+	missing_ind = chain2$missing_ind
+	resultlist <- caculate_results(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
+	hpdlist <- hpd_fun(chain2,NZ,NY,N,IDY)
+	sigpsx_list <- sig_psx_fun(NZ,NY,dataset,resultlist,hpdlist,interval_psx)
 
-	resultlist<-caculate_results(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
-	hpdlist<-hpd_fun(chain2,NZ,NY,N,IDY)
-	sigpsx_list<-sig_psx_fun(NZ,NY,dataset,resultlist,hpdlist,interval_psx)
-
-	epsrlist<-caculate_epsr(MCMAX,N.burn,CNUM,NY,NZ,chain1,chain2)
-	convergence=epsrlist$convergence
-	epsr=epsrlist$epsr
-
+	epsrlist <- caculate_epsr(MCMAX,N.burn,CNUM,NY,NZ,chain1,chain2)
+	convergence = epsrlist$convergence
+	epsr = epsrlist$epsr
+	cat("Gibbs sampling ended up, specific results are being calculated.  \n")
 	if (convergence)
 	{
-		if(sum(chain2$missing_ind) > 0)
+		if(sum(missing_ind) > 0)
 		{
 			ismissing = 1
 			missing_mean = c((N.burn+1):MCMAX)
@@ -128,10 +129,10 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 			{
 				for (j in 1:N)
 				{
-					if(chain2$missing_ind[i,j]==1)
+					if(missing_ind[i,j]==1)
 					{
 						
-						dataset[j,i] = mean(chain2$Y_missing[i,j,missing_mean])
+						dataset[j,i] = mean(Y_missing[i,j,missing_mean])
 					}
 				}
 			}		
@@ -142,9 +143,9 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 		estimation = tolower(estimation)
 		if (estimation == 'ml' || estimation == 'maximum likelihood')
 		{
-			write_results(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
+			write_mplus_ml(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
 		}else{
-			write_results(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
+			write_mplus_bayes(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
 		
 		}
 		if (bloutput)

@@ -6,7 +6,7 @@ if(file.exists("ml.inp"))
  file.remove("ml.inp")
 }
 
-SIGPSX=sigpsx_list$SIGPSX
+
 
 ## The variable name part is split into multiple lines in order to be smaller than the 90 characters constrained by Mplus.
 if (length(varnames)%%10 == 0)

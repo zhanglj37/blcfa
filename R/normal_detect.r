@@ -6,7 +6,7 @@ if(file.exists("normal.inp"))
  file.remove("normal.inp")
 }
 
-SIGPSX=sigpsx_list$SIGPSX
+
 
 ## The variable name part is split into multiple lines in order to be smaller than the 90 characters constrained by Mplus.
 if (length(varnames)%%10 == 0)
@@ -145,7 +145,7 @@ cat(
 	"ANALYSIS:\n\t",
 	"TYPE = MIXTURE;\n\t",
 	"MODEL:\n\t",
-	"%OVERALL%;\n\t",
+	"%OVERALL%\n\t",
 	model4,
 	"\n\n\t",
 	file = paste("normal.inp", sep = ''), append = T)
@@ -157,12 +157,14 @@ cat(
 	file = paste("normal.inp", sep = ''), append = T)
  
 ## run
-runModels()
+runModels("normal.inp")
 
 normality = readModels('normal.out')$tech12
+obsSkewness = normality$obsSkewness
+obsKurtosis = normality$obsKurtosis
 for (i in 1:length(varnames))
 {
-	if (normality$obsSkewness[i] > 2 || normality$obsKurtosis[i] > 7)
+	if (obsSkewness[i] > 2 || obsKurtosis[i] > 7)
 	{
 		nonnormal = 1
 	}else{
