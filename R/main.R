@@ -121,6 +121,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	cat("Gibbs sampling ended up, specific results are being calculated.  \n")
 	if (convergence)
 	{
+		dataset_new = t(Y)
 		if(sum(missing_ind) > 0)
 		{
 			ismissing = 1
@@ -132,14 +133,14 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 					if(missing_ind[i,j]==1)
 					{
 						
-						dataset[j,i] = mean(Y_missing[i,j,missing_mean])
+						dataset_new[j,i] = mean(Y_missing[i,j,missing_mean])
 					}
 				}
 			}		
 		}else{
 			ismissing = 0
 		}
-		write.table(dataset,'data_imputed.txt',col.names=FALSE,row.names=FALSE)
+		write.table(dataset_new,'data_imputed.txt',col.names=FALSE,row.names=FALSE)
 		estimation = tolower(estimation)
 		if (estimation == 'ml' || estimation == 'maximum likelihood')
 		{

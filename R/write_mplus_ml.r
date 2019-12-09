@@ -139,6 +139,26 @@ if (usevar_row_num == 1)
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 			file = paste("blcfa_ml.inp", sep = ''), append = T)
 } 
+	
+cat(
+	"Define:\n\t",
+	"STANDARDIZE ",
+	file = paste("blcfa_ml.inp", sep = ''), append = T)
+
+if (usevar_row_num == 1)
+{
+	cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
+		file = paste("blcfa_ml.inp", sep = ''), append = T)
+}else{
+	for (i in 1:(usevar_row_num-1))
+	{
+		cat(get(paste0("combine_usenames",i)),"\n\t",
+			file = paste("blcfa_ml.inp", sep = ''), append = T)
+	}
+		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
+			file = paste("blcfa_ml.inp", sep = ''), append = T)
+} 
+
 #if (is.numeric(ms))
 #{
 #	cat(
