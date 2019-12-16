@@ -1,5 +1,5 @@
 
-read_data<-function(filename,varnames)
+read_data<-function(filename,varnames,usevar)
 {	
 	dataset_origin <- read.table(file = filename, col.names = varnames)
 		## original data

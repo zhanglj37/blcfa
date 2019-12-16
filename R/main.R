@@ -17,7 +17,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
 	### prepare model and data  #######################################################
 	### source("read_data.r")
-	dataset<-read_data(filename,varnames)
+	dataset<-read_data(filename,varnames,usevar)
 
 	### source("read_model.r")
 	mmvarorigin<-read_model(myModel)

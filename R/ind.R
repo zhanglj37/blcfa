@@ -2,16 +2,16 @@
 
 IDY_matrix_fun<-function(dataset,mmvar,mmvar_loc)
 {
-#Matrix indicating which element in Lambda is free to estmate (1) or fixed(0) 
-IDY_matrix<-matrix(0.0,nrow=ncol(dataset),ncol=length(mmvar))
-for (i in 1:length(mmvar))
-{
-	IDY_matrix[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.0
-}
+	#Matrix indicating which element in Lambda is free to estmate (1) or fixed(0) 
+	IDY_matrix<-matrix(0.0,nrow=ncol(dataset),ncol=length(mmvar))
+	for (i in 1:length(mmvar))
+	{
+		IDY_matrix[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.0
+	}
 
-IDY<-IDY_matrix
+	IDY<-IDY_matrix
 
-return(IDY)
+	return(IDY)
 }
 
 
