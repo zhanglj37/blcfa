@@ -320,7 +320,7 @@ for(g in 1:MCMAX){
 		for(i in 1:N){
 			postp2<-postp2+t(Y.cen[,i])%*%inv.PSX%*%Y.cen[,i]
 		}
-		if(postp1<=postp2) Epostp[gm2]<-1.0;
+		if(postp1<=postp2) Epostp[g]<-1.0;
 		}
 
      }

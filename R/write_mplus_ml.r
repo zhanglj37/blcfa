@@ -139,7 +139,8 @@ if (usevar_row_num == 1)
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 			file = paste("blcfa_ml.inp", sep = ''), append = T)
 } 
-	
+if(ismissing != 1)
+{
 cat(
 	"Define:\n\t",
 	"STANDARDIZE ",
@@ -158,6 +159,7 @@ if (usevar_row_num == 1)
 		cat(get(paste0("combine_usenames",usevar_row_num)),";\n",
 			file = paste("blcfa_ml.inp", sep = ''), append = T)
 } 
+}
 
 #if (is.numeric(ms))
 #{
