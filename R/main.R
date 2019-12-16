@@ -1,16 +1,19 @@
+## process:
+## prepare model and data   
+## prior + init + data -> posterior (gibbs sampling, parallel compuation)
+## caculate_results
+## generate_output
 
-
-blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000,
-			 bloutput = FALSE,  interval_psx = TRUE)
-			## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
-			## bloutput: Output detailed results (xlsx file);
-			## interval_psx: Detect significant residual correlation based on HPD interval or p-value
-			## category & point: used for category data (wait for development)
+blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
+	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
+	## estimation = 'ml' / 'bayes'
+	## bloutput: Output detailed results (xlsx file);
+	## interval_psx: Detect significant residual correlation based on HPD interval or p-value
+	## category & point: used for category data (under development)
 {
 
 	nthin<-1  ## MCMC algorithm sampling interval
-	CNUM<-2
-	ms<-ms
+	CNUM<-2   ## number of chain
 
 	### prepare model and data  #######################################################
 	### source("read_data.r")
@@ -26,6 +29,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	NY<-ncol(dataset)	 # Number of items (p)
 	NZ<-numw  # Number of factors (q)
 	
+	## record ms values as NA for standarizing data
 	dataset_noms = dataset
 	for(i in 1:N)
 	{
@@ -40,17 +44,17 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	Y<-read_dataset(dataset_noms)  # standarized
 	
 	
-	cat("The program is running. See 'log.txt' for details.  \n")
-
-	###  prior + init + data = posterior (gibbs sampling) ##############################################
+	
+	###  prior + init + data -> posterior (gibbs sampling) ############################
 	set.seed(1)
-	#****************************Parallel*****************************
 	### source("ind.R")
 	### source("EPSR_set_int.R")
 	### source("read_observed.R")
 	### source("read_observed.R")
 	### source("Gibbs.R")
+	cat("The program is running. See 'log.txt' for details.  \n")
 
+	#**************** Parallel computation ********************
 	ncores <- 1
 	if(detectCores()-1 > 1)	{
 	  ncores <- 2
@@ -85,23 +89,17 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
 		sink("log.txt", append=TRUE) # divert the output to the log file
 
-  	chainlist <- gibbs_fun(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,
+		chainlist <- gibbs_fun(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,
 						  nthin, mmvar, mmvar_loc, N.burn, CIR)
-  	sink() #revert output back to the console
+		sink() #revert output back to the console
 
-  	list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
+		list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
 	}
-	#cat("Gibbs sampling ended up, specific results are being calculated.  \n")
-
 	
 	if(ncores > 1) stopCluster(cl)
 
 	#************************Stop Parallel******************************
-    ### source("caculate_results.r")
-    ### source("HPD.R")
-	### source("sigpsx.r")
-	### source("EPSR_caculate.r")
-	### source("write_mplus.r")
+
 
 	#***********access the parameter************
 	chain1 <- parList[[1]][[1]]
@@ -109,6 +107,13 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	IDY <- parList[[1]][[2]]
 	IDMU <- parList[[1]][[3]]
 	#*******************************************
+	
+	#***********caculate_results************
+    ### source("caculate_results.r")
+    ### source("HPD.R")
+	### source("sigpsx.r")
+	### source("EPSR_caculate.r")
+	### source("write_mplus.r")
 	Y_missing = chain2$Y_missing
 	missing_ind = chain2$missing_ind
 	resultlist <- caculate_results(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
@@ -119,6 +124,8 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 	convergence = epsrlist$convergence
 	epsr = epsrlist$epsr
 	cat("Gibbs sampling ended up, specific results are being calculated.  \n")
+	
+	#***********generate_output ************
 	if (convergence)
 	{
 		dataset_new = t(Y)
