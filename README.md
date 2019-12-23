@@ -125,7 +125,7 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 
 ## Functions under development
 
-Bayesian lasso partial confirmatory factor analysis models: detect cross-loadings and residual correlations simultaneously (expected in 2020/05).
+Bayesian lasso partial confirmatory factor analysis models: detect cross-loadings and residual correlations simultaneously (expected in 2020/03).
 
 Bayesian lasso confirmatory factor analysis models with ordered categorical data (expected in 2021).
 
