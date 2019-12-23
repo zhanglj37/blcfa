@@ -2,7 +2,7 @@
 
 hpd_fun<-function(chain2,NZ,NY,N,IDY)
 {
-	NLY<-sum(IDY)				#number of free lambda need to be estimated in Lambda.
+	NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
 	EMU=chain2$EMU
 	ELY=chain2$ELY
 	EPHI=chain2$EPHI
@@ -65,6 +65,7 @@ HPD_PHI1<-inter
 
 hpdlist<-list(HPD_LY1 = HPD_LY1, HPD_MU1 = HPD_MU1, HPD_PHI1 = HPD_PHI1, HPD_PSX1 = HPD_PSX1)
 
+return(hpdlist)
 }
 
 

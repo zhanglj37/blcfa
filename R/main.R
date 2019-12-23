@@ -167,9 +167,8 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 
 		mycolsi <- rainbow(ncol(epsr), s = 1, v = 1, start = 0,
 				end = max(1, ncol(epsr) - 1)/ncol(epsr), alpha = 1)
-					#One color per parameter
 
-		repxlim<-c(1:(MCMAX-1))
+		repxlim <- c(1:(MCMAX-1))
 		plot(x = repxlim , y = epsr[,1], type="l",
 			xlab = "iterations", ylab = "EPSR", ylim = c(0,3), col = mycolsi[1])
 		for (i in 2:ncol(epsr))
@@ -178,7 +177,7 @@ blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -9
 		}
 
 		savePlot(filename = "EPSR",
-				type ="png",
+				type = "png",
 				device = dev.cur(),
 				restoreConsole = TRUE)
     }

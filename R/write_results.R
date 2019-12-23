@@ -19,7 +19,7 @@ OUTPSX=sigpsx_list$OUTPSX
 SIGPSX=sigpsx_list$SIGPSX
 
 NMU<-sum(IDMU)			      #number of Mu in measurement equation.
-NLY<-sum(IDY)				#number of free lambda need to be estimated in Lambda.
+NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
 
 ### combine lambda results---------------------------------------
 EmLY1<-matrix(EmLY[1,],NLY,1)

@@ -12,7 +12,7 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 	NK<-NM+NZ	       #dimension of latent variables (eta+xi);  number of factors
 
 	NMU<-sum(IDMU)			      #number of Mu in measurement equation.
-	NLY<-sum(IDY)				#number of free lambda need to be estimated in Lambda.
+	NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
 #Nrec<-(MCMAX-N.burn)/nthin		#number of samples after burn-in.
 Nrec<-MCMAX/nthin #save all then extract
 
