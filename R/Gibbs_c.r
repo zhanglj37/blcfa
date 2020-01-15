@@ -134,6 +134,7 @@ MU<<-rep(1.0,NY)
 #initial value of PHI
 PHI<<-matrix(0.0,nrow=NZ,ncol=NZ)
 diag(PHI[,])<-1.0
+CPH<-PHI
 
 #initial value of PSX
 xi<<-t(mvrnorm(N,mu=rep(0,NZ),Sigma=PHI)) # NZ*N
@@ -418,7 +419,6 @@ for(g in 1:MCMAX){
 		theta.temp<-MU+LY%*%xi.temp  # NY*N
 		for(i in 1:N) Y.temp[,i]<-mvrnorm(1, theta.temp[,i], Sigma=PSX)
 		Y.cen<-Y.temp-MU-LY%*%xi.temp  # NY*N
-		Y_missing[,,gm] = Y.temp[,] 
 		for(i in 1:N){
 			postp2<-postp2+t(Y.cen[,i])%*%inv.PSX%*%Y.cen[,i]
 		}
@@ -433,7 +433,7 @@ for(g in 1:MCMAX){
 
 }#end of g MCMAX
 
-chainlist<-list(EMU=EMU,ELY=ELY,EPHI=EPHI,EPSX=EPSX,Epostp=Epostp,EinvPSX=EinvPSX,chainpsx=chainpsx,Y_missing=Y_missing)
+chainlist<-list(EMU=EMU,ELY=ELY,EPHI=EPHI,EPSX=EPSX,Epostp=Epostp,EinvPSX=EinvPSX,chainpsx=chainpsx)
 return(chainlist)
 
 }

@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
+pecfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
 	## bloutput: Output detailed results (xlsx file);
