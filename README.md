@@ -9,9 +9,9 @@ published: August 7, 2019
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
-The 'blcfa' package was built to conduct Bayesian model modification in confirmatory factor analysis by using Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual covariances.
+The 'blcfa' package was built to conduct Bayesian model modification in confirmatory factor analysis by using Bayesian lasso confirmatory factor analysis to shrink weak residual correlations toward zero and detect significant residual correlations.
 
-The method shrinks weak residual correlations toward zero and detects significant residual correlations.This package aims to: (1) detect significant residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified residual correlation parameters; and (2.2) automatically feed the output from (2.1) into Mplus to obtain an appropriately modified CFA model. This two-steps method circumvents the problem of manually modifying parameters one-at-time. 
+This package aims to: (1) detect significant residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified residual correlation parameters; and (2.2) automatically feed the output from (2.1) into Mplus to obtain an appropriately modified CFA model. 
 
 If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
 
