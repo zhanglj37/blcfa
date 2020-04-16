@@ -20,7 +20,7 @@ If you would like to know the details about Bayesian covariance lasso prior conf
 
 We are also preparing a paper to introduce this package:
 
-Pan, J.H., Zhang, L.J. (co-first author), Ip, E.H.\* (manuscript drafted). BLCFA: An R package for Bayesian Model Modification in Confirmatory Factor Analysis. 
+Pan, J.H., Zhang, L.J. (co-first author), Ip, E.H.\* (manuscript drafted). BLCFA: An R Package for Bayesian Model Modification in Confirmatory Factor Analysis. 
 
 
 ## Installation
