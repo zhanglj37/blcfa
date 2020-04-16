@@ -11,9 +11,15 @@ published: August 7, 2019
 ## Description
 The 'blcfa' package was built to conduct Bayesian model modification in confirmatory factor analysis. It uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual covariances and generate the corresponding mplus file.
 
-If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to Pan, Ip and Dubé(2017).
+If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
 
-(Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.)
+1. Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.
+2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. Psychological Methods. 
+
+We are also preparing a paper to introduce this package:
+
+Pan, J.H., Zhang, L.J. (co-first author), Ip, E.H.\* (manuscript drafted). BLCFA: An R package for Bayesian Model Modification in Confirmatory Factor Analysis. 
+
 
 ## Installation
 ```r
