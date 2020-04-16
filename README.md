@@ -9,7 +9,7 @@ published: August 7, 2019
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
 ## Description
-The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual covariances and generate the corresponding mplus file.
+The 'blcfa' package was built to conduct Bayesian model modification in confirmatory factor analysis. It uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual covariances and generate the corresponding mplus file.
 
 If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to Pan, Ip and Dubé(2017).
 
