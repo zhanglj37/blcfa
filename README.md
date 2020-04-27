@@ -101,10 +101,9 @@ ANALYSIS:
 	 PROC = 2;
 	 BITERATIONS = (10000);
 MODEL:
-	! 1. CFA;
-	f1  BY  y1  y2  y3  y4  y5 ;
-	f2  BY  y6  y7  y8  y9  y10  y11  y14;
-	f3  BY  y12  y5  y13  y14  y15  y16  y17  ;
+	f1 by 	y1  y2  y3  y4  y5  y17  ;
+	f2 by 	y6  y7  y8  y9  y10  y11  y13  y14  ;
+	f3 by 	y12  y5  y13  y14  y15  y16  y17  ;
 	 
 	y11  with  y13 ;
 	y11  with  y14 ;
