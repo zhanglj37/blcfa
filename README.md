@@ -117,7 +117,41 @@ MODEL:
 
 ```
 
-### EX2: Detect Significant Loadings to Explore the Model Structure. 
+### EX2: Detect Residual Covariances.
+
+```r
+NZ=3
+IDY0<-matrix(c(
+  9,0,0,
+  1,0,0,
+  1,0,0,
+  1,0,0,
+  1,0,0,
+  0,9,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,0,9,
+  0,0,1,
+  0,0,1,
+  0,0,1,
+  0,0,1,
+  0,0,1
+),ncol=NZ,byr=T)
+# 0: fixed at zero.
+
+# To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
+# f1: y1@1 y2-y5
+# f2: y6@1 y7-y11 
+# f3: y12@1 y13-y17
+
+blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+
+```
+
+### EX3: Detect Significant Loadings to Explore the Model Structure. 
 
 ```r
 NZ=3
@@ -156,41 +190,6 @@ blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
 ```
 
-
-### EX3: Detect Residual Covariances.
-
-```r
-NZ=3
-IDY0<-matrix(c(
-  9,0,0,
-  1,0,0,
-  1,0,0,
-  1,0,0,
-  1,0,0,
-  0,9,0,
-  0,1,0,
-  0,1,0,
-  0,1,0,
-  0,1,0,
-  0,1,0,
-  0,0,9,
-  0,0,1,
-  0,0,1,
-  0,0,1,
-  0,0,1,
-  0,0,1
-),ncol=NZ,byr=T)
-# 0: fixed at zero.
-
-# To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
-# f1: y1@1 y2-y5
-# f2: y6@1 y7-y11 
-# f3: y12@1 y13-y17
-# make sure there is no -1 setting in the IDY matrix
-
-blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
-
-```
 
 ### Tips 1
 
