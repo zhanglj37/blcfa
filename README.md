@@ -15,7 +15,7 @@ update: April 27, 2020
   * [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1)
   * [EX2: Detect Residual Covariances.](#EX2)
   * [EX3: Detect Cross-Loadings.](#EX3)
-  * [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX4)
+  * [EX4: Detect Significant Loadings to Explore the Model Structure.](#EX4)
   * [Tips1: Model Convergence](#Tips1)
   * [Tips2: Detailed Results](#Tips2)
   * [Tips3: p-value and HPD interval](#Tips3)
