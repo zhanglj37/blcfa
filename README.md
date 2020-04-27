@@ -72,7 +72,7 @@ IDY<-matrix(c(
 # 9: fixed at one for identifing the model
 # 1: estimate this parameter without shrinkage
 # -1: estimate this parameter using lasso shrinkage
-# 0:fixed at zero.
+# 0: fixed at zero.
 
 blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 # estimation ( = 'ML' / 'Bayes', the default value is 'Bayes') denotes the estimation method in Mplus file
@@ -149,7 +149,7 @@ IDY0<-matrix(c(
   0,0,1,
   0,0,1
 ),ncol=NZ,byr=T)
-# 0:fixed at zero.
+# 0: fixed at zero.
 
 blcfa_psx(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
