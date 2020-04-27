@@ -38,7 +38,7 @@ install_github("zhanglj37/blcfa")
 
 ## Examples
 
-### ex1: detect cross-loadings and residual covariances simultaneously
+### EX1: Detect Cross-loadings and Residual Covariances Simultaneously.
 
 ```r
 library(blcfa)
@@ -117,7 +117,7 @@ MODEL:
 
 ```
 
-### ex2: detect cross-loadings 
+### EX2: Detect Cross-loadings. 
 
 ```r
 NZ=3
@@ -153,7 +153,7 @@ blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 ```
 
 
-### ex3: detect residual covariances
+### EX3: Detect Residual Covariances.
 
 ```r
 NZ=3
