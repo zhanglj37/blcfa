@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-pcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
+blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
 	## bloutput: Output detailed results (xlsx file);
@@ -16,44 +16,29 @@ pcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -99
 	CNUM<-2   ## number of chain
 
 	### prepare model and data  #######################################################
-	### source("read_data.r")
-	dataset<-read_data(filename,varnames,usevar)
+	dataset <- read_data(filename, varnames, usevar)
 
 	### source("read_model.r")
-	mmvarorigin<-read_model(myModel)
-	mmvar<-mmvarorigin[2:length(mmvarorigin)] # List: includes factors and variables under each factor
-	factorname<-mmvarorigin[[1]]   # names of factors
-	numw<-length(mmvar)   # num of factors
-	mmvar_loc<-cfa_loc(mmvar,dataset)  # location of indicators
-	N<-nrow(dataset)    # Sample size (N)
-	NY<-ncol(dataset)	 # Number of items (p)
-	NZ<-numw  # Number of factors (q)
-	
+	N <- nrow(dataset)    # Sample size (N)
+	NY <- ncol(dataset)	 # Number of items (p)
+	NZ <- ncol(IDY0)
+
+
 	## record ms values as NA for standarizing data
-	dataset_noms = dataset
-	for(i in 1:N)
-	{
-		for(j in 1:NY)
-		{
-			if(dataset[i,j] == ms) 
-			{
-				dataset_noms[i,j] = NA
-			}
-		}
-	}
-	Y<-read_dataset(dataset_noms)  # standarized
-	
+	dataset_noms <- mark_na(N, NY, dataset, ms)
+	Y <- read_data2(dataset_noms)  # standarized
 	
 	
 	###  prior + init + data -> posterior (gibbs sampling) ############################
-	set.seed(1)
+
 	### source("ind.R")
 	### source("EPSR_set_int.R")
 	### source("read_observed.R")
 	### source("read_observed.R")
 	### source("Gibbs.R")
 	cat("The program is running. See 'log.txt' for details.  \n")
-
+	set.seed(1)
+	
 	#**************** Parallel computation ********************
 	ncores <- 1
 	if(detectCores()-1 > 1)	{
@@ -79,18 +64,16 @@ pcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -99
 	{
 		## Calculate the epsr value by running two chains with two kind of initial values
 
-		IDY<-IDY_matrix_pcfa_fun(dataset,mmvar,mmvar_loc)
-			#vector indicating whether MU should be added to each measurement equation or not.
-			#Added(1), remove(0).
-		IDMU<-rep(1,NY)  # now MU is estimated
-		IDMUA<-any(as.logical(IDMU))
-		LY_int<-set_int_pcfa_fun(CIR,dataset,mmvar,mmvar_loc)
 
+		IDMU<-rep(1,NY)  
+		LY_int <- set_ly_int(CIR, IDY0)
+		IDY = IDY0
+		IDY[which(IDY0==9)] = 0
 
 		sink("log.txt", append=TRUE) # divert the output to the log file
 
-		chainlist <- gibbsc_fun(MCMAX,NZ,NY,N,Y,LY_int,IDMU,IDMUA,IDY,
-						  nthin, mmvar, mmvar_loc, N.burn, CIR)
+		chainlist <- gibbs_psx_fun(MCMAX, NZ, NY, N, Y, LY_int, IDY0, IDY, 
+						  nthin, N.burn, CIR)
 		sink() #revert output back to the console
 
 		list(chainlist, IDY, IDMU) #return chainlist, IDY, IDMU to parList
@@ -112,13 +95,14 @@ pcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -99
     ### source("caculate_results.r")
     ### source("HPD.R")
 	### source("sigpsx.r")
+	### source("sigly.r")
 	### source("EPSR_caculate.r")
 	### source("write_mplus.r")
-	Y_missing = chain2$Y_missing
-	missing_ind = chain2$missing_ind
-	resultlist <- caculate_results(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
-	hpdlist <- hpd_pcfa_fun(chain2,NZ,NY,N,IDY)
-	sigpsx_list <- sig_psx_fun(NZ,NY,dataset,resultlist,hpdlist,interval_psx)
+
+	resultlist <- caculate_results(chain2, CNUM, MCMAX, NY, NZ, N.burn, nthin, IDMU, IDY)
+	hpdlist <- hpd_fun(chain2, NZ, NY, N, IDY)
+	sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval_psx)
+	sigly_list <- sig_ly_set_fun(dataset,resultlist,hpdlist,IDY,interval_psx)
 
 	epsrlist <- caculate_epsr(MCMAX,N.burn,CNUM,NY,NZ,chain1,chain2)
 	convergence = epsrlist$convergence
@@ -128,60 +112,24 @@ pcfa<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -99
 	#***********generate_output ************
 	if (convergence)
 	{
-		dataset_new = t(Y)
-		if(sum(missing_ind) > 0)
-		{
-			ismissing = 1
-			missing_mean = c((N.burn+1):MCMAX)
-			for(i in 1:NY)
-			{
-				for (j in 1:N)
-				{
-					if(missing_ind[i,j]==1)
-					{
-						
-						dataset_new[j,i] = mean(Y_missing[i,j,missing_mean])
-					}
-				}
-			}		
-		}else{
-			ismissing = 0
-		}
-		write.table(dataset_new,'data_imputed.txt',col.names=FALSE,row.names=FALSE)
+		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)
 		if (estimation == 'ml' || estimation == 'maximum likelihood')
 		{
-			write_mplus_ml(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
+			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}else{
-			write_mplus_bayes(varnames,usevar,myModel,filename,sigpsx_list,ismissing)
-		
+			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}
 		if (bloutput)
 		{
-			write_results(MCMAX,NZ,NY,NLY,resultlist,hpdlist,
-							sigpsx_list,epsr,mmvar,factorname,IDMU,IDY)
+			write_results(MCMAX,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+						epsr,usevar,IDMU,IDY)
 		}
     }else{
 		cat('Error: The convergence criterion is not satisfied.  \n')
 		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
 
-		mycolsi <- rainbow(ncol(epsr), s = 1, v = 1, start = 0,
-				end = max(1, ncol(epsr) - 1)/ncol(epsr), alpha = 1)
-
-		repxlim <- c(1:(MCMAX-1))
-		plot(x = repxlim , y = epsr[,1], type="l",
-			xlab = "iterations", ylab = "EPSR", ylim = c(0,3), col = mycolsi[1])
-		for (i in 2:ncol(epsr))
-		{
-			lines(x = repxlim, y = epsr[,i], col = mycolsi[i])
-		}
-
-		savePlot(filename = "EPSR",
-				type = "png",
-				device = dev.cur(),
-				restoreConsole = TRUE)
+		EPSR_figure(epsr, MCMAX)
     }
-
-
 
 }

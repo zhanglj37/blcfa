@@ -11,7 +11,7 @@ published: August 7, 2019
 ## Description
 The 'blcfa' package was built to conduct Bayesian model modification in confirmatory factor analysis. It can shrink weak residual correlations toward zero and detect significant residual correlations by Bayesian lasso method.
 
-This package aims to: (1) detect significant residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified residual correlation parameters; and (2.2) automatically feed the output from (2.1) into Mplus to obtain an appropriately modified CFA model. 
+This package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
 
 If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
 
@@ -40,7 +40,7 @@ install_github("zhanglj37/blcfa")
 
 ## Examples
 
-### ex1
+### ex1: detect cross-loadings and residual covariances simultaneously
 
 ```r
 library(blcfa)
@@ -48,15 +48,33 @@ library(blcfa)
 filename <- "ss.txt"  
 varnames <- c("gender",paste("y", 1:17, sep = ""))
 usevar <- c(paste("y", 1:17, sep = ""))
-myModel<-'   
-# 1. CFA
-f1 =~ y1 + y2 + y3 + y4 + y5 
-f2 =~ y6 + y7 + y8 + y9 + y10 + y11
-f3 =~ y12 + y13 + y14 + y15 + y16 + y17  
-'
-# make sure there is a space between each variable or symbol
+NZ=3
+IDY<-matrix(c(
+  9,-1,-1,
+  1,-1,-1,
+  1,-1,-1,
+  1,-1,-1,
+  1,-1,-1,
+  -1,9,-1,
+  -1,1,-1,
+  -1,1,-1,
+  -1,1,-1,
+  -1,1,-1,
+  -1,1,-1,
+  -1,-1,9,
+  -1,-1,1,
+  -1,-1,1,
+  -1,-1,1,
+  -1,-1,1,
+  -1,-1,1
+),ncol=NZ,byr=T)
+# NZ: number of factors
+# 9: fixed at one for identifing the model
+# 1: estimate this parameter without shrinkage
+# -1: estimate this parameter using lasso shrinkage
+# 0:fixed at zero.
 
-blcfa(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = -9)
+blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 # estimation ( = 'ML' / 'Bayes', the default value is 'Bayes') denotes the estimation method in Mplus file
 # ms represents missing value (you don't need to define it if -999 or NA represents missing value in the dataset).
 ```
@@ -97,7 +115,48 @@ MODEL:
 
 ```
 
-### ex2
+### ex2: detect cross-loadings 
+
+```r
+# same as ex1
+
+blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+
+```
+
+
+### ex3: detect residual covariances
+
+```r
+# same as ex1
+NZ=3
+IDY0<-matrix(c(
+  9,0,0,
+  1,0,0,
+  1,0,0,
+  1,0,0,
+  1,0,0,
+  0,9,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,1,0,
+  0,0,9,
+  0,0,1,
+  0,0,1,
+  0,0,1,
+  0,0,1,
+  0,0,1
+),ncol=NZ,byr=T)
+# 0:fixed at zero.
+
+blcfa_psx(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+
+```
+
+### Tips 1
+
 The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default value = 5000), you will get an epsr graph (for reference) and the warnings:
 ```r
 Error: The convergence criterion is not satisfied.
@@ -110,7 +169,7 @@ Then you should increase the value of N.burn and MCMAX (Total number of MCMC sam
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX=30000,N.burn=15000)
 ```
 
-### ex3
+### Tips 2
 If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
@@ -119,7 +178,7 @@ blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutp
 Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of parameters (ly, mu, phi and psx).
 
-### ex4
+### Tips 3
 Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
@@ -132,8 +191,6 @@ https://github.com/zhanglj37/blcfa/issues
 or contact with me: zhanglj37@mail2.sysu.edu.cn.
 
 ## Functions under development
-
-Bayesian lasso partial confirmatory factor analysis models: detect cross-loadings and residual correlations simultaneously (expected in 2020/05).
 
 Bayesian lasso confirmatory factor analysis models with ordered categorical data (expected in 2021).
 

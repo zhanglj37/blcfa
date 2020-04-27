@@ -1,5 +1,5 @@
-write_results<-function(MCMAX,NZ,NY,NLY,resultlist,hpdlist,sigpsx_list,
-						epsr,mmvar,factorname,IDMU,IDY)
+write_results<-function(MCMAX,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+						epsr,usevar,IDMU,IDY)
 {	
 
 EmLY=resultlist$EmLY
@@ -22,32 +22,7 @@ NMU<-sum(IDMU)			      #number of Mu in measurement equation.
 NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
 
 ### combine lambda results---------------------------------------
-EmLY1<-matrix(EmLY[1,],NLY,1)
-SELY1<-matrix(SELY[1,],NLY,1)
-ZLY=PPLY=EmLY1/SELY1
-for (i in 1:NLY)
-{
-	if (ZLY[i]>0)
-	{
-		PPLY[i]<-2*(1-pnorm(ZLY[i]))
-	}
-	else 
-	{
-		PPLY[i]<-2*pnorm(ZLY[i])
-	}
-}
-LY_matrix<-cbind(EmLY1,SELY1,PPLY,HPD_LY1)
-lyrownames<-c(mmvar[[1]][2])
-for (i in 1:NZ)
-{
-	for (j in 2:length(mmvar[[i]]))
-	{
-		lyrownames<-c(lyrownames,mmvar[[i]][j])
-	}
-}
-lyrownames<-lyrownames[2:(NLY+1)]
-rownames(LY_matrix)<-lyrownames
-colnames(LY_matrix)<-c("EstLY","SeLY","p-value","HPD_lower","HPD_upper")
+### sigly.r
 
 ### combine mu results ----------------------------------------------------------
 EmMU1<-matrix(EmMU[1,],NMU,1)
@@ -65,15 +40,7 @@ for (i in 1:NMU)
 	}
 }
 MU_matrix<-cbind(EmMU1,SEMU1,PMU,HPD_MU1)
-murownames<-c(mmvar[[1]][1])
-for (i in 1:NZ)
-{
-	for (j in 1:length(mmvar[[i]]))
-	{
-		murownames<-c(murownames,mmvar[[i]][j])
-	}
-}
-murownames<-murownames[2:(NMU+1)]
+murownames<-usevar
 rownames(MU_matrix)<-murownames
 colnames(MU_matrix)<-c("EstMU","SeMU","p-value","HPD_lower","HPD_upper")
 
@@ -106,7 +73,7 @@ for(i in 1:NZ)
 {
 	for(j in i:NZ)
 	{
-			philoc[k]<-paste(factorname[i]," with ", factorname[j])
+			philoc[k]<-paste(paste0('f',i)," with ", paste0('f',j))
 			phiest[k]<-EmPHI1[i,j]
 			phise[k]<-SEPHI1[i,j]
 			phicor[k]<-CORPHI[i,j]
@@ -143,15 +110,14 @@ write.table(Empostp[1],file = paste('ppp.dat', sep = ''), sep = '\t', row.names 
 #	rownames(ALPHA_matrix2)<-murownames
 #	write.xlsx(ALPHA_matrix2,xlsxname,"alpha", row.names = FALSE, col.names = FALSE)		
 #}
-write.table(LY_matrix,file = paste('ly.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+write.table(sigly_list$OUTLY,file = paste('ly.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 write.table(MU_matrix,file = paste('mu.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 
 
 
 write.table(OUTPHI,file = paste('phi.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
-rownames(CORPHI)<-factorname
-colnames(CORPHI)<-factorname
-write.table(CORPHI,file = paste('phi_cormatrix.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+
+write.table(CORPHI,file = paste('phi_cormatrix.dat', sep = ''), sep = '\t', row.names = FALSE, col.names = FALSE)
 
 write.table(OUTPSX,file = paste('psx.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
 if (SIGPSX[1] != 0 )
@@ -166,22 +132,8 @@ if (SIGPSX[1] != 0 )
 ## names需要改
 
 # 4. 绘图并输出
-mycolsi <- rainbow(ncol(epsr), s = 1, v = 1, start = 0, 
-			end = max(1, ncol(epsr) - 1)/ncol(epsr), alpha = 1) 
-	#每个参数一种颜色
+EPSR_figure(epsr, MCMAX)
 
-repxlim<-c(1:(MCMAX-1))
-plot(x = repxlim , y = epsr[,1], type="l", 
-	xlab = "iterations", ylab = "EPSR", ylim = c(0,3), col = mycolsi[1])
-for (i in 2:ncol(epsr))
-{
-	lines(x = repxlim, y = epsr[,i], col = mycolsi[i])
-}
-
-savePlot(filename = "EPSR",
-         type ="png",
-         device = dev.cur(),
-         restoreConsole = TRUE)
 setwd('..')
 
 }

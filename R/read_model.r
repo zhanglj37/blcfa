@@ -1,5 +1,5 @@
 ### function---read_model----
-### SYSU Lijin Zhang,190312
+
 	
 ## 	Output factors and indicators
 read_model<-function(myModel)
