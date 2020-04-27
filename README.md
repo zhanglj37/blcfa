@@ -103,8 +103,8 @@ ANALYSIS:
 MODEL:
 	! 1. CFA;
 	f1  BY  y1  y2  y3  y4  y5 ;
-	f2  BY  y6  y7  y8  y9  y10  y11;
-	f3  BY  y12  y13  y14  y15  y16  y17  ;
+	f2  BY  y6  y7  y8  y9  y10  y11 y14;
+	f3  BY  y12  y5 y13  y14  y15  y16  y17  ;
 	 
 	y11  with  y13 ;
 	y11  with  y14 ;
