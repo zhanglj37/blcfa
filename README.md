@@ -186,8 +186,9 @@ IDY0<-matrix(c(
 # f1: y1@1 y2-y5
 # f2: y6@1 y7-y11 
 # f3: y12@1 y13-y17
+# make sure there is no -1 setting in the IDY matrix
 
-blcfa_psx(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
 ```
 
