@@ -117,7 +117,7 @@ MODEL:
 
 ```
 
-### EX2: Explore the Model Structure by Detecting Significant Loadings with Lasso Method . 
+### EX2: Detect Significant Loadings to Explore the Model Structure. 
 
 ```r
 NZ=3
@@ -141,6 +141,8 @@ IDY<-matrix(c(
   -1,-1,-1
 ),ncol=NZ,byr=T)
 
+# You can also use the model structure same as EX1 to detect significant cross-loadings
+
 # To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
 # f1: y1@1 y2 y3-y17(eatimate with lasso shrinkage)
 # f2: y1-y5(eatimate with lasso shrinkage) y6@1 y7 y8-y17(eatimate with lasso shrinkage)
@@ -148,11 +150,9 @@ IDY<-matrix(c(
 
 # make sure there are at least two identified loadings per factor (Chen et al., accepted)
 # Check Chen et al (accepted) for the details of this method
-# You can also use the model structure same as EX1 to detect significant cross-loadings
 
 blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 # residual covariances were set at zero in "blcfa_ly" function
-
 
 ```
 
