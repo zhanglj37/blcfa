@@ -1,10 +1,3 @@
----
-title: "BLCFA_README"
-output:
-  html_document:
-    toc: true
-    theme: united
----
 
 # blcfa
 author: Junhao Pan, Lijin Zhang
@@ -15,6 +8,7 @@ update: April 27, 2020
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
+[toc]
 
 ## Description
 This 'blcfa' package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
