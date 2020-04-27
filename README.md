@@ -149,6 +149,7 @@ IDY<-matrix(c(
 
 
 blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+# residual covariances were set at zero in "blcfa_ly" function
 
 ```
 
