@@ -9,18 +9,18 @@ update: April 27, 2020
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
 
-* 1 [Description](#Description)
-* 2 [Installation](#Installation)
-* 3 [Examples](#Examples)
-  * 3.1 [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1)
-  * 3.2 [EX2: Detect Residual Covariances.](#EX2)
-  * 3.3 [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX3)
-  * 3.4 [Tips 1](#Tips1)
-  * 3.5 [Tips 2](#Tips2)
-  * 3.6 [Tips 3](#Tips3)
-* 4 [BugsReports](#BugsReports)
-* 5 [Functions under development](#Functions)
-* 6 [Acknowledgement](#Acknowledgement)
+* [Description](#Description)
+* [Installation](#Installation)
+* [Examples](#Examples)
+  * [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1)
+  * [EX2: Detect Residual Covariances.](#EX2)
+  * [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX3)
+  * [Tips 1](#Tips1)
+  * [Tips 2](#Tips2)
+  * [Tips 3](#Tips3)
+* [BugsReports](#BugsReports)
+* [Functions under development](#Functions)
+* [Acknowledgement](#Acknowledgement)
 
 ## Description
 This 'blcfa' package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
