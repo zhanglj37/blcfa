@@ -155,6 +155,11 @@ IDY0<-matrix(c(
 ),ncol=NZ,byr=T)
 # 0: fixed at zero.
 
+# To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
+# f1: y1@1 y2-y5
+# f2: y6@1 y7-y11 
+# f3: y12@1 y13-y17
+
 blcfa_psx(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
 ```
