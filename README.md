@@ -12,14 +12,14 @@ update: April 27, 2020
 * 1 [Description](#Description)
 * 2 [Installation](#Installation)
 * 3 [Examples](#Examples)
-  * 3.1 [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1: Detect Cross-loadings and Residual Covariances Simultaneously.)
-  * 3.2 [EX2: Detect Residual Covariances.](#EX2: Detect Residual Covariances.)
-  * 3.3 [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX3: Detect Significant Loadings to Explore the Model Structure.)
-  * 3.4 [Tips 1](#Tips 1)
-  * 3.5 [Tips 2](#Tips 2)
-  * 3.6 [Tips 3](#Tips 3)
+  * 3.1 [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1)
+  * 3.2 [EX2: Detect Residual Covariances.](#EX2)
+  * 3.3 [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX3)
+  * 3.4 [Tips 1](#Tips1)
+  * 3.5 [Tips 2](#Tips2)
+  * 3.6 [Tips 3](#Tips3)
 * 4 [BugsReports](#BugsReports)
-* 5 [Functions under development](#Functions under development)
+* 5 [Functions under development](#Functions)
 * 6 [Acknowledgement](#Acknowledgement)
 
 ## Description
@@ -205,7 +205,7 @@ blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 ```
 
 
-### Tips 1
+### Tips1
 
 The convergence criterion is epsr value < 1.2. If the model does not converge within the number of burn-in MCMC samples(N.burn) (the default value = 5000), you will get an epsr graph (for reference) and the warnings:
 ```r
@@ -219,7 +219,7 @@ Then you should increase the value of N.burn and MCMAX (Total number of MCMC sam
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX=30000,N.burn=15000)
 ```
 
-### Tips 2
+### Tips2
 If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
@@ -228,7 +228,7 @@ blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutp
 Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of parameters (ly, mu, phi and psx).
 
-### Tips 3
+### Tips3
 Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
