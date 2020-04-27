@@ -69,10 +69,15 @@ IDY<-matrix(c(
   -1,-1,1
 ),ncol=NZ,byr=T)
 # NZ: number of factors
-# 9: fixed at one for identifing the model
+# 9: fixed at one for identifing the factor
 # 1: estimate this parameter without shrinkage
 # -1: estimate this parameter using lasso shrinkage
 # 0: fixed at zero.
+
+# To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
+# f1: y1@1 y2-y5 y6-y17(eatimate with lasso shrinkage)
+# f2: y1-y5(eatimate with lasso shrinkage) y6@1 y7-y11 y12-y17(eatimate with lasso shrinkage)
+# f3: y1-y11(eatimate with lasso shrinkage) y12@1 y13-y17
 
 blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 # estimation ( = 'ML' / 'Bayes', the default value is 'Bayes') denotes the estimation method in Mplus file
