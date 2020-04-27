@@ -120,7 +120,6 @@ MODEL:
 ### ex2: detect cross-loadings 
 
 ```r
-# same as ex1
 NZ=3
 IDY<-matrix(c(
   9,-1,-1,
@@ -157,7 +156,6 @@ blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 ### ex3: detect residual covariances
 
 ```r
-# same as ex1
 NZ=3
 IDY0<-matrix(c(
   9,0,0,
