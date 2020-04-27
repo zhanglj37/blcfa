@@ -15,8 +15,8 @@ This package aims to: (1) detect significant cross-loadings and/or residual cova
 
 If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
 
-1. Pan, J., Ip, E. H.\*, & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.
-2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* 
+1. Pan, J., Ip, E. H.\*, & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704. [detect significant residual covariances]
+2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* [detect significant cross-loadings and/or residual covariances]
 
 We are also preparing a paper to introduce this package:
 
@@ -123,6 +123,33 @@ MODEL:
 
 ```r
 # same as ex1
+NZ=3
+IDY<-matrix(c(
+  9,-1,-1,
+  1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,9,-1,
+  -1,1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,9,
+  -1,-1,1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1,
+  -1,-1,-1
+),ncol=NZ,byr=T)
+
+# To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
+# f1: y1@1 y2 y3-y17(eatimate with lasso shrinkage)
+# f2: y1-y5(eatimate with lasso shrinkage) y6@1 y7 y8-y17(eatimate with lasso shrinkage)
+# f3: y1-y11(eatimate with lasso shrinkage) y12@1 y13 y14-y17(eatimate with lasso shrinkage)
+# make sure there are at least two identified loadings per factor (Chen et al., accepted)
+
 
 blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
