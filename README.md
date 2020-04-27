@@ -14,7 +14,8 @@ update: April 27, 2020
 * [Examples](#Examples)
   * [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#EX1)
   * [EX2: Detect Residual Covariances.](#EX2)
-  * [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX3)
+  * [EX3: Detect Cross-Loadings.](#EX3)
+  * [EX3: Detect Significant Loadings to Explore the Model Structure.](#EX4)
   * [Tips1: Model Convergence](#Tips1)
   * [Tips2: Detailed Results](#Tips2)
   * [Tips3: p-value and HPD interval](#Tips3)
@@ -165,7 +166,18 @@ blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 
 ```
 
-### EX3: Detect Significant Loadings to Explore the Model Structure. 
+### EX3: Detect Cross-Loadings. 
+
+```r
+# The model structure is same as EX1
+
+blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
+# residual covariances were set at zero in "blcfa_ly" function
+
+```
+
+
+### EX4: Detect Significant Loadings to Explore the Model Structure. 
 
 ```r
 NZ=3
@@ -189,7 +201,7 @@ IDY<-matrix(c(
   -1,-1,-1
 ),ncol=NZ,byr=T)
 
-# You can also use the model structure of EX1 to detect significant cross-loadings
+# This is an extra application of Bayesian Lasso CFA, Check Chen et al (accepted) for the details of this method
 
 # To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
 # f1: y1@1 y2 y3-y17(eatimate with lasso shrinkage)
@@ -197,10 +209,8 @@ IDY<-matrix(c(
 # f3: y1-y11(eatimate with lasso shrinkage) y12@1 y13 y14-y17(eatimate with lasso shrinkage)
 
 # make sure there are at least two identified loadings per factor (Chen et al., accepted)
-# Check Chen et al (accepted) for the details of this method
 
 blcfa_ly(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
-# residual covariances were set at zero in "blcfa_ly" function
 
 ```
 
