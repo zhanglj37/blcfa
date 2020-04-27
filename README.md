@@ -189,7 +189,7 @@ IDY<-matrix(c(
   -1,-1,-1
 ),ncol=NZ,byr=T)
 
-# You can also use the model structure same as EX1 to detect significant cross-loadings
+# You can also use the model structure of EX1 to detect significant cross-loadings
 
 # To illustrate this model structure, the corresponding relationships between factors and loadings were listed as follows:
 # f1: y1@1 y2 y3-y17(eatimate with lasso shrinkage)
