@@ -117,7 +117,7 @@ MODEL:
 
 ```
 
-### EX2: Explore the model structure by using lasso method to detect significant loadings. 
+### EX2: Explore the Model Structure by Using Lasso Method to Detect Significant Loadings. 
 
 ```r
 NZ=3
