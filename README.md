@@ -20,6 +20,7 @@ update: April 27, 2020
   * [Tips2: Detailed Results](#Tips2)
   * [Tips3: p-value and HPD interval](#Tips3)
   * [Tips4: Normality Test](#Tips4)
+  * [Tips5: Missing Data](#Tips5)
 * [BugsReports](#BugsReports)
 * [Functions under development](#functions-under-development)
 * [Acknowledgement](#Acknowledgement)
@@ -262,6 +263,9 @@ f3 =~ y12 + y13 + y14 + y15 + y16 + y17
 
 mplus_ml(filename, varnames, usevar, myModel, ms = -9)
 ```
+
+### Tips5
+For missing data that is assumed MAR, this package can automatically impute these missing values with Gibbs sampling method and generated a new data set. 
 
 ## BugsReports
 
