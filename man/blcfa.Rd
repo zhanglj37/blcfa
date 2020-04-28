@@ -7,7 +7,7 @@
 			 the significant residual correlations detected by Bayesian Covariance Lasso Prior Confirmatory Factor Analysis.}
 \usage{
 blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,   
-			ms = -999, bloutput = FALSE,  interval_psx = TRUE)
+			ms = -999, bloutput = FALSE,  interval = TRUE)
 
 }			 
 \arguments{
@@ -47,7 +47,7 @@ blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,
 			estimated value, standard error and hpd interval of ly, mu, phi and psx.
 			The default setting is not output these results, if you just want
 			the mplus input file then you don't need to change it.}
-\item{interval_psx}{Detect the significant residual correlations by hpd interval or p-value,
+\item{interval}{Detect the significant residual correlations by hpd interval or p-value,
 			the default setting is using hpd interval.}
 }
  

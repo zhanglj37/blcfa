@@ -4,11 +4,11 @@
 ## caculate_results
 ## generate_output
 
-blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval_psx = TRUE)
+blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms = -999, MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
 	## bloutput: Output detailed results (xlsx file);
-	## interval_psx: Detect significant residual correlation based on HPD interval or p-value
+	## interval: Detect significant residual correlation based on HPD interval or p-value
 	## category & point: used for category data (under development)
 {
 
@@ -101,8 +101,8 @@ blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms 
 
 	resultlist <- caculate_results(chain2, CNUM, MCMAX, NY, NZ, N.burn, nthin, IDMU, IDY)
 	hpdlist <- hpd_fun(chain2, NZ, NY, N, IDY)
-	sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval_psx)
-	sigly_list <- sig_ly_set_fun(dataset,resultlist,hpdlist,IDY,interval_psx)
+	sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval)
+	sigly_list <- sig_ly_set_fun(dataset,resultlist,hpdlist,IDY,interval)
 
 	epsrlist <- caculate_epsr(MCMAX,N.burn,CNUM,NY,NZ,chain1,chain2)
 	convergence = epsrlist$convergence

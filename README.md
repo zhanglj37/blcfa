@@ -26,7 +26,7 @@ update: April 27, 2020
 ## Description
 This 'blcfa' package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
 
-If you would like to know the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
+For the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
 
 1. Pan, J., Ip, E. H.\*, & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704. 
 2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* 
@@ -232,16 +232,16 @@ blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX=30000,N.burn=15000)
 ### Tips2
 If you want to get the detailed results of the Bayesian covariance lasso prior confirmatory factor analysis:
 ```r
-blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE)
+blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, bloutput = TRUE)
 ```
 
 Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of parameters (ly, mu, phi and psx).
 
 ### Tips3
-Detect significant residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
+Detect significant cross-loadings and residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```r
-blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000,bloutput = TRUE,interval_psx = FALSE)
+blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, bloutput = TRUE, interval = FALSE)
 ```
 
 ## BugsReports

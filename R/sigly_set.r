@@ -1,5 +1,5 @@
 
-sig_ly_set_fun<-function(dataset,resultlist,hpdlist,IDY,interval_psx)
+sig_ly_set_fun<-function(dataset,resultlist,hpdlist,IDY,interval)
 { 
 
 EmLY=resultlist$EmLY
@@ -64,7 +64,7 @@ out_sig<-function(NZ,NY,NLY,PLY,EmLY,HPD_LY1,IDY,dataset,count)
 		{
 		if(IDY[i,j]!=0)
 		{
-			if (interval_psx)
+			if (interval)
 			{
 				
 					signame[k]<-paste(paste0('f',j)," by ", colnames(dataset)[i])

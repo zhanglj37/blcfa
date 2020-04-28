@@ -1,5 +1,5 @@
 
-sig_psx_fun<-function(NZ,NY,dataset,resultlist,hpdlist,interval_psx,step='c')
+sig_psx_fun<-function(NZ,NY,dataset,resultlist,hpdlist,interval,step='c')
 { 
 
 EmPSX=resultlist$EmPSX
@@ -156,7 +156,7 @@ if (step == 'e')
 	return(count)
 	}
 
-	if (interval_psx)
+	if (interval)
 	{
 		count<-count_sig_interval(NY,HPD_PSX3)
 	}else{
@@ -178,7 +178,7 @@ if (step == 'e')
 		{
 			if(i>j)
 			{
-				if (interval_psx)
+				if (interval)
 				{
 					if ((HPD_PSX3[i,j,1]*HPD_PSX3[i,j,2])>0)
 					{
