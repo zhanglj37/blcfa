@@ -258,7 +258,7 @@ f2 =~ y6 + y7 + y8 + y9 + y10 + y11
 f3 =~ y12 + y13 + y14 + y15 + y16 + y17  
 '
 
-mplus_ml<-function(filename, varnames, usevar, myModel, ms = -9)
+mplus_ml(filename, varnames, usevar, myModel, ms = -9)
 ```
 
 ## BugsReports
