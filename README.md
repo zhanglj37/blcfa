@@ -19,6 +19,7 @@ update: April 27, 2020
   * [Tips1: Model Convergence](#Tips1)
   * [Tips2: Detailed Results](#Tips2)
   * [Tips3: p-value and HPD interval](#Tips3)
+  * [Tips4: Normality Test](#Tips4)
 * [BugsReports](#BugsReports)
 * [Functions under development](#functions-under-development)
 * [Acknowledgement](#Acknowledgement)
@@ -242,6 +243,22 @@ Then you will get the results folder includes: ppp, epsr graph,
 Detect significant cross-loadings and residual correlations by p-value rather than Highest Posterior Density (HPD)  interval.
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, bloutput = TRUE, interval = FALSE)
+```
+
+### Tips4
+When the estimation is set at ml, the 'blcfa' package will select a maximum likelihood estimator based on the normality of items.
+MLM method was specified in this analysis because this data did not satisfy multivariate normal distribution. 
+
+By the way, the mplus_ml() function in this package can detect the non-normality of data and generate the Mplus file (traditional CFA model) without doing Bayesian Lasso CFA analysis.
+```r
+myModel<-'   
+# 1. CFA
+f1 =~ y1 + y2 + y3 + y4 + y5 
+f2 =~ y6 + y7 + y8 + y9 + y10 + y11
+f3 =~ y12 + y13 + y14 + y15 + y16 + y17  
+'
+
+mplus_ml<-function(filename, varnames, usevar, myModel, ms = 'na')
 ```
 
 ## BugsReports

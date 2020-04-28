@@ -176,7 +176,7 @@ cat(
 	"ANALYSIS:\n\t",
 	file = paste("pcfa_ml.inp", sep = ''), append = T)
 
-nonnormal = normal_detect(varnames,usevar,myModel,filename)
+nonnormal = normal_detect(filename,varnames,usevar)
 if (nonnormal == 1)
 {
 	cat(

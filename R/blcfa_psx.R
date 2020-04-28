@@ -102,7 +102,7 @@ blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms 
 	resultlist <- caculate_results(chain2, CNUM, MCMAX, NY, NZ, N.burn, nthin, IDMU, IDY)
 	hpdlist <- hpd_fun(chain2, NZ, NY, N, IDY)
 	sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval)
-	sigly_list <- sig_ly_set_fun(dataset,resultlist,hpdlist,IDY,interval)
+	sigly_list <- sig_ly_set_fun(dataset,resultlist,hpdlist,IDY0,interval)
 
 	epsrlist <- caculate_epsr(MCMAX,N.burn,CNUM,NY,NZ,chain1,chain2)
 	convergence = epsrlist$convergence

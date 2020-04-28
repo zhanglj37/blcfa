@@ -1,5 +1,5 @@
 
-mplus_ml<-function(varnames,usevar,myModel,filename, ms = 'na')
+mplus_ml<-function(filename,varnames,usevar,myModel, ms = 'na')
 {
 if(file.exists("ml.inp"))
 {
@@ -152,7 +152,7 @@ cat(
 	"ANALYSIS:\n\t",
 	file = paste("ml.inp", sep = ''), append = T)
 
-nonnormal = normal_detect(varnames,usevar,myModel,filename)
+nonnormal = normal_detect(filename,varnames,usevar)
 if (nonnormal == 1)
 {
 	cat(

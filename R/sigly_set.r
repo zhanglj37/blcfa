@@ -1,5 +1,5 @@
 
-sig_ly_set_fun<-function(dataset,resultlist,hpdlist,IDY,interval)
+sig_ly_set_fun<-function(dataset,resultlist,hpdlist,IDY,interval=TRUE)
 { 
 
 EmLY=resultlist$EmLY
