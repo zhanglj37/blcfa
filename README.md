@@ -247,8 +247,8 @@ blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, blout
 
 ### Tips4
 When the estimation is set at ml, the 'blcfa' package will select a maximum likelihood estimator based on the normality of items.
-MLM method will be specified if the dataset did not satisfy multivariate normal distribution. 
-
+MLM method will be specified if the dataset did not satisfy multivariate normal distribution (Skewness > 2 or Kurtosis > 7). 
+ 
 By the way, the mplus_ml() function in this package can detect the non-normality of data and generate the Mplus file (traditional CFA model) without doing Bayesian Lasso CFA analysis.
 ```r
 myModel<-'   
