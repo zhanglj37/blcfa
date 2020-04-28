@@ -265,7 +265,7 @@ mplus_ml(filename, varnames, usevar, myModel, ms = -9)
 ```
 
 ### Tips5
-For missing data that is assumed MAR, this package can automatically impute these missing values with Gibbs sampling method and generated a new data set. 
+For missing data that is assumed missing at random (MAR), this package can automatically impute these missing values with Gibbs sampling method and generated a new data set. 
 
 ## BugsReports
 
