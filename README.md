@@ -277,7 +277,7 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 
 Bayesian lasso confirmatory factor analysis models with ordered categorical data (expected in 2021).
 
-If you have any suggestions or are willing to join in the improvement of this package, please contact with me.  I really hope that we can jointly promote the improvement of this package.
+If you have any suggestions or are willing to join in the improvement of this package, please contact with me. 
 
 ## Acknowledgement
 
