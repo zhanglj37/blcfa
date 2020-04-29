@@ -1,6 +1,6 @@
 
 # blcfa
-author: Junhao Pan, Lijin Zhang
+author: Lijin Zhang, Junhao Pan
 
 update: April 27, 2020
 
