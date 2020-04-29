@@ -2,7 +2,7 @@ Package: blcfa
 Type: Package
 Title: Bayesian Covariance Lasso Prior Confirmatory Factor Analysis
 Version: 0.1.0
-Author: Junhao Pan[aut], Lijin Zhang[aut,cre]
+Author: Lijin Zhang[aut,cre], Junhao Pan[aut]
 Maintainer: Lijin Zhang <zhanglj37@mail2.sysu.edu.cn>
 Description: Uses Bayesian covariance lasso Prior confirmatory factor analysis to 
              detect significant residual correlations and generate the corresponding mplus file.
