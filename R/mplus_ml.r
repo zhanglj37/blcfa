@@ -91,16 +91,19 @@ cat(
 	"TITLE: Bayesian Lasso CFA\n", #_fix211_
 	file = paste("ml.inp", sep = ''), append = T)
 
-if(ismissing == 1)
+
+cat(
+	"DATA: FILE = ", filename, ";",
+	file = paste("ml.inp", sep = ''), append = T)
+
+if(ms != 'na')
 {
-	cat(
-		"DATA: FILE = data_imputed.txt ;",
-		file = paste("ml.inp", sep = ''), append = T)
-}else{
-	cat(
-		"DATA: FILE = ", filename, ";",
-		file = paste("ml.inp", sep = ''), append = T)
+cat(
+	"\n LISTWISE = ON", filename, ";",
+	file = paste("ml.inp", sep = ''), append = T)
+
 }
+
 cat(
 	"\n",
 	"VARIABLE:\n",
@@ -142,9 +145,9 @@ if (usevar_row_num == 1)
 if (is.numeric(ms))
 {
 	cat(
-		"missing: ALL(",
+		"MISSING = ALL(",
 		ms,
-		")\n\n\t",
+		");\n\n\t",
 		file = paste("ml.inp", sep = ''), append = T)
 }
  
@@ -169,15 +172,7 @@ cat(
 	"\n\n\t",
 	file = paste("ml.inp", sep = ''), append = T)
  
-if (SIGPSX[1] != 0)
-{
-	sigpsxname<-sigpsx_list$sigpsxname
-	for (i in 1:length(sigpsxname))
-	{
-		cat(sigpsxname[i],";\n\t",
-			file = paste("ml.inp", sep = ''), append = T)
-	}
-}
+
 
 cat(
 	"\n",
@@ -185,7 +180,7 @@ cat(
 	file = paste("ml.inp", sep = ''), append = T)
  
 ## run
-runModels()
+runModels("ml.inp")
 
 if(file.exists("Mplus Run Models.log"))
 {

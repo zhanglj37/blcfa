@@ -136,11 +136,17 @@ if (usevar_row_num == 1)
 #}
  
 cat(
-	"CLASSES = C(1);\n\t",
+	"CLASSES = C(1);\n",
 	"ANALYSIS:\n\t",
-	"TYPE = MIXTURE;\n\t",
+	"TYPE = MIXTURE;\n",
 	"MODEL:\n\t",
 	file = paste("normal.inp", sep = ''), append = T)
+
+cat(
+	"%OVERALL%\n\t",
+	"\n\n\t",
+	file = paste("normal.inp", sep = ''), append = T)
+ 
 
 if (usevar_row_num == 1)
 {
@@ -157,12 +163,7 @@ if (usevar_row_num == 1)
 } 
 
 
-cat(
-	"%OVERALL%\n\t",
-	model4,
-	"\n\n\t",
-	file = paste("normal.inp", sep = ''), append = T)
- 
+
 
 cat(
 	"\n",
@@ -175,7 +176,7 @@ runModels("normal.inp")
 normality = readModels('normal.out')$tech12
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
-for (i in 1:length(varnames))
+for (i in 1:length(usevar))
 {
 	if (obsSkewness[i] > 2 || obsKurtosis[i] > 7)
 	{
