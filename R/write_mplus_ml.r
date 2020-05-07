@@ -245,7 +245,7 @@ if (SIGPSX[1] != 0)
 cat(
 	"\n",
 	"OUTPUT: TECH1  STDY;\n",
-	file = paste("blcfa_ml.inp", sep = ''), append = T)
+	file = paste("pcfa_ml.inp", sep = ''), append = T)
  
 ## run
 runModels()

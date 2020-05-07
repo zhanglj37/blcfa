@@ -1,0 +1,7 @@
+{
+    "installOptions" : {
+        "installDependencies" : true,
+        "installFromRepository" : true,
+        "libraryPath" : "E:/2_work_software/1_r/R-3.6.0/library"
+    }
+}
