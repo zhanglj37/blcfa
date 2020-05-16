@@ -1,0 +1,200 @@
+---
+title: "Nonlinear Curve Fitting (Type C)"
+author: "Lijin Zhang, Ziyi Duan, Yu Wu, Shan Liu"
+date: "2020/5/13"
+output: 
+ rmdformats::readthedown:
+  highlight: kate
+---
+
+
+
+# 1. Model for the group median data
+
+
+## Read data
+
+
+```{r}
+library(MASS)
+
+data_median = read.table("https://zhanglj37.github.io/share/rm_pre/data_median.txt", header = TRUE)
+attach(data_median)
+head(data_median)
+```
+
+
+##  Conduct model
+
+\begin{array}{c}
+Equation 1: V = A/(1 + k*D)
+
+\\Equation 2: V = A*e^{(-k*D)}
+
+\\Eqution 3: V = A/(1+k*D)^s
+
+\\Eqution 4: V = A/(1+k*D^s)
+
+\\Note: V: Value, A = 1, D: Days.
+\end{array}
+
+
+
+```{r}
+eq1.st <- c(k = 0)
+eq1 <- nls(Value ~ 1/(1 + k*Days), start = eq1.st)
+
+eq2.st <- c(k = 0)
+eq2 <- nls(Value ~ 1*exp(-k*Days), data = data_median, 
+	start = eq2.st)
+
+eq3.st <- c(k = 0.1, s = 1) # try other initial values:k=0,1
+eq3 <- nls(Value ~ 1/((1 + k*Days)^s), start = eq3.st)
+
+eq4.st <- c(k = 0.1, s = 1) 
+eq4 <- nls(Value ~ 1/(1 + k*(Days)^s), start = eq4.st)
+
+```
+
+- try other initial value in eq3
+```{r}
+eq3.st2 <- c(k = 0, s = 1) 
+eq3_2 <- try(nls(Value ~ 1/((1 + k*Days)^s), start = eq3.st2))
+
+```
+
+How to debug: try other initial values or see the [reference](https://stats.stackexchange.com/questions/160552/why-is-nls-giving-me-singular-gradient-matrix-at-initial-parameter-estimates)
+
+
+## Summary
+```{r}
+for (i in 1:4)
+{
+  cat("Results for Eqaution", i)
+  print(summary(get(paste0("eq", i))))
+}
+```
+
+
+## Confidence interval
+```{r}
+for (i in 1:4)
+{
+  cat("Results for Eqaution", i)
+  print(confint(get(paste0("eq", i))))
+}
+
+```
+
+## Model fitting
+```{r}
+for (i in 1:4)
+{
+  cat("Results for Eqaution", i, "\n")
+  Rsquare = (cor(Value, predict(get(paste0("eq", i)))))^2
+  print(Rsquare)
+  print(AIC(get(paste0("eq", i))))
+  print(BIC(get(paste0("eq", i))))
+}
+
+
+```
+R-square is not suggested in nonlinear modeling [Reference](https://blog.minitab.com/blog/adventures-in-statistics-2/why-is-there-no-r-squared-for-nonlinear-regression)
+
+
+## Plot
+```{r}
+plot(x = Days, y = Value)
+
+lines(x = Days, y = predict(eq1))
+```
+
+## Residual plot
+```{r}
+#install.packages("nlstools")
+library(nlstools)
+res = nlsResiduals(eq1)
+plot(res)
+test.nlsResiduals(res)
+```
+
+
+# 2. Model for individuals
+
+## Read data
+
+```{r}
+#install.packages("minpack.lm")
+library(minpack.lm)
+library(MASS)
+
+data_median = read.table("https://zhanglj37.github.io/share/rm_pre/data_median.txt", header = TRUE)
+data_id = read.table("https://zhanglj37.github.io/share/rm_pre/data_id.txt", header = TRUE)
+head(data_id)
+N = dim(data_id)[1]
+Days = data_median$Days
+
+```
+
+## Conduct model
+```{r}
+rsquare = estk = array(0, dim = c(N, 4)) # save r-square and k estimates for each individual
+ests = ests_p = array(0, dim = c(N, 2)) # save s estimates for each individual
+
+for (i in 1:N)
+{
+	# define a new dataset for participant i
+	data_temp = rbind(data_id[i, 2:8], Days)
+	data_temp = data.frame(t(data_temp))
+	colnames(data_temp) = c("Value", "Days")
+	
+	# set the max number of interations in nls(), the default value is 50
+	nlc <- nls.control(maxiter = 1000)
+
+	# modeling
+	eq1.st <- c(k = 0)
+	eq1 <- nls(Value ~ 1/(1 + k*Days), 
+		data = data_temp, start = eq1.st)
+	eq2.st <- c(k = 0)
+	eq2 <- nls(Value ~ 1*exp(-k*Days), data = data_temp, 
+		start = eq2.st)	
+	eq3.st <- c(k = 0.1, s = 1)
+	eq3 <- nlsLM(Value ~ 1/((1 + k*Days)^s), data = data_temp, 
+	   start = eq3.st, control = nlc)	
+	   # nlsLM is a modified version of nls that uses nls.lm for fitting. 
+	eq4.st <- c(k = 0.1, s = 1) 
+	eq4 <- nls(Value ~ 1/(1 + k*(Days)^s), data = data_temp, 
+	   start = eq4.st, control = nlc)
+
+	# save results for each participant
+	for (j in 1:4)
+	{
+		estk[i,j] = coef(get(paste0("eq",j)))[1] # k, when j = 1, coef(eq1)
+		rsquare[i,j] = (cor(data_temp$Value,predict(get(paste0("eq",j)))))^2
+		
+		if (j > 2)
+		{
+			ests[i,j-2] = coef(get(paste0("eq",j)))[2] # s
+			ests_p[i,j-2] = coef(summary(get(paste0("eq",j))))[2,4] # p value for s
+		}
+	}	
+}
+
+```
+
+## Results
+```{r}
+# median of estimates
+apply(estk,FUN=median,MAR=c(2))
+apply(ests,FUN=median,MAR=c(2))
+apply(rsquare,FUN=median,MAR=c(2))
+
+# Proportion of individuals with s value smaller than 1 in eq3
+ests = cbind(ests, ests_p)
+which(ests[,1]<1 & ests[,3]<0.05)
+
+length(which(ests[,1]<1 & ests[,3]<0.05))/N
+
+```
+
+

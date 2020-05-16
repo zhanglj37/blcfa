@@ -1,0 +1,12 @@
+---
+  title: "Nonlinear Curve Fitting (Type C)"
+author: "Lijin Zhang, Ziyi Duan, Yu Wu, Shan Liu"
+date: "2020/5/13"
+output: 
+  rmdformats::readthedown:
+  highlight: kate
+---
+  
+  
+  toc: true
+toc_float: true

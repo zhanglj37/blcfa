@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589532100628.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2970434015",
+    "id" : "3A1918F",
+    "lastKnownWriteTime" : 1589622609,
+    "last_content_update" : 1589622609957,
+    "path" : "D:/0_document/Data analysis/nls.rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "200,0",
+        "scrollLine" : "173"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
