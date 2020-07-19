@@ -33,7 +33,7 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = 
 		numw<-length(mmvar)   # num of factors
 		mmvar_loc<-cfa_loc(mmvar,dataset)  # location of indicators
 		NZ<-numw  # Number of factors (q)
-		IDY0<-IDY_matrix_fun(dataset,mmvar,mmvar_loc) 
+		IDY0<-IDY_matrix(dataset,mmvar,mmvar_loc) 
 	}
 
 
@@ -71,7 +71,7 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = 
 
 	parList <- foreach (CIR = 1:CNUM,
 	                      .packages = c("MASS", "statmod", "MCMCpack"),
-	                      .export = c("IDY_matrix_fun", "set_int_fun", "read_dataset", "gibbs_fun")) %is_par%
+	                      .export = c("IDY_matrix", "set_ly_int", "gibbs_fun")) %is_par%
 	{
 		## Calculate the epsr value by running two chains with two kind of initial values
 

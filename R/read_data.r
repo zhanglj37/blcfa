@@ -43,7 +43,8 @@ read_data2<-function(dataset)
 #		}
 #}
 
-mark_na <- function(N, NY, dataset_noms, ms){
+mark_na <- function(N, NY, dataset, ms){
+	dataset_noms = dataset
 	for(i in 1:N)
 	{
 		for(j in 1:NY)

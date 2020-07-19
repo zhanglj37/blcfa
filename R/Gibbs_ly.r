@@ -61,7 +61,7 @@ for(i in 1:NY){
 } # end of i
 
 
-Empostp<-numeric(CNUM)
+Empostp<-numeric(2)
 chainpsx<-array(0,dim=c(Nrec,NY*(NY+1)/2))
 set.seed(1)
 
@@ -155,7 +155,7 @@ for(i in 1:NY)
 
 for(i in 1:NY)
    for(j in 1:N)
-      if(is.na(Y[i,j]) || Y[i,j]==ms) Y[i,j]<-rnorm(1)
+      if(is.na(Y[i,j])) Y[i,j]<-rnorm(1)
 
 
 
