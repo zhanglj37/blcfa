@@ -248,7 +248,7 @@ cat(
 	file = paste("blcfa_ml.inp", sep = ''), append = T)
  
 ## run
-runModels()
+runModels("blcfa_ml.inp")
 
 if(file.exists("Mplus Run Models.log"))
 {

@@ -139,6 +139,8 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = 
 		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
 
 		EPSR_figure(epsr, MCMAX)
+		
+
     }
 	
 

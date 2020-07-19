@@ -237,7 +237,7 @@ cat(
 	file = paste("blcfa_bayes.inp", sep = ''), append = T)
  
 ## run
-runModels()
+runModels("blcfa_bayes.inp")
 
 if(file.exists("Mplus Run Models.log"))
 {
