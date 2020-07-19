@@ -59,11 +59,11 @@ install_github("zhanglj37/blcfa")
 ```r
 library(blcfa)
 
-filename <- "ss.txt"  
-varnames <- c("gender",paste("y", 1:17, sep = ""))
-usevar <- c(paste("y", 1:17, sep = ""))
-NZ=3
-IDY<-matrix(c(
+filename = "ss.txt"  
+varnames = c("gender",paste("y", 1:17, sep = ""))  # variables in dataset
+usevar = c(paste("y", 1:17, sep = ""))  # variables used in the analysis
+NZ = 3  # number of factors
+IDY = matrix(c(
   9,-1,-1,
   1,-1,-1,
   1,-1,-1,
@@ -248,9 +248,9 @@ blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, blout
 ### Tips4
 When the estimation is set at ml, the 'blcfa' package will select a maximum likelihood estimator based on the normality of items.
 MLM method will be specified if the dataset did not satisfy multivariate normal distribution (Skewness > 2 or Kurtosis > 7; West, Finch, & Curran, 1995). 
- 
+
 West, S. G., Finch, J. F., & Curran, P. J. (1995). Structural equation models with nonnormal variables. *Structural equation modeling: Concepts, issues, and applications*, 56-75. 
- 
+
 By the way, the mplus_ml() function in this package can detect the non-normality of data and generate the Mplus file (traditional CFA model) without doing Bayesian Lasso CFA analysis.
 ```r
 myModel<-'   

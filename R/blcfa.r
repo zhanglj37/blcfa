@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa<-function(filename, varnames, usevar, IDY0, estimation = 'Bayes', ms = -999, 
+blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = -999, 
 	MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
@@ -21,7 +21,20 @@ blcfa<-function(filename, varnames, usevar, IDY0, estimation = 'Bayes', ms = -99
 	### source("read_model.r")
 	N <- nrow(dataset)    # Sample size (N)
 	NY <- ncol(dataset)	 # Number of items (p)
-	NZ <- ncol(IDY0)
+	if (is.matrix(myModel))
+	{
+		IDY0 = myModel
+		NZ <- ncol(IDY0)
+	}else{
+		### source("read_model.r")
+		mmvarorigin<-read_model(myModel) ## IDY0 = myModel
+		mmvar<-mmvarorigin[2:length(mmvarorigin)] # List: includes factors and variables under each factor
+		factorname<-mmvarorigin[[1]]   # names of factors
+		numw<-length(mmvar)   # num of factors
+		mmvar_loc<-cfa_loc(mmvar,dataset)  # location of indicators
+		NZ<-numw  # Number of factors (q)
+		IDY0<-IDY_matrix_fun(dataset,mmvar,mmvar_loc) 
+	}
 
 
 	## record ms values as NA for standarizing data
@@ -65,7 +78,7 @@ blcfa<-function(filename, varnames, usevar, IDY0, estimation = 'Bayes', ms = -99
 		IDMU<-rep(1,NY)  
 		LY_int <- set_ly_int(CIR, IDY0)
 		IDY = IDY0
-		IDY[which(IDY0==9)] = 0
+		IDY[which(IDY0==9)] = 0 
 
 		sink("log.txt", append=TRUE) # divert the output to the log file
 

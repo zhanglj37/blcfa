@@ -6,6 +6,7 @@ IDY_matrix <- function(dataset,mmvar,mmvar_loc)
 	IDY_matrix<-matrix(0.0,nrow=ncol(dataset),ncol=length(mmvar))
 	for (i in 1:length(mmvar))
 	{
+		IDY_matrix[mmvar_loc[[i]][1],i]<-9
 		IDY_matrix[mmvar_loc[[i]][2:length(mmvar_loc[[i]])],i]<-1.0
 	}
 
