@@ -95,7 +95,7 @@ IDY = matrix(c(
 
 blcfa(filename, varnames, usevar, IDY, estimation = 'Bayes', ms = -9)
 # estimation ( = 'ML' / 'Bayes', the default value is 'Bayes') denotes the estimation method in Mplus file
-# ms represents missing value (you don't need to define it if -999 or NA represents missing value in the dataset).
+# ms represents missing value (you don't need to define it if NA represents missing value in the dataset).
 ```
 
 After running this function:

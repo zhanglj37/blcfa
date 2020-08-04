@@ -244,7 +244,7 @@ if (SIGPSX[1] != 0)
 
 cat(
 	"\n",
-	"OUTPUT: TECH1  STDY;\n",
+	"OUTPUT: TECH1  STDYX;\n",
 	file = paste("blcfa_ml.inp", sep = ''), append = T)
  
 ## run

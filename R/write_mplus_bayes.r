@@ -232,7 +232,7 @@ if (SIGPSX[1] != 0)
 
 cat(
 	"\n",
-	"OUTPUT: TECH1  TECH8  STDY;\n",
+	"OUTPUT: TECH1  TECH8  STDYX;\n",
 	"PLOT: TYPE= PLOT2;\n",
 	file = paste("blcfa_bayes.inp", sep = ''), append = T)
  
