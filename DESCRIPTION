@@ -11,7 +11,6 @@ Depends: stats,MASS,MCMCpack,msm,
          MplusAutomation,sna,doParallel
 License: GPL (>= 2)
 Encoding: UTF-8
-LazyLoad: yes
 LazyData: true
 ByteCompile: true
 RoxygenNote: 6.1.1
