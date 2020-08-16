@@ -132,7 +132,7 @@ if (SIGPSX[1] != 0 )
 ## names需要改
 
 # 4. 绘图并输出
-EPSR_figure(epsr, MCMAX)
+EPSR_figure(epsr, N.burn)
 
 setwd('..')
 
