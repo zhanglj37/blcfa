@@ -1,4 +1,4 @@
-write_results<-function(MCMAX,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+write_results<-function(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
 						epsr,usevar,IDMU,IDY)
 {	
 

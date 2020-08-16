@@ -142,9 +142,9 @@ if (usevar_row_num == 1)
 } 
 
 	
-cat(
-	"Define:\n",
-	file = paste("blcfa_bayes.inp", sep = ''), append = T)
+#cat(
+#	"Define:\n",
+#	file = paste("blcfa_bayes.inp", sep = ''), append = T)
 
 ### 
 ### if (usevar_row_num == 1)

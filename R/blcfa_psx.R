@@ -122,7 +122,7 @@ blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'Bayes', ms 
 		}
 		if (bloutput)
 		{
-			write_results(MCMAX,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+			write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
 						epsr,usevar,IDMU,IDY)
 		}
     }else{
