@@ -60,7 +60,7 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 #	    SEALPHA[1,,]=apply(EALPHA[(N.burn+1):MCMAX,],FUN=sd,MARGIN=c(2,3)) 
 #	}
 	
-    Empostp[1]<-mean(Epostp[(N.burn+1):MCMAX,])
+    Empostp[1]<-mean(Epostp[,])
 	
 
 		#MARGINk significant residual correlation

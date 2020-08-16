@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = -99999, 
+blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = -999999, 
 	MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
@@ -138,10 +138,10 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'Bayes', ms = 
 		cat('Error: The convergence criterion is not satisfied.  \n')
 		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
 
-		EPSR_figure(epsr, MCMAX)
-		
-
+		EPSR_figure(epsr, N.burn)
+	
     }
 	
 
 }
+

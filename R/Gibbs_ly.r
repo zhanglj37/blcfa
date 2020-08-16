@@ -140,7 +140,7 @@ inv.sqrt.PSX<-chol(inv.PSX)
 if(IDMUA==F) MU<-rep(0,NY)
 	         										
 #source("Gibbs.R")
-Epostp<-array(0, dim=c(Nrec,1))
+Epostp<-array(0, dim=c(MCMAX-N.burn,1))
 
 
 # Creat the matrix of missing indicators where 1 represents missing
