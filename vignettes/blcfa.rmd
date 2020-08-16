@@ -1,6 +1,6 @@
 ---
 title: blcfa
-author: Junhao Pan, Lijin Zhang
+author: Lijin Zhang, Junhao Pan, Edward Ip 
 date: May 21, 2019
 output: 
   rmdformats::readthedown:
