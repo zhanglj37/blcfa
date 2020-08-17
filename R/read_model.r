@@ -8,6 +8,7 @@ read_model<-function(myModel)
 	mmsplit<-mmsplit[[1]]
 	mmlength<-length(mmsplit)
 	
+	loc_blank = rep(0, mmlength)
 	## Delete blank line
 	for (i in 1:mmlength)
 	{
@@ -20,17 +21,21 @@ read_model<-function(myModel)
 		tempempty<-NULL
 		for (j in 1:length(tempsplit))
 		{
-			tempempty=paste(tempempty,"")
+			tempempty=paste0(tempempty,"")
 		}
 		
 
 		if(tempstr == tempempty)
 		{
-			mm2split<-mmsplit[-i]
+			loc_blank[i] = 9
 		}
 	}	
-	
-	
+	if (sum(loc_blank)>0)
+	{
+		mm2split<-mmsplit[-which(loc_blank==9)]
+	}else{
+		mm2split<-mmsplit
+	}
 	mm2length<-length(mm2split)
 	mmvar<-NULL
 	numw<-1  ## num of latent variables(w)
