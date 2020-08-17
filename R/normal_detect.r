@@ -177,7 +177,7 @@ if("try-error" %in% class(runmplus))
 	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
 }
 
-
+nonnormal = 0
 normality = try(readModels('normal.out')$tech12)
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
