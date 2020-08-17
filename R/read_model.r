@@ -76,7 +76,6 @@ read_model<-function(myModel)
 	
 		for (j in 1:templength)
 		{
-	############## Need to be modified after the subsequent SEM is included here.
 			if (temp2split[j] == "=~" || temp2split[j] == "+")
 			{
 				cfa_loc[locj]<-j

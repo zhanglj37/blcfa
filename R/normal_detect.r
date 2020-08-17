@@ -171,8 +171,17 @@ cat(
 	file = paste("normal.inp", sep = ''), append = T)
  
 ## run
-runModels("normal.inp")
+runmplus = try(runModels("normal.inp"))
+if("try-error" %in% class(runmplus))
+{
+	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
+}
 
+read_try = try(readModels('normal.out')$tech12)
+if("try-error" %in% class(runmplus))
+{
+	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
+}esle{
 normality = readModels('normal.out')$tech12
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
@@ -185,7 +194,7 @@ for (i in 1:length(usevar))
 		nonnormal = 0
 	}
 }
-
+}
 return(nonnormal)
 
 }
