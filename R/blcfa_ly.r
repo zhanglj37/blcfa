@@ -111,11 +111,11 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	{
 		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)
-		if (estimation == 'ml' || estimation == 'maximum likelihood')
+		if (estimation == 'bayes' || estimation == 'bayesian')
 		{
-			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
-		}else{
 			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+		}else{
+			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}
 		if (bloutput)
 		{

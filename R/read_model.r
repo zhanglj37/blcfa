@@ -8,6 +8,7 @@ read_model<-function(myModel)
 	mmsplit<-mmsplit[[1]]
 	mmlength<-length(mmsplit)
 	
+	loc_blank = rep(0, mmlength)
 	## Delete blank line
 	for (i in 1:mmlength)
 	{
@@ -17,18 +18,29 @@ read_model<-function(myModel)
 		templength<-length(tempsplit)
 	
 		## Delete blank line
-		tempempty<-NULL
-		for (j in 1:length(tempsplit))
+		if (templength > 0)
 		{
-			tempempty=paste(tempempty,"")
+			tempempty<-NULL
+			for (j in 1:length(tempsplit))
+			{
+				tempempty=paste0(tempempty," ")
+			}
+		}else{
+			tempempty = tempstr
 		}
 		
 
 		if(tempstr == tempempty)
 		{
-			mm2split<-mmsplit[-i]
+			loc_blank[i] = 9
 		}
 	}	
+	if (sum(loc_blank)>0)
+	{
+		mm2split<-mmsplit[-which(loc_blank==9)]
+	}else{
+		mm2split<-mmsplit
+	}
 	
 	
 	mm2length<-length(mm2split)
