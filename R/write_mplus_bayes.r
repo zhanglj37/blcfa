@@ -240,7 +240,7 @@ cat(
 runmplus = try(runModels("blcfa_bayes.inp"))
 if("try-error" %in% class(runmplus))
 {
-	print('Error: Failed run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
+	print('Error: Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
 }
 
 if(file.exists("Mplus Run Models.log"))

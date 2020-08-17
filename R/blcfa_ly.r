@@ -123,8 +123,7 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 						epsr,usevar,IDMU,IDY)
 		}
     }else{
-		cat('Error: The convergence criterion is not satisfied.  \n')
-		cat('Please refer to the epsr graph and increase the value of N.burn and MCMAX.')
+		cat('Error: Failed to satisfy the convergence criterion. Check the epsr graph and increase the values of N.burn and MCMAX.  \n')
 
 		EPSR_figure(epsr, N.burn)
     }
