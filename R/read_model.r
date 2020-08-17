@@ -18,10 +18,15 @@ read_model<-function(myModel)
 		templength<-length(tempsplit)
 	
 		## Delete blank line
-		tempempty<-NULL
-		for (j in 1:length(tempsplit))
+		if (templength > 0)
 		{
-			tempempty=paste0(tempempty,"")
+			tempempty<-NULL
+			for (j in 1:length(tempsplit))
+			{
+				tempempty=paste0(tempempty," ")
+			}
+		}else{
+			tempempty = tempstr
 		}
 		
 
@@ -36,6 +41,8 @@ read_model<-function(myModel)
 	}else{
 		mm2split<-mmsplit
 	}
+	
+	
 	mm2length<-length(mm2split)
 	mmvar<-NULL
 	numw<-1  ## num of latent variables(w)
