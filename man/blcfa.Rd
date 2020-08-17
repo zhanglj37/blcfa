@@ -6,8 +6,8 @@
 			 After running this function, you can get an mplus file that includes your model and
 			 the significant cross-loadings and residual correlations detected by Bayesian Lasso Prior Confirmatory Factor Analysis.}
 \usage{
-blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,
-			ms = -999, bloutput = FALSE,  interval = TRUE)
+blcfa(filename, varnames, usevar, myModel, estimation = "Bayes", ms = -999999, MCMAX = 15000, N.burn = 5000,
+			bloutput = FALSE,  interval = TRUE)
 
 }
 \arguments{
@@ -16,10 +16,10 @@ blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,
 			and the variable name is not included in the file.}
 \item{varnames}{Colnames of your dataset (eg. c("gender",paste("y", 1:19, sep = ""))).}
 \item{usevar}{select a subset of variables for analysis (eg. c(paste("y", 1:19, sep = ""))))}
-\item{IDY0}{define your model by a matrix 
+\item{myModel}{define your model by a matrix 
       (eg.
 			
-			IDY0<-matrix(c(
+			myModel<-matrix(c(
 			
 			  9,0,0,
 			
@@ -76,6 +76,7 @@ blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,
       ' 
       
       in this way, no loading will be assigned with lasso shrinkage. }
+\item{estimation}{Estimator in the Mplus: 'ML' or 'Bayes'.}
 \item{MCMAX}{Total number of MCMC samples for inference (the default value is 15000).}
 \item{N.burn}{Number of burn-in MCMC samples. Discarded (the default value is 5000).
 			Besides, if the model does not converge in the N.burn iteration,
@@ -91,6 +92,6 @@ blcfa(filename, varnames, usevar, IDY0, MCMAX = 15000, N.burn = 5000,
 }
 
 \references{
-Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704.
-Chen, J.S.*, Guo, Z.H., Zhang, L.J., Pan, J.H.* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. Psychological Methods.
+Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. Psychological Methods, 22(4), 687–704.
+Chen, J.S.*, Guo, Z.H., Zhang, L.J., Pan, J.H.* (2020). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. Psychological Methods. Advance online publication.
 }

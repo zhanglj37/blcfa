@@ -5,6 +5,7 @@ date: May 21, 2019
 output: 
   rmdformats::readthedown:
     highlight: kate
+    
 ---
 ## Description
 The 'blcfa' package uses Bayesian covariance lasso prior confirmatory factor analysis to detect significant residual correlations and generate the corresponding mplus file.
