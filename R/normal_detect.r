@@ -178,7 +178,7 @@ if("try-error" %in% class(runmplus))
 }
 
 
-normality = readModels('normal.out')$tech12
+normality = try(readModels('normal.out')$tech12)
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
 for (i in 1:length(usevar))
