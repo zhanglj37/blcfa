@@ -6,7 +6,7 @@
 			 After running this function, you can get an mplus file that includes your model and
 			 the significant cross-loadings and residual correlations detected by Bayesian Lasso Prior Confirmatory Factor Analysis.}
 \usage{
-blcfa(filename, varnames, usevar, myModel, estimation = "Bayes", ms = -999999, MCMAX = 15000, N.burn = 5000,
+blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, MCMAX = 15000, N.burn = 5000,
 			bloutput = FALSE,  interval = TRUE)
 
 }
