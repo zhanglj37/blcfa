@@ -248,10 +248,12 @@ cat(
 	file = paste("blcfa_ml.inp", sep = ''), append = T)
  
 ## run
-runmplus = try(runModels("blcfa_ml.inp"))
-if("try-error" %in% class(runmplus))
-{
-	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
+path_detect = Sys.getenv("PATH")
+path_detect = tolower(path_detect)
+if (str_detect(path_detect,'mplus')){
+	runModels("blcfa_ml.inp")
+}else{
+	print('Error: Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
 }
 
 if(file.exists("Mplus Run Models.log"))

@@ -6,8 +6,8 @@
 			 After running this function, you can get an mplus file that includes your model and
 			 the significant cross-loadings and residual correlations detected by Bayesian Lasso Prior Confirmatory Factor Analysis.}
 \usage{
-blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, MCMAX = 15000, N.burn = 5000,
-			bloutput = FALSE,  interval = TRUE)
+blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, 
+      MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
 
 }
 \arguments{
@@ -29,17 +29,11 @@ blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, MCMA
 			
 			  1,0,0,
 			
-			  1,0,0,
-			
 			  -1,9,0,
 			
 			  -1,1,0,
 			
 			  -1,1,0,
-			
-			  0,1,0,
-			
-			  0,1,0,
 			
 			  0,1,0,
 			
@@ -50,10 +44,6 @@ blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, MCMA
 			  0,0,1,
 			
 			  0,0,1,
-			
-			  0,0,1,
-			
-			  0,0,1
 			
 			),ncol=NZ,byr=T).
 			
@@ -92,6 +82,6 @@ blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, MCMA
 }
 
 \references{
-Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. Psychological Methods, 22(4), 687–704.
+Pan, J., Ip, E. H., & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. Psychological Methods, 22(4), 687�?704.
 Chen, J.S.*, Guo, Z.H., Zhang, L.J., Pan, J.H.* (2020). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. Psychological Methods. Advance online publication.
 }

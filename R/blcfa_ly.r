@@ -109,6 +109,11 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	#***********generate_output ************
 	if (convergence)
 	{
+		if (bloutput)
+		{
+			write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+						epsr,usevar,IDMU,IDY)
+		}
 		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)
 		if (estimation == 'bayes' || estimation == 'bayesian')
@@ -116,11 +121,6 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}else{
 			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
-		}
-		if (bloutput)
-		{
-			write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
-						epsr,usevar,IDMU,IDY)
 		}
     }else{
 		cat('Error: Failed to satisfy the convergence criterion. Check the epsr graph and increase the values of N.burn and MCMAX.  \n')

@@ -171,13 +171,11 @@ cat(
 	file = paste("normal.inp", sep = ''), append = T)
  
 ## run
-runmplus = try(runModels("normal.inp"))
-if("try-error" %in% class(runmplus))
-{
-	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
-}
+path_detect = Sys.getenv("PATH")
+path_detect = tolower(path_detect)
+if (str_detect(path_detect,'mplus')){
+runModels("normal.inp")
 
-nonnormal = 0
 normality = try(readModels('normal.out')$tech12)
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
@@ -189,6 +187,11 @@ for (i in 1:length(usevar))
 	}else{
 		nonnormal = 0
 	}
+}
+
+}else{
+	nonnormal = 0
+	print('Error: Failed to run Mplus to detect possible non-normality, choose the maximum likelihood estimator as default')
 }
 
 

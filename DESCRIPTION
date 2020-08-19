@@ -6,11 +6,11 @@ Author: Lijin Zhang[aut,cre], Junhao Pan[aut], Edward Ip[aut]
 Maintainer: Lijin Zhang <zhanglj37@mail2.sysu.edu.cn>
 Description: Uses Bayesian covariance lasso Prior confirmatory factor analysis to 
              detect significant residual correlations and generate the corresponding mplus file.
-Depends: stats,MASS,MCMCpack,msm,
+Depends: stats,stringr,MASS,MCMCpack,msm,
          statmod,psychometric,
          MplusAutomation,sna,doParallel
 License: GPL (>= 2)
 Encoding: UTF-8
 ByteCompile: true
 RoxygenNote: 7.1.0
-Packaged: 2019-05-21 02:00:05 UTC; Zhang
+Packaged: 2020-08-21; Zhang
