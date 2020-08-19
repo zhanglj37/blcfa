@@ -188,7 +188,7 @@ for(g in 1:MCMAX){
 	   Ycen<-Y-LY%*%Omega		       
 	   temp<-rowSums(Ycen)
 	   mumu<-calsm%*%(inv.PSX%*%temp+rep(sigmu,NY)*PMU)
-	   MU<-mvrnorm(1,mumu,Sig=calsm)
+	   MU<-mvrnorm(1,mumu,Sigma=calsm)
 					   
 	} 
 	###################    end of update MU  ##########################################################	
@@ -318,7 +318,7 @@ for(g in 1:MCMAX){
 			calsmnpsx<-chol2inv(chol(invconvar*tcrossprod(omesub)+PSiginv))
 			temp<-(omesub%*%Ycen*invconvar+PSiginv%*%Pmean)
 			LYnpsx<-calsmnpsx%*%temp
-			LY[j,subs]<-mvrnorm(1,LYnpsx,Sig=(calsmnpsx))
+			LY[j,subs]<-mvrnorm(1,LYnpsx,Sigma=(calsmnpsx))
 			#if((gm>0)&&(gm%%nthin==0)){ELY[gm/nthin,count.n:(count.n+len-1)]<-LY[j,subs]}
 			#    count.n<-count.n+len
 	    } # end len>0
@@ -360,7 +360,7 @@ for(g in 1:MCMAX){
 			calsmnpsx<-chol2inv(chol(invconvar*tcrossprod(omesub)+invD_tau))
 			temp<-(omesub%*%Ycen*invconvar)
 			LYnpsx<-calsmnpsx%*%temp
-			LY[j,subs]<-mvrnorm(1,LYnpsx,Sig=(calsmnpsx))
+			LY[j,subs]<-mvrnorm(1,LYnpsx,Sigma=(calsmnpsx))
 		  
 		} # end len>0
 

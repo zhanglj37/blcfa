@@ -83,7 +83,7 @@ epsr_reserve<-epsr[(N.burn+1):(N.burn+99),]
 tempindex<-arrayInd(sort.list(epsr_reserve,decreasing=T)[1],
 			dim(epsr_reserve))
 
-if (epsr[tempindex]<1.2)
+if (epsr_reserve[tempindex]<1.2)
 {
 	convergence<-TRUE
 }else
