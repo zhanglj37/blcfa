@@ -7,7 +7,7 @@
 			 the significant cross-loadings and residual correlations detected by Bayesian Lasso Prior Confirmatory Factor Analysis.}
 \usage{
 blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, 
-      MCMAX = 15000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
+      MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
 
 }
 \arguments{

@@ -256,9 +256,9 @@ if (str_detect(path_detect,'mplus')){
 	print('Error: Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
 }
 
-if(file.exists("Mplus Run Models.log"))
-{
- file.remove("Mplus Run Models.log")
-}
+#if(file.exists("Mplus Run Models.log"))
+#{
+# file.remove("Mplus Run Models.log")
+#}
 
 }

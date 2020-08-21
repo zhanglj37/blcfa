@@ -246,9 +246,9 @@ if (str_detect(path_detect,'mplus')){
 }
 
 
-if(file.exists("Mplus Run Models.log"))
-{
- file.remove("Mplus Run Models.log")
-}
+#if(file.exists("Mplus Run Models.log"))
+#{
+# file.remove("Mplus Run Models.log")
+#}
 
 }
