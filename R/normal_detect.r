@@ -191,7 +191,7 @@ for (i in 1:length(usevar))
 
 }else{
 	nonnormal = 0
-	print('Error: Failed to run Mplus to detect possible non-normality, choose the maximum likelihood estimator as default')
+	print('Error: Failed to run Mplus to detect non-normality, choose the maximum likelihood estimator as default')
 }
 
 

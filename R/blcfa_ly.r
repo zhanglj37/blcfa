@@ -47,12 +47,16 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	#switch between %do% (serial) and %dopar% (parallel)
 	if (ncores == 1){  #serial
 	  `%is_par%` <- `%do%`
+	}else if(Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM")) && 
+			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0") {
+		`%is_par%` <- `%do%`
+		ncores <- 1
 	}else{  #parallel
 	  `%is_par%` <- `%dopar%`
-	  cl <- makeCluster(ncores)
-	  registerDoParallel(cores = ncores)
-	}
+		cl <- makeCluster(ncores)
+		registerDoParallel(cores = ncores)
 
+	}
 
 	writeLines(c(""), "log.txt") #create or clear the log file recording the ouput of foreach loop
 

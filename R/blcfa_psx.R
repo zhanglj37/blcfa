@@ -49,11 +49,15 @@ blcfa_psx<-function(filename, varnames, usevar, model, estimation = 'ml', ms = -
 	#switch between %do% (serial) and %dopar% (parallel)
 	if (ncores == 1){  #serial
 	  `%is_par%` <- `%do%`
-	}
-	else{  #parallel
+	}else if(Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM")) && 
+			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0") {
+		`%is_par%` <- `%do%`
+		ncores <- 1
+	}else{  #parallel
 	  `%is_par%` <- `%dopar%`
-	  cl <- makeCluster(ncores)
-	  registerDoParallel(cores = ncores)
+		cl <- makeCluster(ncores)
+		registerDoParallel(cores = ncores)
+
 	}
 
 
