@@ -8,7 +8,7 @@ Description: Uses Bayesian covariance lasso Prior confirmatory factor analysis t
              detect significant residual correlations and generate the corresponding mplus file.
 Depends: stats,stringr,MASS,MCMCpack,msm,
          statmod,psychometric,
-         MplusAutomation,sna,doParallel
+         MplusAutomation,sna,doParallel,rstudioapi
 License: GPL (>= 2)
 Encoding: UTF-8
 ByteCompile: true

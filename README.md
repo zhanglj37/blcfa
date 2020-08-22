@@ -7,6 +7,8 @@ update: April 27, 2020
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
 
+[![](https://img.shields.io/github/stars/zhanglj37/blcfa?style=social)](https://github.com/zhanglj37/blcfa/stargazers)
+
 
 * [Description](#Description)
 * [Installation](#Installation)

@@ -99,7 +99,7 @@ NLY1<-sum(IDY==-1)				#number of lasso lambda.
 a_lamsq<-1
 b_lamsq<-.01    
 stau<-0
-LY_eps<- 0 #threhods for LY sign change
+LY_eps<-0 #threhods for LY sign change
 
 
 #initial value of Lambda, 

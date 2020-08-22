@@ -11,6 +11,7 @@ import(psychometric)
 import(MplusAutomation)
 import(sna)
 import(doParallel)
+import(rstudioapi)
 
 
 importFrom("grDevices", "dev.cur", "rainbow", "savePlot")

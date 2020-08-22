@@ -5,15 +5,19 @@
 ## generate_output
 
 blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -999999, 
-	MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
+	MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE, conver_check = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
 	## bloutput: Output detailed results (xlsx file);
 	## interval: Detect significant residual correlation based on HPD interval or p-value
 	## category & point: used for category data (under development)
 {
-
+if (!conver_check){
+	blcfa_noepsr(filename, varnames, usevar, myModel, estimation, ms, 
+		MCMAX, N.burn, bloutput,  interval, conver_check)
+}else{
 	nthin<-1  ## MCMC algorithm sampling interval
+
 	CNUM<-2   ## number of chain
 
 	dataset <- read_data(filename, varnames, usevar)
@@ -58,12 +62,17 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -99
 	}
 
 	#switch between %do% (serial) and %dopar% (parallel)
+	# require(rstudioapi) 
 	if (ncores == 1){  #serial
 	  `%is_par%` <- `%do%`
 	}else if(Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM")) && 
-			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0") {
-		`%is_par%` <- `%do%`
-		ncores <- 1
+			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0" ) {
+			
+			if(versionInfo()$version < "1.3.1056"){
+				`%is_par%` <- `%do%`
+			ncores <- 1
+			}
+			
 	}else{  #parallel
 	  `%is_par%` <- `%dopar%`
 		cl <- makeCluster(ncores)
@@ -126,27 +135,34 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -99
 	#***********generate_output ************
 	if (convergence)
 	{
-		if (bloutput)
-		{
-			write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
-						epsr,usevar,IDMU,IDY)
-		}
+
+		resultlist2<-write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+					epsr,usevar,IDMU,IDY,bloutput)
+		
 		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)
 		if (estimation == 'bayes' || estimation == 'bayesian')
 		{
 			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+		}else if (estimation == 'both'){
+			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}else{
 			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
 		}
 
     }else{
+
+		resultlist2<-write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
+					epsr,usevar,IDMU,IDY,bloutput)
+
 		cat('Error: Failed to satisfy the convergence criterion. Check the epsr graph and increase the values of N.burn and MCMAX.  \n')
 
 		EPSR_figure(epsr, N.burn)
 	
     }
 	
-
-}
+	blcfa_results = list(blcfa_est = resultlist2, estimation = estimation)
+	return(invisible(blcfa_results))
+}}
 

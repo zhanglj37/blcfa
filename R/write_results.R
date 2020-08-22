@@ -1,5 +1,5 @@
 write_results<-function(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
-						epsr,usevar,IDMU,IDY)
+						epsr,usevar,IDMU,IDY,bloutput)
 {	
 
 EmLY=resultlist$EmLY
@@ -64,7 +64,8 @@ PPHI1=CORPHI=matrix(PPHI,NZ,NZ)
 for (i in 1:NZ)
 	for (j in 1:NZ)
 		CORPHI[i,j] = EmPHI1[i,j]/( sqrt(EmPHI1[i,i])* sqrt(EmPHI1[j,j]) )
-
+fname = c(paste("f", 1:NZ, sep = ""))
+colnames(CORPHI) = fname
 
 
 philoc=phiest=phise=phicor=phip=hpd_low=hpd_up=rep(0,(NZ*(NZ+1))/2)
@@ -88,7 +89,7 @@ colnames(OUTPHI)<-c("est","se","cor","p-value","HPD_lower","HPD_upper")
 rownames(OUTPHI)<-philoc
 
 
-
+if (bloutput){
 ### write results----------------------------------------------------
 wd_origin<-getwd()
 if (file.exists('results')){
@@ -98,7 +99,7 @@ if (file.exists('results')){
     setwd('results')
 }
 
-write.table(Empostp[1],file = paste('ppp.dat', sep = ''), sep = '\t', row.names = FALSE, col.names = FALSE)
+write.csv(Empostp[1],file = paste('ppp.csv', sep = ''), row.names = FALSE)
  
 
 #if (category)
@@ -110,31 +111,37 @@ write.table(Empostp[1],file = paste('ppp.dat', sep = ''), sep = '\t', row.names 
 #	rownames(ALPHA_matrix2)<-murownames
 #	write.xlsx(ALPHA_matrix2,xlsxname,"alpha", row.names = FALSE, col.names = FALSE)		
 #}
-write.table(sigly_list$OUTLY,file = paste('ly.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
-write.table(MU_matrix,file = paste('mu.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+write.csv(sigly_list$OUTLY,file = paste('ly.csv', sep = ''), row.names = TRUE)
+write.csv(MU_matrix,file = paste('mu.csv', sep = ''), row.names = TRUE)
 
 
 
-write.table(OUTPHI,file = paste('phi.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+write.csv(OUTPHI,file = paste('phi.csv', sep = ''), row.names = TRUE)
 
-write.table(CORPHI,file = paste('phi_cormatrix.dat', sep = ''), sep = '\t', row.names = FALSE, col.names = FALSE)
+write.csv(CORPHI,file = paste('phi_cormatrix.csv', sep = ''), row.names = FALSE)
 
-write.table(OUTPSX,file = paste('psx.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+write.csv(OUTPSX,file = paste('psx.csv', sep = ''), row.names = TRUE)
 if (SIGPSX[1] != 0 )
 {
-	write.table(SIGPSX,file = paste('psx_sig.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+	write.csv(SIGPSX,file = paste('psx_sig.csv', sep = ''), row.names = TRUE)
 }else{
-	write.table( "no sig residual correlation",file = paste('psx_sig.dat', sep = ''), sep = '\t', row.names = TRUE, col.names = TRUE)
+	write.csv( "no sig residual correlation",file = paste('psx_sig.csv', sep = ''), row.names = TRUE)
 }
 
 
-## x,file,sheet
-## names需要改
 
-# 4. 绘图并输出
-EPSR_figure(epsr, N.burn)
 
+# epsr graph
+if (epsr[1]!='noepsr')
+{
+	EPSR_figure(epsr, N.burn)
+}
 setwd('..')
+}
 
+resultlist2 = list(ppp = Empostp, ly = sigly_list$OUTLY,
+	mu = MU_matrix, phi = OUTPHI,
+	psx = OUTPSX)
+return(resultlist2)
 }
 

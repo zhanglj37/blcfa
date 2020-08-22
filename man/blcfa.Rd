@@ -7,7 +7,8 @@
 			 the significant cross-loadings and residual correlations detected by Bayesian Lasso Prior Confirmatory Factor Analysis.}
 \usage{
 blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999, 
-      MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE)
+      MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  
+	  interval = TRUE, conver_check = TRUE)
 
 }
 \arguments{
@@ -79,6 +80,8 @@ blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999,
 			the mplus input file then you don't need to change it.}
 \item{interval}{Detect the significant residual correlations by hpd interval or p-value,
 			the default setting is using hpd interval.}
+\item{conver_check}{TRUE: use two MCMC chains to caculate the EPSR valus and check whether the model converge,
+	FALSE: use one MCMC chain to get the estimates without convergence check}
 }
 
 \references{

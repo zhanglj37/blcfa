@@ -35,7 +35,7 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 #	SEinvPSX<-array(0,dim=c(1,NY,NY))	#Store standard error of estimates of inv(PSX)
 	SEPHI<-array(0,dim=c(1,(NZ*NZ)))       #Store standard error of estimates of PHI
 	SElambda<-array(0,dim=c(1,1))          #Store standard error of estimates of shrinkage paraemter lambda
-	Empostp<-numeric(CNUM)
+	Empostp<-0 #numeric(CNUM)
 	
 	
 	

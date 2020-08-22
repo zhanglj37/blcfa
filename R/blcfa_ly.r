@@ -48,9 +48,13 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	if (ncores == 1){  #serial
 	  `%is_par%` <- `%do%`
 	}else if(Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM")) && 
-			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0") {
-		`%is_par%` <- `%do%`
-		ncores <- 1
+			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0" ) {
+			
+			if(versionInfo()$version < "1.3.1056"){
+				`%is_par%` <- `%do%`
+			ncores <- 1
+			}
+			
 	}else{  #parallel
 	  `%is_par%` <- `%dopar%`
 		cl <- makeCluster(ncores)

@@ -55,9 +55,9 @@ for (namesi in 2:length(names))
 
 ## 3. Calculate the epsr chain for each parameter
 	## To save time, the epsr values are caculated based on the c(1:N.burn+100) iterations rather than MCMAX iterations
-	assign(paste0(names3[namesi]),array(0, dim=c(N.burn+99,length(npar) ) ) )
+	assign(paste0(names3[namesi]),array(0, dim=c(N.burn,length(npar) ) ) )
 	epsrpar<-get(paste0(names3[namesi]))
-	for (burni in 2:(N.burn+100))
+	for (burni in 2:(N.burn+1))
 	{
 		for(npari in 1:length(npar))
 		{
@@ -79,7 +79,7 @@ epsr<-cbind(	get(paste0("epsrly")),
 
 
 ## Determine whether the model converges in the N.burn iterations
-epsr_reserve<-epsr[(N.burn+1):(N.burn+99),]
+epsr_reserve<-epsr[(N.burn-99):(N.burn),]
 tempindex<-arrayInd(sort.list(epsr_reserve,decreasing=T)[1],
 			dim(epsr_reserve))
 
