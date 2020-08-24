@@ -14,6 +14,7 @@ EPSR_figure <- function(epsr, N.burn){
 		{
 			lines(x = repxlim, y = epsr[,i], col = mycolsi[i])
 		}
+		lines(x = repxlim, y = rep(1.2, N.burn), col = 'black')
 		dev.off()
 		#try_plot = try(savePlot(filename = "EPSR",
 		#		type = "png",
@@ -24,3 +25,4 @@ EPSR_figure <- function(epsr, N.burn){
 		#  cat('If you are working with RStudio, the plot can be exported from menu in plot panel (lower right-pannel).   \n')
 		#}
 }
+
