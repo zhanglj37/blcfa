@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -999999, 
+blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms, 
 	MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE, Conver_check = FALSE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
@@ -39,7 +39,11 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 
 
 	## record ms values as NA for standarizing data
-	dataset_noms <- mark_na(N, NY, dataset, ms)
+	if (exists("ms")){
+		dataset_noms <- mark_na(N, NY, dataset, ms)
+	}else{
+		dataset_noms <- dataset
+	}
 	Y <- read_data2(dataset_noms)  # standarized
 		
 	

@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -999999, 
+blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms, 
 	MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE, conver_check = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
@@ -13,8 +13,14 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = -99
 	## category & point: used for category data (under development)
 {
 if (!conver_check){
+	if (exists("ms")){
 	blcfa_noepsr(filename, varnames, usevar, myModel, estimation, ms, 
-		MCMAX, N.burn, bloutput,  interval, conver_check)
+		MCMAX=MCMAX, N.burn, bloutput,  interval, conver_check)
+	}else{
+	blcfa_noepsr(filename, varnames, usevar, myModel, estimation, 
+		MCMAX=MCMAX, N.burn=N.burn, bloutput=bloutput,  interval=interval, conver_check=conver_check)
+	}
+
 }else{
 	nthin<-1  ## MCMC algorithm sampling interval
 
@@ -42,7 +48,11 @@ if (!conver_check){
 
 
 	## record ms values as NA for standarizing data
-	dataset_noms <- mark_na(N, NY, dataset, ms)
+	if (exists("ms")){
+		dataset_noms <- mark_na(N, NY, dataset, ms)
+	}else{
+		dataset_noms <- dataset
+	}
 	Y <- read_data2(dataset_noms)  # standarized
 		
 	
