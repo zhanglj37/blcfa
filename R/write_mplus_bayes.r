@@ -242,7 +242,7 @@ path_detect = tolower(path_detect)
 if (str_detect(path_detect,'mplus')){
 	runModels("blcfa_bayes.inp")
 }else{
-	print('Failed to run the Mplus software, check whether the environment variables of your computer include the path of Mplus')
+	print('Error: Failed to run the Mplus software, check whether the environment variable of your computer includes the path of Mplus')
 }
 
 
