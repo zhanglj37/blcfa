@@ -13,14 +13,8 @@ blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms,
 	## category & point: used for category data (under development)
 {
 if (!conver_check){
-	if (exists("ms")){
 	blcfa_noepsr(filename, varnames, usevar, myModel, estimation, ms, 
-		MCMAX=MCMAX, N.burn, bloutput,  interval, conver_check)
-	}else{
-	blcfa_noepsr(filename, varnames, usevar, myModel, estimation, 
-		MCMAX=MCMAX, N.burn=N.burn, bloutput=bloutput,  interval=interval, conver_check=conver_check)
-	}
-
+		MCMAX, N.burn, bloutput,  interval, conver_check)
 }else{
 	nthin<-1  ## MCMC algorithm sampling interval
 
@@ -48,7 +42,7 @@ if (!conver_check){
 
 
 	## record ms values as NA for standarizing data
-	if (exists("ms")){
+	if (is.na("ms")){
 		dataset_noms <- mark_na(N, NY, dataset, ms)
 	}else{
 		dataset_noms <- dataset
@@ -79,8 +73,13 @@ if (!conver_check){
 			Sys.info()["sysname"] == "Darwin" && getRversion() >= "4.0.0" ) {
 			
 			if(versionInfo()$version < "1.3.1056"){
-				`%is_par%` <- `%do%`
+			`%is_par%` <- `%do%`
 			ncores <- 1
+			}else{
+			`%is_par%` <- `%dopar%`
+			cl <- makeCluster(ncores)
+			registerDoParallel(cores = ncores)
+
 			}
 			
 	}else{  #parallel
