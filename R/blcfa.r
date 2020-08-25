@@ -42,10 +42,10 @@ if (!conver_check){
 
 
 	## record ms values as NA for standarizing data
-	if (is.na("ms")){
-		dataset_noms <- mark_na(N, NY, dataset, ms)
-	}else{
+	if (is.na(ms)){
 		dataset_noms <- dataset
+	}else{
+		dataset_noms <- mark_na(N, NY, dataset, ms)
 	}
 	Y <- read_data2(dataset_noms)  # standarized
 		

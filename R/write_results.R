@@ -139,9 +139,9 @@ if (epsr[1]!='noepsr')
 setwd('..')
 }
 
-resultlist2 = list(ppp = Empostp, ly = sigly_list$OUTLY,
-	mu = MU_matrix, phi = OUTPHI,
-	psx = OUTPSX)
+resultlist2 = list(ppp = Empostp, ly = round(sigly_list$OUTLY,3),
+	mu = round(MU_matrix,3), phi = round(OUTPHI,3),
+	psx = round(OUTPSX,3))
 return(resultlist2)
 }
 
