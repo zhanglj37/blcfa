@@ -181,7 +181,7 @@ obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
 for (i in 1:length(usevar))
 {
-	if (obsSkewness[i] > 2 || obsKurtosis[i] > 7)
+	if (abs(obsSkewness[i]) > 2 || abs(obsKurtosis[i]) > 7)
 	{
 		nonnormal = 1
 	}else{
