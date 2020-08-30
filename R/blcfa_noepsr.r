@@ -69,7 +69,7 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 	sink("log.txt", append=TRUE) # divert the output to the log file
 
 	chain2 <- gibbs_fun(MCMAX, NZ, NY, N, Y, LY_int, IDY0, IDY, 
-					  nthin, N.burn, CIR)
+					  nthin, N.burn, CIR=1) #CIR=1 for number of iterations
 	sink() #revert output back to the console
 
 
