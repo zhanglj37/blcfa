@@ -4,7 +4,7 @@
 ## caculate_results
 ## generate_output
 
-blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms, 
+blcfa<-function(filename, varnames, usevar, myModel, estimation = 'ml', ms = NA, 
 	MCMAX = 10000, N.burn = 5000, bloutput = FALSE,  interval = TRUE, conver_check = TRUE)
 	## MCMAX: Total number of iterations;  N.burn: Discard the previous N.burn iteration sample
 	## estimation = 'ml' / 'bayes'
