@@ -179,15 +179,14 @@ runModels("normal.inp")
 normality = try(readModels('normal.out')$tech12)
 obsSkewness = normality$obsSkewness
 obsKurtosis = normality$obsKurtosis
-for (i in 1:length(usevar))
-{
-	if (abs(obsSkewness[i]) > 2 || abs(obsKurtosis[i]) > 7)
+
+	if (max(abs(obsSkewness)) > 2 || max(abs(obsKurtosis)) > 7)
 	{
 		nonnormal = 1
 	}else{
 		nonnormal = 0
 	}
-}
+
 
 }else{
 	nonnormal = 0
