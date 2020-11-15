@@ -152,12 +152,12 @@ if (!conver_check){
 		estimation = tolower(estimation)
 		if (estimation == 'bayes' || estimation == 'bayesian')
 		{
-			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 		}else if (estimation == 'both'){
-			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
-			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+			write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
+			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 		}else{
-			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+			write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 		}
 
     }else{

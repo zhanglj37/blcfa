@@ -57,7 +57,7 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 	set.seed(1)
 	
 
-	CIR = 2
+	CIR = 2 # same int and results as the blcfa() function
 	writeLines(c(""), "log.txt") #create or clear the log file recording the ouput of foreach loop
 
 		
@@ -69,7 +69,7 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 	sink("log.txt", append=TRUE) # divert the output to the log file
 
 	chain2 <- gibbs_fun(MCMAX, NZ, NY, N, Y, LY_int, IDY0, IDY, 
-					  nthin, N.burn, CIR=1) #CIR=1 for number of iterations
+					  nthin, N.burn, CIR=1) #CIR=1 for out number of iterations
 	sink() #revert output back to the console
 
 
@@ -100,12 +100,12 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 	estimation = tolower(estimation)
 	if (estimation == 'bayes' || estimation == 'bayesian')
 	{
-		write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+		write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 	}else if (estimation == 'both'){
-		write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
-		write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+		write_mplus_bayes(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
+		write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 	}else{
-		write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+		write_mplus_ml(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 	}
 
 	blcfa_results = list(blcfa_est = resultlist2, estimation = estimation)

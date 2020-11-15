@@ -1,5 +1,5 @@
 
-write_mplus_bayes<-function(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing)
+write_mplus_bayes<-function(varnames,usevar,filename,sigpsx_list,sigly_list,IDY0,ismissing,myModel)
 {
 if(file.exists("blcfa_bayes.inp"))
 {
@@ -180,6 +180,8 @@ cat(
 	"MODEL:\n\t",
 	file = paste("blcfa_bayes.inp", sep = ''), append = T)
 
+
+if(is.matrix(myModel)){
 siglyname<-sigly_list$siglyname
 siglyloc<-sigly_list$sigloc
 NZ=dim(IDY0)[2]
@@ -218,7 +220,19 @@ if (SIGLY[1] != 0)
 	}
 
 }
+}else{
 
+model1<-gsub("#","!",myModel)
+model2<-gsub("\\+","",model1)
+model3<-gsub("\\=~"," BY ",model2)
+model4<-gsub("\n",";\n\t",model3)
+
+cat(
+	model4,
+	"\n\n\t",
+	file = paste("blcfa_ml.inp", sep = ''), append = T)
+ 
+}
 
 if (SIGPSX[1] != 0)
 {
