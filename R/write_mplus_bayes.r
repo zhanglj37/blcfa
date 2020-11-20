@@ -230,7 +230,7 @@ model4<-gsub("\n",";\n\t",model3)
 cat(
 	model4,
 	"\n\n\t",
-	file = paste("blcfa_ml.inp", sep = ''), append = T)
+	file = paste("blcfa_bayes.inp", sep = ''), append = T)
  
 }
 
