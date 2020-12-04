@@ -4,6 +4,7 @@ sig_psx_fun<-function(NZ,NY,dataset,resultlist,hpdlist,interval,step='c')
 
 EmPSX=resultlist$EmPSX
 SEPSX=resultlist$SEPSX
+PPSX1=resultlist$PPSX[1,,]
 HPD_PSX1=hpdlist$HPD_PSX1
 
 
@@ -72,16 +73,16 @@ if (step == 'e')
 	#### PSX-----------------------------------------------------------
 	EmPSX1<-matrix(as.vector(EmPSX[1,,]),NY,NY)
 	SEPSX1<-matrix(as.vector(SEPSX[1,,]),NY,NY)
-	ZPSX=PPSX= (as.vector(EmPSX[1,,])/as.vector(SEPSX[1,,]))
+#	ZPSX=PPSX= (as.vector(EmPSX[1,,])/as.vector(SEPSX[1,,]))
 
 	## caculate p-value
-	for (i in 1:length(ZPSX))
-	{
-		if (ZPSX[i]>0)	{ PPSX[i]<-2*(1-pnorm(ZPSX[i])) }
-		else{ PPSX[i]<-2*pnorm(ZPSX[i])	}
-	}
-	PPSX1=CORPSX=matrix(PPSX,NY,NY)
-
+#	for (i in 1:length(ZPSX))
+#	{
+#		if (ZPSX[i]>0)	{ PPSX[i]<-2*(1-pnorm(ZPSX[i])) }
+#		else{ PPSX[i]<-2*pnorm(ZPSX[i])	}
+#	}
+#	PPSX1=CORPSX=matrix(PPSX,NY,NY)
+	CORPSX=PPSX1
 	## caculate correlation
 	for (i in 1:NY)
 	{

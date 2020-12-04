@@ -4,6 +4,7 @@ sig_ly_fun<-function(dataset,resultlist,hpdlist,IDY,interval_psx)
 
 EmLY=resultlist$EmLY
 SELY=resultlist$SELY
+PLY=resultlist$PLY[1,]
 HPD_LY1=hpdlist$HPD_LY1
 NLY=sum(IDY!=0)
 NZ=ncol(IDY)
@@ -11,14 +12,14 @@ NY=nrow(IDY)
 
 #### LY-----------------------------------------------------------
 
-ZLY = PLY = EmLY[1,]/SELY[1,]
+#ZLY = PLY = EmLY[1,]/SELY[1,]
 
 ## caculate p-value
-for (i in 1:length(ZLY))
-{
-	if (ZLY[i]>0)	{ PLY[i]<-2*(1-pnorm(ZLY[i])) }
-	else{ PLY[i]<-2*pnorm(ZLY[i])	}
-}
+#for (i in 1:length(ZLY))
+#{
+#	if (ZLY[i]>0)	{ PLY[i]<-2*(1-pnorm(ZLY[i])) }
+#	else{ PLY[i]<-2*pnorm(ZLY[i])	}
+#}
 
 
 ## combine LY output

@@ -145,8 +145,7 @@ if (!conver_check){
 	if (convergence)
 	{
 
-		resultlist2<-write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,
-					epsr,usevar,IDMU,IDY,bloutput)
+		resultlist2<-write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,epsr,usevar,IDMU,IDY,bloutput)
 		
 		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)

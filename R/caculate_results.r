@@ -35,6 +35,12 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 #	SEinvPSX<-array(0,dim=c(1,NY,NY))	#Store standard error of estimates of inv(PSX)
 	SEPHI<-array(0,dim=c(1,(NZ*NZ)))       #Store standard error of estimates of PHI
 	SElambda<-array(0,dim=c(1,1))          #Store standard error of estimates of shrinkage paraemter lambda
+	PMU<-array(0,dim=c(1,NMU))		#Store p-value of MU 
+	PLY<-array(0,dim=c(1,NLY))		#Store p-value of Lambda 
+	PPSX<-array(0,dim=c(1,NY,NY))		#Store p-value of PSX
+#	EminvPSX<-array(0,dim=c(1,NY,NY))	#Store p-value of inv(PSX)
+	PPHI<-array(0,dim=c(1,(NZ*NZ)))		#Store p-value of PHI
+
 	Empostp<-0 #numeric(CNUM)
 	
 	
@@ -53,6 +59,42 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 #    SEinvPSX[1,,]<-apply(EinvPSX[(N.burn+1):MCMAX,,],FUN=sd,MARGIN=c(2,3))
     SEPHI[1,]<-apply(EPHI[(N.burn+1):MCMAX,],FUN=sd,MARGIN=c(2))
 #    SElambda[1]<-sd(Elambda[(N.burn+1):MCMAX,])
+
+	for (nlyi in 1:NLY){
+		if(EmLY[1,nlyi]>0){
+			PLY[1,nlyi]=length(which(ELY[(N.burn+1):MCMAX,nlyi]<0))/length(ELY[(N.burn+1):MCMAX,nlyi])
+		}
+		else{
+			PLY[1,nlyi]=length(which(ELY[(N.burn+1):MCMAX,nlyi]>0))/length(ELY[(N.burn+1):MCMAX,nlyi])
+		}
+	}
+	for (nmui in 1:NMU){
+		if(EmMU[1,nmui]>0){
+			PMU[1,nmui]=length(which(EMU[(N.burn+1):MCMAX,nmui]<0))/length(EMU[(N.burn+1):MCMAX,nmui])
+		}
+		else{
+			PMU[1,nmui]=length(which(EMU[(N.burn+1):MCMAX,nmui]>0))/length(EMU[(N.burn+1):MCMAX,nmui])
+		}
+	}
+	for (nphii in 1:dim(PPHI)[2]){
+		if(EmPHI[1,nphii]>0){
+			PPHI[1,nphii]=length(which(EPHI[(N.burn+1):MCMAX,nphii]<0))/length(EPHI[(N.burn+1):MCMAX,nphii])
+		}
+		else{
+			PPHI[1,nphii]=length(which(EPHI[(N.burn+1):MCMAX,nphii]>0))/length(EPHI[(N.burn+1):MCMAX,nphii])
+		}
+	}
+	for (npsxi1 in 1:NY){
+		for (npsxi2 in 1:NY){
+		if(EmPSX[1,npsxi1,npsxi2]>0){
+			PPSX[1,npsxi1,npsxi2]=length(which(EPSX[(N.burn+1):MCMAX,npsxi1,npsxi2]<0))/length(EPSX[(N.burn+1):MCMAX,npsxi1,npsxi2])
+		}
+		else{
+			PPSX[1,npsxi1,npsxi2]=length(which(EPSX[(N.burn+1):MCMAX,npsxi1,npsxi2]>0))/length(EPSX[(N.burn+1):MCMAX,npsxi1,npsxi2])
+		}
+		}
+	}
+			
 	
 #	if (category)
 #	{
@@ -66,7 +108,9 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 		#MARGINk significant residual correlation
 		
 	resultlist<-list(EmLY=EmLY,EmMU=EmMU,EmPHI=EmPHI,EmPSX=EmPSX,#EminvPSX=EminvPSX,
-					SELY=SELY,SEMU=SEMU,SEPHI=SEPHI,SEPSX=SEPSX,#SEinvPSX=SEinvPSX,
+					SELY=SELY,SEMU=SEMU,SEPHI=SEPHI,SEPSX=SEPSX,
+					PMU=PMU, PLY=PLY, PPHI=PPHI, PPSX=PPSX,
+					#SEinvPSX=SEinvPSX,
 					Empostp=Empostp)
 	return(resultlist)
 }	
