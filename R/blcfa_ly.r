@@ -106,7 +106,7 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	resultlist <- caculate_results(chain2, CNUM, MCMAX, NY, NZ, N.burn, nthin, IDMU, IDY)
 	hpdlist <- hpd_fun(chain2, NZ, NY, N, IDY)
 	#sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval)
-	sigpsx_list<-list(SIGPSX=0)
+	sigpsx_list<-list(SIGPSX=0,OUTPSX=0)
 	sigly_list <- sig_ly_fun(dataset, resultlist, hpdlist, IDY, interval)
 
 	epsrlist <- caculate_epsr(MCMAX, N.burn, CNUM, NY, NZ, chain1, chain2)
@@ -119,7 +119,7 @@ blcfa_ly<-function(filename, varnames, usevar, IDY0, estimation = 'ml', ms = -99
 	{
 		if (bloutput)
 		{
-			write_resultswrite_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,epsr,usevar,IDMU,IDY,bloutput)
+			write_results(MCMAX,N.burn,NZ,NY,resultlist,hpdlist,sigpsx_list,sigly_list,epsr,usevar,IDMU,IDY,bloutput)
 		}
 		ismissing <- impute_ms(Y, NY, N, chain2, N.burn, MCMAX)
 		estimation = tolower(estimation)
