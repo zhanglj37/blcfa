@@ -50,7 +50,7 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
 	EmMU[1,]<-apply(EMU[(N.burn+1):MCMAX,],FUN=mean,MARGIN=c(2))
     EmPSX[1,,]<-apply(EPSX[(N.burn+1):MCMAX,,],FUN=mean,MARGIN=c(2,3))
 #    EminvPSX[1,,]<-apply(EinvPSX[(N.burn+1):MCMAX,,],FUN=mean,MARGIN=c(2,3))
-	if (dim(EPHI)[2] > 1){
+	if(dim(EPHI)[2] > 1){
     	EmPHI[1,]<-apply(EPHI[(N.burn+1):MCMAX,],FUN=mean,MARGIN=c(2))
 	}else{
 		EmPHI[1,]<-mean(EPHI[(N.burn+1):MCMAX,])
@@ -61,7 +61,11 @@ caculate_results<-function(chain2,CNUM,MCMAX,NY,NZ,N.burn,nthin,IDMU,IDY)
     SEMU[1,]<-apply(EMU[(N.burn+1):MCMAX,],FUN=sd,MARGIN=c(2))
     SEPSX[1,,]<-apply(EPSX[(N.burn+1):MCMAX,,],FUN=sd,MARGIN=c(2,3))
 #    SEinvPSX[1,,]<-apply(EinvPSX[(N.burn+1):MCMAX,,],FUN=sd,MARGIN=c(2,3))
-    SEPHI[1,]<-apply(EPHI[(N.burn+1):MCMAX,],FUN=sd,MARGIN=c(2))
+	if(dim(EPHI)[2] > 1){
+	    SEPHI[1,]<-apply(EPHI[(N.burn+1):MCMAX,],FUN=sd,MARGIN=c(2))
+	}else{
+		SEPHI[1,]<-sd(EPHI[(N.burn+1):MCMAX,]) 
+	}
 #    SElambda[1]<-sd(Elambda[(N.burn+1):MCMAX,])
 
 	for (nlyi in 1:NLY){
