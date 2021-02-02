@@ -112,8 +112,9 @@ MU<-rep(1.0,NY)
 
 #initial value of PHI
 PHI<-matrix(0.3,nrow=NZ,ncol=NZ)
-diag(PHI[,])<-1.0
-	
+if(NZ>1){
+	diag(PHI[,])<-1.0
+}	
 #initial value of PSX
 xi<-t(mvrnorm(N,mu=rep(0,NZ),Sigma=PHI)) # NZ*N
 #xi<-matrix(runif(NZ*N),nrow=NZ)+2# NZ*N
