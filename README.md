@@ -13,6 +13,7 @@ update: April 27, 2020
 * [Description](#Description)
 * [Installation](#Installation)
 * [Examples](#Examples)
+  * [Example code in the paper.](#example-code-in-the-paper)
   * [EX1: Detect Cross-loadings and Residual Covariances Simultaneously.](#ex1-detect-cross-loadings-and-residual-covariances-simultaneously)
   * [EX2: Detect Residual Covariances.](#ex2-detect-residual-covariances)
   * [EX3: Detect Cross-Loadings.](#ex3-detect-cross-loadings)
@@ -34,15 +35,11 @@ For the details about Bayesian covariance lasso prior confirmatory factor analys
 1. Pan, J., Ip, E. H.\*, & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704. 
 2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* 
 
-We are also preparing a paper to introduce this package:
+Citation of this package:
 
-Pan, J.H., Zhang, L.J. (co-first author), Ip, E.H.\* (manuscript drafted). BLCFA: An R Package for Bayesian Model Modification in Confirmatory Factor Analysis. 
-
+Zhang, L., Pan, J., Dubé, L., Ip, E.H. (2021). blcfa: An R Package for Bayesian Model Modification in Confirmatory Factor Analysis. *Structural Equation Modeling: A Multidisciplinary Journal*. Advance Online Publication 
 
 ## Installation
-```r
-install.packages("blcfa")  #It hasn't been released yet. 2019-08-07
-```
 
 If you want to try out the latest development 'blcfa' code, you can install it  from github using Hadley Wickham's 'devtools' package. 
 
@@ -53,8 +50,103 @@ library(devtools)
 install_github("zhanglj37/blcfa")
 ```
 
-
 ## Examples
+
+### Example code in the paper
+
+```R
+library(blcfa)
+setwd("C:/Users/Desktop/SimuExample/")
+filename = system.file("extdata", "simu_data.txt", package = "blcfa")
+varnames<-c(paste("y", 1:10, sep = ""))
+usevar <- varnames
+myModel<-"
+f1 =~ y1 + y2 + y3 + y4 + y5
+f2 =~ y6 + y7 + y8 + y9 + y10
+"
+set.seed(1)
+results <- blcfa(filename, varnames, usevar, myModel, estimation = "both", MCMAX = 5000, N.burn = 2500, bloutput = TRUE, interval = TRUE)
+
+```
+
+```
+
+## Mplus input 
+TITLE: Bayesian Lasso CFA
+DATA: FILE =  D:/Software/R/R-4.0.1/library/blcfa/extdata/simu_data.txt ;
+VARIABLE:
+ NAMES = y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 ;
+ USEV = y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 ;
+ANALYSIS:
+	ESTIMATOR = ML;
+MODEL:
+	f1 by 	y1  y2  y3  y4  y5  ;
+	f2 by 	y6  y7  y8  y9  y10  ;
+	y6  with  y1 ;
+	y7  with  y2 ;
+	y10  with  y9 ;
+	
+OUTPUT: TECH1  STDYX;
+```
+
+```R
+
+## results of the first-step analysis
+> results
+$blcfa_est
+$blcfa_est$ppp
+[1] 0.5156
+
+$blcfa_est$ly
+              est    se p-value HPD_lower HPD_upper
+f1  by  y2  0.936 0.043       0     0.850     1.013
+...
+
+## results of the second-step analysis
+> sum_second(results)
+Reading model:  blcfa_bayes.out
+Reading model:  blcfa_ml.out
+$bayes_fit
+...
+  Parameters   CFI   TLI      BIC      DIC     pD RMSEA_Estimate RMSEA_90CI_LB
+1         34   1   0.999  10991.69 10846.96 33.226          0.001            0
+  RMSEA_90CI_UB RMSEA_pLT05 ObsRepChiSqDiff_95CI_LB ObsRepChiSqDiff_95CI_UB
+1         0.032           1                 -28.816                    29.6
+  PostPred_PValue        Filename
+1           0.465 blcfa_bayes.out
+
+$bayes_par_est
+          paramHeader param   est posterior_sd pval lower_2.5ci upper_2.5ci   sig
+1               F1.BY    Y1 1.000        0.000    0       1.000       1.000 FALSE
+2               F1.BY    Y2 0.777        0.026    0       0.728       0.831  TRUE
+...
+
+$bayes_par_est_std
+          paramHeader param   est posterior_sd pval lower_2.5ci upper_2.5ci   sig
+1               F1.BY    Y1 0.863        0.013    0       0.835       0.888  TRUE
+2               F1.BY    Y2 0.811        0.017    0       0.776       0.842  TRUE
+...
+
+$ml_fit
+...
+  ChiSqBaseline_PValue        LL UnrestrictedLL   CFI   TLI      AIC      BIC
+1                    0  -5389.93       -5373.401 0.999 0.999 10847.86 10991.16
+...
+
+$ml_par_est
+          paramHeader param   est    se  est_se pval
+1               F1.BY    Y1 1.000 0.000 999.000  999
+...
+
+$ml_par_est_std
+          paramHeader param   est    se  est_se pval
+1               F1.BY    Y1 0.864 0.013  64.475    0
+...
+
+
+```
+
+
 
 ### EX1: Detect Cross-loadings and Residual Covariances Simultaneously.
 
