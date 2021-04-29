@@ -3,10 +3,6 @@
 
 update: April 27, 2020
 
-[![Build Status](https://travis-ci.org/zhanglj37/blcfa.svg)](https://travis-ci.org/zhanglj37/blcfa)
-[![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/blcfa)](https://cran.r-project.org/package=blcfa)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/blcfa)](https://cran.r-project.org/package=blcfa)
-
 [![](https://img.shields.io/github/stars/zhanglj37/blcfa?style=social)](https://github.com/zhanglj37/blcfa/stargazers)
 
 
@@ -30,10 +26,10 @@ update: April 27, 2020
 ## Description
 This 'blcfa' package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
 
-For the details about Bayesian covariance lasso prior confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (accepted).
+For the details about Bayesian lasso confirmatory factor analysis, please refer to 1. Pan, Ip and Dubé(2017), 2. Chen, Guo, Zhang and Pan (2020).
 
 1. Pan, J., Ip, E. H.\*, & Dubé, L. (2017). An alternative to post hoc model modification in confirmatory factor analysis: the Bayesian lasso. *Psychological Methods, 22*(4), 687–704. 
-2. Chen, J.S.\*, Guo, Z.H., Zhang, L.J., Pan, J.H.\* (accepted). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* 
+2. Chen, J.\*, Guo, Z., Zhang, L., Pan, J.\* (2020). A Partially Confirmatory Approach to Scale Development with the Bayesian Lasso. *Psychological Methods.* Advance Online Publication.
 
 Citation of this package:
 
