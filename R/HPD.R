@@ -3,12 +3,12 @@
 hpd_fun<-function(chain2,NZ,NY,N,IDY)
 {
 	NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
-	EMU=chain2$EMU
-	ELY=chain2$ELY
-	EPHI=chain2$EPHI
-	EPSX=chain2$EPSX
+	EMU=chain2$EMU[(N.burn+1):MCMAX,]
+	ELY=chain2$ELY[(N.burn+1):MCMAX,]
+	EPHI=chain2$EPHI[(N.burn+1):MCMAX,]
+	EPSX=chain2$EPSX[(N.burn+1):MCMAX,,]
 	Epostp=chain2$Epostp
-	chainpsx=chain2$chainpsx
+	chainpsx=chain2$chainpsx[(N.burn+1):MCMAX,]
 	
 c<-numeric(NY*(NY+1)/2)
 temp.sig<-array(0,dim=c(NY,NY))
