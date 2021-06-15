@@ -83,7 +83,7 @@ blcfa_noepsr<-function(filename, varnames, usevar, myModel, estimation = 'ml', m
 	### source("write_mplus.r")
 
 	resultlist <- caculate_results(chain2, CNUM, MCMAX, NY, NZ, N.burn, nthin, IDMU, IDY)
-	hpdlist <- hpd_fun(chain2, NZ, NY, N, IDY)
+	hpdlist <- hpd_fun(chain2,NZ,NY,N,IDY,N.burn,MCMAX)
 	sigpsx_list <- sig_psx_fun(NZ, NY, dataset, resultlist, hpdlist, interval)
 	sigly_list <- sig_ly_fun(dataset, resultlist, hpdlist, IDY, interval)
 

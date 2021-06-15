@@ -1,6 +1,6 @@
 
 
-hpd_fun<-function(chain2,NZ,NY,N,IDY)
+hpd_fun<-function(chain2,NZ,NY,N,IDY,N.burn,MCMAX)
 {
 	NLY<-sum(IDY!=0)				#number of free lambda need to be estimated in Lambda.
 	EMU=chain2$EMU[(N.burn+1):MCMAX,]
