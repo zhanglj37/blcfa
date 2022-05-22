@@ -123,7 +123,7 @@ out_sig<-function(NZ,NY,NLY,PLY,EmLY,HPD_LY1,IDY,dataset,count)
 					k<-k+1
 				}
 			}else{
-				if ( abs(PLY[m]) >0.1)
+				if ( abs(EmLY[1,m]) >0.1)
 				{
 					signame[k]<-paste(paste0('f',i)," by ", colnames(dataset)[j])
 					siglyp[k]<-PLY[m]
