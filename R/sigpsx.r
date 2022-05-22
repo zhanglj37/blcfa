@@ -177,7 +177,7 @@ if (step == 'e')
 	{
 		count<-count_sig_interval(NY,HPD_PSX3)
 	}else{
-		count<-count_sig_threshold(NY,psxcor)
+		count<-count_sig_threshold(NY,CORPSX)
 	}
 
 
