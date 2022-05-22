@@ -1,5 +1,5 @@
 
-sig_ly_fun<-function(dataset,resultlist,hpdlist,IDY,interval_psx)
+sig_ly_fun<-function(dataset,resultlist,hpdlist,IDY,interval)
 { 
 
 EmLY=resultlist$EmLY
@@ -76,11 +76,24 @@ count_sig_p<-function(NLY,matrix)
 return(count)
 }
 
-if (interval_psx)
+count_sig_threshold<-function(NLY,matrix)
+{
+	count=0
+	for(i in 1:NLY)
+	{
+		if(abs(matrix[i])>0.1) #should be stand
+		{
+			count=count+1
+		}
+	}
+return(count)
+}
+
+if (interval)
 {
 	count<-count_sig_interval(NLY,HPD_LY1)
 }else{
-	count<-count_sig_p(NLY,PLY)
+	count<-count_sig_threshold(NLY,lyest)
 }
 
 
@@ -97,27 +110,27 @@ out_sig<-function(NZ,NY,NLY,PLY,EmLY,HPD_LY1,IDY,dataset,count)
 		{
 		if(IDY[i,j]!=0)
 		{
-			if (interval_psx)
+			if (interval)
 			{
 				if ((HPD_LY1[m,1]*HPD_LY1[m,2])>0)
 				{
 					signame[k]<-paste(paste0('f',j)," by ", colnames(dataset)[i])
-					siglyp[k]<-PLY[k]
+					siglyp[k]<-PLY[m]
 					sigloc[k,1]<-j
 					sigloc[k,2]<-i
-					sighpdly[k,]<-HPD_LY1[k,]
-					sigest[k]<-EmLY[1,k]
+					sighpdly[k,]<-HPD_LY1[m,]
+					sigest[k]<-EmLY[1,m]
 					k<-k+1
 				}
 			}else{
-				if ( PLY[m] <0.05)
+				if ( abs(PLY[m]) >0.1)
 				{
 					signame[k]<-paste(paste0('f',i)," by ", colnames(dataset)[j])
-					siglyp[k]<-PLY[k]
+					siglyp[k]<-PLY[m]
 					sigloc[k,1]<-j
 					sigloc[k,2]<-i
-					sighpdly[k,]<-HPD_LY1[k,]
-					sigest[k]<-EmLY[1,k]
+					sighpdly[k,]<-HPD_LY1[m,]
+					sigest[k]<-EmLY[1,m]
 					k<-k+1
 				}			
 			}
