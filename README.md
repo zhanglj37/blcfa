@@ -16,7 +16,7 @@ update: April 27, 2020
   * [EX4: Detect Significant Loadings to Explore the Model Structure.](#ex4-detect-significant-loadings-to-explore-the-model-structure)
   * [Tips1: Model Convergence](#Tips1)
   * [Tips2: Detailed Results](#Tips2)
-  * [Tips3: p-value and HPD interval](#Tips3)
+  * [Tips3: Threshold and HPD interval](#Tips3)
   * [Tips4: Normality Test](#Tips4)
   * [Tips5: Missing Data](#Tips5)
 * [BugsReports](#BugsReports)
