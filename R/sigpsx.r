@@ -156,12 +156,28 @@ if (step == 'e')
 		}
 	return(count)
 	}
+	count_sig_threshold<-function(NY,matrix)
+	{
+		count=0
+		for(i in 1:NY)
+		{
+		for(j in 1:NY)
+		{
+			if(i>j)
+			{
+				if(abs(matrix[i,j]) > 0.1)
+				count=count+1
+			}
+		}
+		}
+	return(count)
+	}
 
 	if (interval)
 	{
 		count<-count_sig_interval(NY,HPD_PSX3)
 	}else{
-		count<-count_sig_p(NY,PPSX1)
+		count<-count_sig_threshold(NY,psxcor)
 	}
 
 
@@ -193,7 +209,7 @@ if (step == 'e')
 						k<-k+1
 					}
 				}else{
-					if ( PPSX1[i,j] <0.05)
+					if ( abs(CORPSX[i,j]) >0.1)
 					{
 						signame[k]<-paste(colnames(dataset)[i]," with ",colnames(dataset)[j])
 						sigpsxcor[k]<-CORPSX[i,j]
