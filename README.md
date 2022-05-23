@@ -330,7 +330,7 @@ Then you will get the results folder includes: ppp, epsr graph,
 			estimated value, standard error and hpd interval of parameters (ly, mu, phi and psx).
 
 ### Tips3
-Detect significant cross-loadings and residual correlations by threshold 0.1 rather than 95% Highest Posterior Density (HPD)  interval.
+Detect significant cross-loadings and residual correlations by threshold (0.1 for cross-loadings, 0.15 for residual correlations) rather than 95% Highest Posterior Density (HPD)  interval.
 ```r
 blcfa(filename,varnames,usevar,myModel,ms=-9,MCMAX = 10000, N.burn = 5000, bloutput = TRUE, interval = FALSE)
 ```
