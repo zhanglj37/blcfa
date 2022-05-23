@@ -364,7 +364,7 @@ or contact with me: zhanglj37@mail2.sysu.edu.cn.
 
 ## Functions under development
 
-Bayesian lasso confirmatory factor analysis models with ordered categorical data (expected in 2021).
+Bayesian lasso confirmatory factor analysis models with ordered categorical data (expected in 2022).
 
 If you have any suggestions or are willing to join in the improvement of this package, please contact with me. 
 
