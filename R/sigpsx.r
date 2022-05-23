@@ -209,7 +209,7 @@ if (step == 'e')
 						k<-k+1
 					}
 				}else{
-					if ( abs(CORPSX[i,j]) >0.1)
+					if ( abs(CORPSX[i,j]) >0.15)
 					{
 						signame[k]<-paste(colnames(dataset)[i]," with ",colnames(dataset)[j])
 						sigpsxcor[k]<-CORPSX[i,j]
