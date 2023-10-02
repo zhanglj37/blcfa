@@ -39,7 +39,6 @@ blcfa(filename, varnames, usevar, myModel, estimation = "ml", ms = -999999,
 # SimuExample
 ## run model
 library(blcfa)
-setwd("C:/Users/Desktop/SimuExample/")
 filename = system.file("extdata", "simu_data.txt", package = "blcfa")
 varnames<-c(paste("y", 1:10, sep = ""))
 usevar <- varnames
