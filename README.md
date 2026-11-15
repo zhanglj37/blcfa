@@ -25,21 +25,8 @@ update: April 27, 2020
 
 ## What's new in 0.2.0
 
-The interface used in the paper is unchanged and gives the same estimates. The code around the
-MCMC samplers was rewritten:
-
-* Model syntax is parsed robustly: `f1=~y1+y2`, tabs, comments (`#` or `!`), Windows line endings and
-  factors continued over several lines are accepted; unknown variables give an error instead of
-  being silently dropped. An IDY matrix is still accepted and is validated.
-* Mplus files respect the 90-character line limit. Long data paths (typical on macOS) used to break Mplus;
-  the data file is now copied next to the input file when needed.
-* New optional arguments: `mplus_path` (Mplus executable if it is not on the `PATH`, e.g.
-  `mplus_path = "/Applications/Mplus/mplus"`), `outdir` (output folder, default: working directory) and
-  `criterion` (`"hpd"`, `"pvalue"` or `"threshold"`; `interval = TRUE/FALSE` still works).
-* Fixed: incomplete `USEV` lists, wrong `NAMES` with imputed data, missing codes in the normality check,
-  `interval = FALSE` selection, convergence check of the residual covariances, `blcfa_psx()`,
-  `blcfa_ly()` returning no results.
-* Faster EPSR computation; fewer package dependencies.
+The code framework has been reframed. The interface and results are the same as described in the paper.
+Optional new arguments: `mplus_path` (location of the Mplus executable), `outdir` (output folder) and `criterion`.
 
 ## Description
 This 'blcfa' package aims to: (1) detect significant cross-loadings and/or residual covariances different from zero by Bayesian covariance Lasso CFA; (2.1) free the identified significant parameters; (2.2) automatically feed the output from (2.1) into M*plus* to obtain an appropriately modified CFA model using Maximum likelihood (ML) or Bayesian estimation. 
