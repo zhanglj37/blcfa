@@ -1,16 +1,34 @@
 Package: blcfa
 Type: Package
-Title: Bayesian Covariance Lasso Prior Confirmatory Factor Analysis
-Version: 0.1.0
-Author: Lijin Zhang[aut,cre], Junhao Pan[aut], Edward Ip[aut]
-Maintainer: Lijin Zhang <zhanglj37@mail2.sysu.edu.cn>
-Description: Uses Bayesian covariance lasso Prior confirmatory factor analysis to 
-             detect significant residual correlations and generate the corresponding mplus file.
-Depends: stats,stringr,MASS,MCMCpack,msm,
-         statmod,psychometric,
-         MplusAutomation,sna,doParallel,rstudioapi
+Title: Bayesian Model Modification in Confirmatory Factor Analysis
+Version: 0.2.0
+Authors@R: c(
+    person("Lijin", "Zhang", role = c("aut", "cre"),
+           email = "zhanglj37@mail2.sysu.edu.cn"),
+    person("Junhao", "Pan", role = "aut"),
+    person("Edward", "Ip", role = "aut"))
+Description: Uses Bayesian covariance lasso prior confirmatory factor analysis
+    to detect significant residual covariances (and cross-loadings) and
+    generates and runs the corresponding modified CFA model in 'Mplus'.
+Depends: R (>= 3.5.0)
+Imports:
+    MASS,
+    MCMCpack,
+    statmod,
+    coda,
+    MplusAutomation,
+    parallel,
+    stats,
+    utils,
+    tools,
+    grDevices,
+    graphics
+Suggests:
+    testthat (>= 3.0.0),
+    sna
 License: GPL (>= 2)
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.1.0
-Packaged: 2020-08-21; Zhang
+Roxygen: list(markdown = FALSE)
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3
